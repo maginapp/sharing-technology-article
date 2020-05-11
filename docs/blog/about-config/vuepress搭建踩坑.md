@@ -8,7 +8,7 @@
 
 配置token，暂时未研究具体权限需求，提供了除删除仓库外的所有权限
 
-![2020-5-1-token账户进入](/webstatic/2020-05-01-token-get.png)
+<ImgWithBase src="/webstatic/2020-05-01-token-get.png"/>
 
 ### [travis-ci](https://travis-ci.org/)注册
 
@@ -99,15 +99,27 @@ cd -
 
 * '/test': test.html test/index.html
 
-### 图片路径
+### 静态资源/图片路径
 
-静态资源路径
 
 * 根据vuepress官网配置了alias，没能生效，最后选择了使用相对地址
 
 使用此写法会打包到`assets/img/`
 
 * 放置在`.vuepress/public`中的资源会直接打包到根目录中，以`.vuepress/public`为根目录写地址即可
+
+* 由于项目config.js配置了base参数，需要使用$withbase调整地址，此处使用了图片组件完成
+
+此处使用了vue的方法，$withbase被注入到vue原型上，需要使用vue的语法书写才能调用成功
+
+``` md
+> 失败
+![2020-5-1-token账户进入]($withBase('/webstatic/2020-05-01-token-get.png'))
+> 成功
+<img :src="$withBase('/webstatic/2020-05-01-token-get.png')" alt="2020-5-1-token账户进入">
+> 成功
+<ImgWithBase src="/webstatic/2020-05-01-token-get.png"/>
+```
 
 ```{2,5}
 # .vuepress/public
