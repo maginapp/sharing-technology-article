@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>vuepress搭建踩坑 | sharing magina</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="路阻且长，行则至">
+    <link rel="preload" href="/sharing-technology-article/assets/css/0.styles.d881c24f.css" as="style"><link rel="preload" href="/sharing-technology-article/assets/js/app.e3f9b75c.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/2.100ae01a.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/8.f8b298e7.js" as="script"><link rel="prefetch" href="/sharing-technology-article/assets/js/10.5ef82fde.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/11.09c5dd98.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/12.2b66fd5c.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/3.a1874a9b.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/4.b5cfd9a3.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/5.3db750e2.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/6.02acdfd7.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/7.4f0d68e6.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/9.36a5a873.js">
+    <link rel="stylesheet" href="/sharing-technology-article/assets/css/0.styles.d881c24f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/sharing-technology-article/" class="home-link router-link-active"><!----> <span class="site-name">sharing magina</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/sharing-technology-article/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/sharing-technology-article/blog/" class="nav-link router-link-active">
+  Blog
+</a></div><div class="nav-item"><a href="/sharing-technology-article/sharing/" class="nav-link">
+  Sharing
+</a></div><div class="nav-item"><a href="/sharing-technology-article/audition/" class="nav-link">
+  Audition
+</a></div><div class="nav-item"><a href="https://github.com/maginapp/sharing-technology-article/issues" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Issues
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/sharing-technology-article/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/sharing-technology-article/blog/" class="nav-link router-link-active">
+  Blog
+</a></div><div class="nav-item"><a href="/sharing-technology-article/sharing/" class="nav-link">
+  Sharing
+</a></div><div class="nav-item"><a href="/sharing-technology-article/audition/" class="nav-link">
+  Audition
+</a></div><div class="nav-item"><a href="https://github.com/maginapp/sharing-technology-article/issues" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Issues
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>配置构建相关</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html" class="active sidebar-link">vuepress搭建踩坑</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#准备" class="sidebar-link">准备</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#获取token，用于travis构建发布权限配置" class="sidebar-link">获取token，用于travis构建发布权限配置</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#travis-ci注册" class="sidebar-link">travis-ci注册</a></li></ul></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#开始" class="sidebar-link">开始</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#github创建仓库" class="sidebar-link">github创建仓库</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#项目仓库设置" class="sidebar-link">项目仓库设置</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#vuepress-config-js设置" class="sidebar-link">.vuepress &gt; config.js设置</a></li></ul></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#部署" class="sidebar-link">部署</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#travis-部署" class="sidebar-link">travis 部署</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#deploy-sh" class="sidebar-link">deploy.sh</a></li></ul></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#其他" class="sidebar-link">其他</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#sidebar-路径设置" class="sidebar-link">sidebar 路径设置</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vuepress搭建踩坑.html#图片路径" class="sidebar-link">图片路径</a></li></ul></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>测试</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sharing-technology-article/blog/html-test/测试页面汇总.html" class="sidebar-link">测试页面汇总</a></li><li><a href="/sharing-technology-article/blog/html-test/锚点功能测试.html" class="sidebar-link">锚点功能测试</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>博客</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sharing-technology-article/" class="sidebar-link">Home</a></li><li><a href="/sharing-technology-article/blog/" class="sidebar-link">blog</a></li><li><a href="/sharing-technology-article/audition/" class="sidebar-link">auditions</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vuepress搭建踩坑"><a href="#vuepress搭建踩坑" class="header-anchor">#</a> vuepress搭建踩坑</h1> <h2 id="准备"><a href="#准备" class="header-anchor">#</a> 准备</h2> <h3 id="获取token，用于travis构建发布权限配置"><a href="#获取token，用于travis构建发布权限配置" class="header-anchor">#</a> 获取token，用于travis构建发布权限配置</h3> <blockquote><p>个人账户 &gt; developer settings &gt; Personal access tokens &gt; add</p></blockquote> <p>配置token，暂时未研究具体权限需求，提供了除删除仓库外的所有权限</p> <p><img src="/webstatic/2020-05-01-token-get.png" alt="2020-5-1-token账户进入"></p> <h3 id="travis-ci注册"><a href="#travis-ci注册" class="header-anchor">#</a> <a href="https://travis-ci.org/" target="_blank" rel="noopener noreferrer">travis-ci<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>注册</h3> <p>使用github同步账户数据</p> <blockquote><p>setting页配置需要同步到travis的仓库 &gt; 进入对应的仓库settings配置 Environment Variables（键值对）</p></blockquote> <p>配置的键名: 项目中的<a href="#travis-%E9%83%A8%E7%BD%B2">.travis.yml</a>文件中 github_token所配置的变量名对应
+值：上一步的token，考虑到安全性问题，设置为不可见</p> <h2 id="开始"><a href="#开始" class="header-anchor">#</a> 开始</h2> <h3 id="github创建仓库"><a href="#github创建仓库" class="header-anchor">#</a> github创建仓库</h3> <h3 id="项目仓库设置"><a href="#项目仓库设置" class="header-anchor">#</a> 项目仓库设置</h3> <blockquote><p>settings &gt; options &gt; GitHub Pages &gt; sources修改访问资源 <code>gh-pages</code></p></blockquote> <p>使用travis构建后，会自动想仓库推送打包后的gh-pages分钟，切换到该分支后，即可访问  <code>https://&lt;username&gt;.github.io/&lt;repository name&gt;/</code></p> <h3 id="vuepress-config-js设置"><a href="#vuepress-config-js设置" class="header-anchor">#</a> .vuepress &gt; config.js设置</h3> <p>base: 设置为仓库名 <code>&lt;repository name&gt;</code></p> <p>dest: 打包后的地址 默认 <code>&lt;资源文件夹&gt;/.vuepress/dist</code></p> <h2 id="部署"><a href="#部署" class="header-anchor">#</a> 部署</h2> <h3 id="travis-部署"><a href="#travis-部署" class="header-anchor">#</a> travis 部署</h3> <p>项目添加.travis.yml文件，<a href="https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages" target="_blank" rel="noopener noreferrer">参考<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-yml extra-class"><pre class="language-yml"><code><span class="token key atrule">language</span><span class="token punctuation">:</span> node_js
+<span class="token key atrule">node_js</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> lts/*
+<span class="token key atrule">install</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> npm ci
+<span class="token key atrule">script</span><span class="token punctuation">:</span>
+  <span class="token punctuation">-</span> npm run build
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">provider</span><span class="token punctuation">:</span> pages
+  <span class="token key atrule">skip_cleanup</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">local_dir</span><span class="token punctuation">:</span> docs/.vuepress/dist
+  <span class="token key atrule">github_token</span><span class="token punctuation">:</span> $GITHUB_TOKEN <span class="token comment"># 在 GitHub 中生成，用于允许 Travis 向你的仓库推送代码。在 Travis 的项目设置页面进行配置，设置为 secure variable</span>
+  <span class="token key atrule">keep_history</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token key atrule">on</span><span class="token punctuation">:</span>
+    <span class="token key atrule">branch</span><span class="token punctuation">:</span> master
+</code></pre></div><h3 id="deploy-sh"><a href="#deploy-sh" class="header-anchor">#</a> deploy.sh</h3> <p>配置 deploy.sh ，<a href="https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages" target="_blank" rel="noopener noreferrer">参考<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <div class="language-sh extra-class"><pre class="language-sh"><code><span class="token shebang important">#!/usr/bin/env sh</span>
+
+<span class="token comment"># 确保脚本抛出遇到的错误</span>
+<span class="token builtin class-name">set</span> -e
+
+<span class="token comment"># 生成静态文件</span>
+<span class="token function">npm</span> run docs:build
+
+<span class="token comment"># 进入生成的文件夹</span>
+<span class="token builtin class-name">cd</span> docs/.vuepress/dist
+
+<span class="token comment"># 如果是发布到自定义域名</span>
+<span class="token comment"># echo 'www.example.com' &gt; CNAME</span>
+
+<span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> -A
+<span class="token function">git</span> commit -m <span class="token string">'deploy'</span>
+
+<span class="token comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io</span>
+<span class="token comment"># git push -f git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git master</span>
+
+<span class="token comment"># 如果发布到 https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</span>
+<span class="token function">git</span> push -f git@github.com:maginapp/sharing-technology-article.git master:gh-pages
+
+<span class="token builtin class-name">cd</span> -
+</code></pre></div><h2 id="其他"><a href="#其他" class="header-anchor">#</a> 其他</h2> <h3 id="sidebar-路径设置"><a href="#sidebar-路径设置" class="header-anchor">#</a> sidebar 路径设置</h3> <ul><li><p>'/test/': 查找test文件夹下的index.html</p></li> <li><p>'/test': test.html test/index.html</p></li></ul> <h3 id="图片路径"><a href="#图片路径" class="header-anchor">#</a> 图片路径</h3> <p>静态资源路径</p> <ul><li>根据vuepress官网配置了alias，没能生效，最后选择了使用相对地址</li></ul> <p>使用此写法会打包到<code>assets/img/</code></p> <ul><li>放置在<code>.vuepress/public</code>中的资源会直接打包到根目录中，以<code>.vuepress/public</code>为根目录写地址即可</li></ul> <div class="language- extra-class"><pre class="language-text"><code># .vuepress/public
+test.png
+
+# md文件
+![图片 来自 public](/test.png)
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/sharing-technology-article/blog/html-test/测试页面汇总.html">
+        测试页面汇总
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/sharing-technology-article/assets/js/app.e3f9b75c.js" defer></script><script src="/sharing-technology-article/assets/js/2.100ae01a.js" defer></script><script src="/sharing-technology-article/assets/js/8.f8b298e7.js" defer></script>
+  </body>
+</html>
