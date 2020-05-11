@@ -2,6 +2,12 @@
 
 ## 准备
 
+* node.js >= 8.6 本地开发环境搭建
+
+* [vuepress](https://www.vuepress.cn/)
+
+* markdown语法
+
 ### 获取token，用于travis构建发布权限配置
 
 > 个人账户 > developer settings > Personal access tokens > add
@@ -21,6 +27,7 @@
 
 
 ## 开始
+
 
 ### github创建仓库
 
@@ -191,3 +198,9 @@ head: [
 ::: details 点击查看代码
 这是一个详情块，在 IE / Edge 中不生效
 :::
+
+## 引用
+
+* [使用travis-ci自动部署github上的项目](https://www.cnblogs.com/morang/p/7228488.html)
+
+* [travis ci 自动部署](https://blog.csdn.net/hanziyuan08/article/details/82919454)

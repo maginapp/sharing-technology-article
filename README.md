@@ -1,6 +1,7 @@
 # sharing-technology-article
 
+个人博客网站
 
 ## tradvis.yml
 
-需要在 [travis.ci](travis-ci.org)上配置token相关数据，暂未用到
+[travis.ci](https://travis-ci.org)上配置token相关数据，集成发布
