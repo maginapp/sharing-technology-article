@@ -50,7 +50,7 @@ const blogSideBar = [
 module.exports = {
   // meta
   title: 'magina',
-  description: '路阻且长，行则至',
+  description: '路阻且长，行则将至',
   // vuepress config
   // dest: 'public',
   base: `/${basePath}/`,
