@@ -129,6 +129,16 @@ test.png
 ![图片 来自 public](/test.png)
 ```
 
+### favivon 设置
+
+config.js 设置
+
+``` js
+head: [
+    ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/favicon.ico` }]
+]
+```
+
 ### 代码高亮显示
 
 ```{1}
