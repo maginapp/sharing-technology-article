@@ -42,7 +42,7 @@ dest: 打包后的地址 默认 `<资源文件夹>/.vuepress/dist`
 
 项目添加.travis.yml文件，[参考](https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages)
 
-``` yml
+``` yml{12}
 language: node_js
 node_js:
   - lts/*
@@ -64,7 +64,7 @@ deploy:
 
 配置 deploy.sh ，[参考](https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages)
 
-``` sh
+``` sh{13,20,23}
 #!/usr/bin/env sh
 
 # 确保脚本抛出遇到的错误
@@ -91,7 +91,7 @@ git push -f git@github.com:maginapp/sharing-technology-article.git master:gh-pag
 
 cd -
 ```
-## 其他
+## tips
 
 ### sidebar 路径设置
 
@@ -109,10 +109,63 @@ cd -
 
 * 放置在`.vuepress/public`中的资源会直接打包到根目录中，以`.vuepress/public`为根目录写地址即可
 
-```
+```{2,5}
 # .vuepress/public
 test.png
 
 # md文件
 ![图片 来自 public](/test.png)
 ```
+
+### 代码高亮显示
+
+```{1}
+``` type{行号,行号}
+1
+3
+测试
+```
+
+### [emoji](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json)
+
+```
+:tada: :100:
+```
+:tada: :100:
+
+### 自定义容器
+
+``` md
+::: tip
+这是一个提示
+:::
+
+::: warning
+这是一个警告
+:::
+
+::: danger 提示标题 
+这是一个危险警告
+:::
+
+类似 <summary> <details>
+::: details 标题
+这是一个详情块，在 IE / Edge 中不生效
+:::
+```
+
+::: tip
+这是一个提示
+:::
+
+::: warning
+这是一个警告
+:::
+
+::: danger error
+这是一个危险警告
+:::
+
+::: details 点击查看代码
+这是一个详情块，在 IE / Edge 中不生效
+:::

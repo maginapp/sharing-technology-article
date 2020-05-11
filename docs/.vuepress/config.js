@@ -10,16 +10,24 @@ const blogSideBar = [
     ]
   },
   {
+    title: '规范',   // 必要的
+    path: '/blog/standard/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+    collapsable: false, // 可选的, 默认值是 true,
+    sidebarDepth: 2,    // 可选的, 默认值是 1
+    children: [
+      '/blog/standard/git-commit'
+    ]
+  },
+  {
     title: '测试',   // 必要的
     collapsable: false, // 可选的, 默认值是 true,
     sidebarDepth: 2,    // 可选的, 默认值是 1
-    // path: '/htmltest/',
+    path: '/blog/html-test/测试页面汇总',
     // children: [
     //   { title: '测试汇总', path:'/test-func/'},
     //   { title: '锚点功能测试', path:'/test-func/锚点功能测试/'}
     // ]
     children: [
-      '/blog/html-test/测试页面汇总',
       '/blog/html-test/锚点功能测试'
     ],
     // children: [
@@ -27,17 +35,6 @@ const blogSideBar = [
     //   '/blog/',
     //   '/audition/'
     // ]
-  },
-  {
-    title: '博客',   // 必要的
-    // path: '/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-    collapsable: false, // 可选的, 默认值是 true,
-    sidebarDepth: 2,    // 可选的, 默认值是 1
-    children: [
-      '/',
-      '/blog/',
-      '/audition/',
-    ]
   }
 ]
 
@@ -70,9 +67,14 @@ module.exports = {
       }]
     }
   },
+  // 配置搜索
   plugins: [
     ['@vuepress/search', {
       searchMaxSuggestions: 10
     }]
-  ]
+  ],
+  // 代码添加行号
+  markdown: {
+    lineNumbers: true
+  }
 }
