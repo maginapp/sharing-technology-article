@@ -85,5 +85,8 @@ module.exports = {
   // 代码添加行号
   markdown: {
     lineNumbers: true
-  }
+  },
+  head: [
+    ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `./${basePath}/favicon.ico` }]
+ ]
 }
