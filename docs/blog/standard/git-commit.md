@@ -5,13 +5,19 @@
 ``` cmd
 <type>(<scope>): <subject>
 // 空一行
+<body>
+// 空一行
+<footer>
 ```
 
 示例
 
 ```
 fix #251: add DataValidation
+
 修复了#251号bug
+
+bug连接 http://bug.bug
 
 ```
 
@@ -52,6 +58,10 @@ fix #251: add DataValidation
 ### body （可选）
 
 对 `commit` 的具体描述，可以分成多行
+
+### footer （可选）
+
+通常是备注信息，与上一版本不兼容/修复bug(关闭Issue)的连接
 
 ## 引用
 
