@@ -87,6 +87,6 @@ module.exports = {
     lineNumbers: true
   },
   head: [
-    ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `./${basePath}/favicon.ico` }]
+    ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/${basePath}/favicon.ico` }]
  ]
 }
