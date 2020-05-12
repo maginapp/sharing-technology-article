@@ -49,8 +49,8 @@ const blogSideBar = [
 
 module.exports = {
   // meta
-  title: 'magina',
-  description: '路阻且长，行则将至',
+  title: '分享技术资料-magina',
+  description: '分享前端博客，面试题，相关标准等 | 路阻且长，行则将至',
   // vuepress config
   // dest: 'public',
   base: `/${basePath}/`,
@@ -72,7 +72,27 @@ module.exports = {
         title: '博客',  path: '/sharing/', sidebarDepth: 2
       }],
       '/audition/':  [{
-        title: '博客',  path: '/',
+        title: '分类',
+        collapsable: false,
+        children: [
+          '/audition/js',
+          '/audition/css',
+          '/audition/html'
+        ]
+      }, {
+        title: '专题',
+        collapsable: false,
+        children: [
+          '/audition/vue',
+          '/audition/nodejs',
+          '/audition/react',
+          '/audition/webpack',
+          '/audition/小程序'
+        ]
+      }, {
+        title: '历史汇总',
+        collapsable: false,
+        path: '/audition/history'
       }]
     }
   },

@@ -3,20 +3,18 @@ home: true
 heroImage: /favicon.ico
 actionText: 开始 →
 actionLink: /blog/
-features:
-- title: blog
-  details: 个人日常笔记记录
-- title: sharing
-  details: 收集分享他人博客
-- title: audition
-  details: 分享面试资料
-sidebarDepth: 2
 footer: MIT Licensed | Copyright © 2020-present magina
+meta:
+  - name: keywords
+    content: 前端,magina,JavaScript,CSS,HTML
+  - name: description
+    content: 路阻且长，行则将至 
 ---
 
+## 分类
+
+:point_right:[个人笔记](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/audition/)
 
 
-> Markdown/Vue 写作，travis集成发布，github提供静态服务器与域名 [网站](https://github.com/maginapp/sharing-technology-article)
-
-
+> 网站基于Markdown/Vue开发，travis集成发布，github提供静态服务器与域名 [:point_right:](https://github.com/maginapp/sharing-technology-article)
 
