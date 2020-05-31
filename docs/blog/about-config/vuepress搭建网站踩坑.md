@@ -1,4 +1,4 @@
-# vuepress搭建踩坑
+# vuepress搭建网站踩坑
 
 ## 准备
 
@@ -14,7 +14,8 @@
 
 配置token，暂时未研究具体权限需求，提供了除删除仓库外的所有权限
 
-<ImgWithBase src="/webstatic/2020-05-01-token-get.png"/>
+<!-- <ImgWithBase src="/webstatic/2020-05-01-token-get.png"/> -->
+![token](/webstatic/2020-05-01-token-get.png)
 
 ### [travis-ci](https://travis-ci.org/)注册
 
@@ -46,6 +47,8 @@ dest: 打包后的地址 默认 `<资源文件夹>/.vuepress/dist`
 ## 部署
 
 ### travis 部署
+
+> 本项目使用 `travis` 部署
 
 项目添加.travis.yml文件，[参考](https://vuepress.vuejs.org/zh/guide/deploy.html#github-pages)
 
@@ -98,7 +101,93 @@ git push -f git@github.com:maginapp/sharing-technology-article.git master:gh-pag
 
 cd -
 ```
-## tips
+
+## vuepress非官方插件
+
+为同步博客到csdn，添加了对`katex数学公式`、`甘特图`和`flowchart`的支持
+
+### [@maginapp/vuepress-plugin-katex](https://github.com/maginapp/vuepress-plugin-katex)
+
+
+行内公式:  $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$ 
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+
+```
+行内公式:  $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$ 
+
+$$
+\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
+$$
+```
+
+### [vuepress-plugin-mermaidjs](https://github.com/eFrane/vuepress-plugin-mermaidjs)
+
+```mermaid
+gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section 现有任务
+        已完成               :done,    des1, 2014-01-06,2014-01-08
+        进行中               :active,  des2, 2014-01-09, 3d
+        计划一               :         des3, after des2, 5d
+        计划二               :         des4, after des3, 5d
+```
+
+```md
+\```mermaid
+gantt
+        dateFormat  YYYY-MM-DD
+        title Adding GANTT diagram functionality to mermaid
+        section 现有任务
+        已完成               :done,    des1, 2014-01-06,2014-01-08
+        进行中               :active,  des2, 2014-01-09, 3d
+        计划一               :         des3, after des2, 5d
+        计划二               :         des4, after des3, 5d
+\```
+```
+
+```mermaid
+sequenceDiagram
+张三 ->> 李四: 你好！李四, 最近怎么样?
+李四-->>王五: 你最近怎么样，王五？
+李四--x 张三: 我很好，谢谢!
+李四-x 王五: 我很好，谢谢!
+Note right of 王五: 李四想了很长时间, 文字太长了<br/>不适合放在一行.
+
+李四-->>张三: 打量着王五...
+张三->>王五: 很好... 王五, 你怎么样?
+```
+
+
+```mermaid
+graph LR
+A[长方形] -- 链接 --> B((圆))
+A --> C(圆角长方形)
+B --> D{菱形}
+C --> D
+```
+
+### [@maginappvuepress-plugin-flowchart](https://github.com/maginappvuepress/vuepress-plugin-flowchart)
+
+基于(ulivz/vuepress-plugin-flowchart)[https://github.com/ulivz/vuepress-plugin-flowchart
+]做了改写，兼容了csdn博客的flowchart模板
+
+```mermaid
+flowchat
+st=>start: 启1动11 <ImgWIthBase /> $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$ 
+e=>end: 结束
+op=>operation: 我的操作
+cond=>condition: 确认？
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
+
+## tips/md语法扩展
 
 ### sidebar 路径设置
 

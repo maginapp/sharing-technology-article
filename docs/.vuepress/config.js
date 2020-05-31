@@ -6,7 +6,7 @@ const blogSideBar = [
     // collapsable: false,
     sidebarDepth: 2,
     children: [
-      '/blog/about-config/vuepress搭建踩坑'
+      '/blog/about-config/vuepress搭建网站踩坑'
     ]
   },
   {
@@ -100,13 +100,37 @@ module.exports = {
   plugins: [
     ['@vuepress/search', {
       searchMaxSuggestions: 10
+    }],
+    ['@vuepress/back-to-top', true],
+    ['@vuepress/nprogress'],
+    ['@maginapp/vuepress-plugin-katex'],
+    ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}],
+    'vuepress-plugin-mermaidjs',
+    [
+      '@vuepress/pwa', {
+      serviceWorker: true,
+      updatePopup: {
+        message: "New content is available.",
+        buttonText: "Refresh"
+      }
     }]
+    // 以下替换为magina系列插件
+    // ['flowchart', {'???????????': 'test'}],
+    // ['@markspec/vuepress-plugin-katex', {ss: 'ss'}]
   ],
   // 代码添加行号
   markdown: {
     lineNumbers: true
   },
   head: [
-    ['link', { rel: 'shortcut icon', type: "image/x-icon", href: `/favicon.ico` }]
+    ['link', { rel: 'icon' , href: `/favicon.ico` }],
+    ['meta', { name: 'theme-color', content: '#3eaf7c' }],
+    ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
+    ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    // ['link', { rel: 'apple-touch-icon', href: '/icons/apple-touch-icon-152x152.png' }],
+    // ['link', { rel: 'mask-icon', href: '/icons/safari-pinned-tab.svg', color: '#3eaf7c' }],
+    // ['link', { rel: 'manifest', href: '/manifest.json' }],
+    // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
+    // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
  ]
 }

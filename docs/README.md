@@ -13,8 +13,22 @@ meta:
 
 ## 分类
 
-:point_right:[个人笔记](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/audition/)
+:point_right:[博客](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/audition/)
 
 
 > 网站基于Markdown/Vue开发，travis集成发布，github提供静态服务器与域名 [:point_right:](https://github.com/maginapp/sharing-technology-article)
+
+## 最近
+
+### 博客
+
+* [vuepress搭建网站踩坑](https://maginapp.github.io/sharing-technology-article/blog/about-config/vuepress搭建网站踩坑.html)
+
+### 文章分享
+
+
+
+### 面试题
+
+
 
