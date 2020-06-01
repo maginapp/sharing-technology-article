@@ -6,7 +6,7 @@ const blogSideBar = [
     // collapsable: false,
     sidebarDepth: 2,
     children: [
-      '/blog/about-config/vuepress搭建网站踩坑'
+      '/blog/about-config/vuepress-github-website'
     ]
   },
   {
@@ -31,13 +31,13 @@ const blogSideBar = [
     title: '测试',   // 必要的
     // collapsable: false, // 可选的, 默认值是 true,
     sidebarDepth: 2,    // 可选的, 默认值是 1
-    path: '/blog/html-test/测试页面汇总',
+    path: '/blog/html-test/summary-test',
     // children: [
     //   { title: '测试汇总', path:'/test-func/'},
     //   { title: '锚点功能测试', path:'/test-func/锚点功能测试/'}
     // ]
     children: [
-      '/blog/html-test/锚点功能测试'
+      '/blog/html-test/hash-test'
     ],
     // children: [
     //   '/',
