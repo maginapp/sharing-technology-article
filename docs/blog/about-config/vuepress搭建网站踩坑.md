@@ -15,7 +15,7 @@
 配置token，暂时未研究具体权限需求，提供了除删除仓库外的所有权限
 
 <!-- <ImgWithBase src="/webstatic/2020-05-01-token-get.png"/> -->
-![token](/webstatic/2020-05-01-token-get.png)
+![token]($withBase('/webstatic/2020-05-01-token-get.png'))
 
 ### [travis-ci](https://travis-ci.org/)注册
 
