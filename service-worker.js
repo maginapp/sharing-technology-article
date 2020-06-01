@@ -27,11 +27,11 @@ self.addEventListener('message', (event) => {
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "9931816db983e56eca6ce22699850d1e"
+    "revision": "b6e25622eae5b8e3b3019233f7306718"
   },
   {
-    "url": "assets/css/0.styles.88f2ffdb.css",
-    "revision": "f5f8af2476637ef49992c928f9c0fdcb"
+    "url": "assets/css/0.styles.1537403c.css",
+    "revision": "0a4ec255babcad238ae087e751de0729"
   },
   {
     "url": "assets/fonts/KaTeX_AMS-Regular.7f06b4e3.woff",
@@ -286,8 +286,8 @@ self.__precacheManifest = [
     "revision": "ab124798a931a56406afaae0211b041b"
   },
   {
-    "url": "assets/js/21.f1b92f2f.js",
-    "revision": "f85ef521b10d63b2223dc320edb7e42c"
+    "url": "assets/js/21.08dcd7c4.js",
+    "revision": "41e25e072810460fbc45254e4bba39ca"
   },
   {
     "url": "assets/js/22.22a319f2.js",
@@ -338,8 +338,8 @@ self.__precacheManifest = [
     "revision": "f058c287eaaf0f017d53431df798ca8c"
   },
   {
-    "url": "assets/js/6.ab259354.js",
-    "revision": "5377557c6ff0d3cac681a7eb86ecb780"
+    "url": "assets/js/6.83ccfa04.js",
+    "revision": "aa903fe54f3d3b44ea4cb29eaff95105"
   },
   {
     "url": "assets/js/7.acd723f7.js",
@@ -354,8 +354,8 @@ self.__precacheManifest = [
     "revision": "b2faf4ee06fe00e9fecb1efef4fd65f9"
   },
   {
-    "url": "assets/js/app.b9380a3d.js",
-    "revision": "c10fb42acedb64027ebf8d7359d4d0c5"
+    "url": "assets/js/app.731ff5a6.js",
+    "revision": "9405a361cf7e69c5cafb5afc857a874d"
   },
   {
     "url": "assets/js/vendors~flowchart.debf4c03.js",
@@ -363,75 +363,75 @@ self.__precacheManifest = [
   },
   {
     "url": "audition/css.html",
-    "revision": "59a16e0b16d8df384b959d8236ea4876"
+    "revision": "f289fceca0ff59916a9a6a403f50990d"
   },
   {
     "url": "audition/history.html",
-    "revision": "71898203b1bedd2ae4e8ee22bf722e36"
+    "revision": "3adc28866089aaa50c7cc56a0c2af5d1"
   },
   {
     "url": "audition/html.html",
-    "revision": "27f824c00f086ddcc1bc135cb975d79f"
+    "revision": "088555172571cdae38e7cf4ed3d3aed8"
   },
   {
     "url": "audition/index.html",
-    "revision": "34c95b912c26b6f287a577dbdbf7caad"
+    "revision": "d3971caff038bbb7ed42b195bd5c82f8"
   },
   {
     "url": "audition/js.html",
-    "revision": "82b70f9492471630d1a1a817f8d660d1"
+    "revision": "f036881c777f9f0c917739f20d8d1423"
   },
   {
     "url": "audition/nodejs.html",
-    "revision": "011ea116232069d196f487b6d34466e0"
+    "revision": "cf451fbce25eec56201fc341af7d5488"
   },
   {
     "url": "audition/react.html",
-    "revision": "28392a46ba7cd525ac1ae7901820d296"
+    "revision": "0c32dc3ff89bbbf734c66a4aba96d12e"
   },
   {
     "url": "audition/vue.html",
-    "revision": "1d62e6e24b828d8d62231c23090f91fa"
+    "revision": "9717ee1f4b1b9c31f74cb408759f77b1"
   },
   {
     "url": "audition/webpack.html",
-    "revision": "d4dae7ec408e4333fe1f094d8ceb0b70"
+    "revision": "3ad46a7b58f7eb3efe1f983d82a61f74"
   },
   {
     "url": "audition/小程序.html",
-    "revision": "928c5adaba6cfbfb63661442aba54fc2"
+    "revision": "8c64d71b98252319ae91ae0805b45b81"
   },
   {
     "url": "blog/about-config/vuepress搭建网站踩坑.html",
-    "revision": "b8c085e3f3fdd36486e7491882d878d4"
+    "revision": "cbd97968b5a4b3fde68a8d645f42e84b"
   },
   {
     "url": "blog/html-test/测试页面汇总.html",
-    "revision": "8c7356f7d19062636eab4c977dee4526"
+    "revision": "e3f3f7d7c3fdd7c40d36c8bcfd308935"
   },
   {
     "url": "blog/html-test/锚点功能测试.html",
-    "revision": "2bf9750e7f46ec1f5d3db05e96189937"
+    "revision": "0d3d61fcb58bc6c8c51df099e4d951db"
   },
   {
     "url": "blog/index.html",
-    "revision": "8f9638e8368139bca61cc74afbaf5b26"
+    "revision": "bd880b6c87226660e1d3075417186971"
   },
   {
     "url": "blog/standard/git-commit.html",
-    "revision": "e08700109028c02dbb86f555761b3420"
+    "revision": "2953d1a2b8607922a1fed3593f534bab"
   },
   {
     "url": "blog/standard/index.html",
-    "revision": "fc4b004f55c52c5d8e3cc8a3504ef04d"
+    "revision": "3bf6a3c6bdd0d3d74a820af5783baa0f"
   },
   {
     "url": "blog/standard/internet.html",
-    "revision": "4c9ecf12b318c47e34d4fe0991b263b2"
+    "revision": "b1e672d008b5b6c4546c6be192e3b17a"
   },
   {
     "url": "Goal.html",
-    "revision": "2c02a37e3a6abccd6ea3a57cfe7be7be"
+    "revision": "54f3033c48e57389c6b3e36cadb2f744"
   },
   {
     "url": "icons/icon-128.png",
@@ -467,11 +467,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "639c5f748e2521845864ff3a8a629ee2"
+    "revision": "bc7b6e8a59ec6788e563290b82c9aeb7"
   },
   {
     "url": "sharing/index.html",
-    "revision": "5b12e28c50962dcc5889eafb7217cecf"
+    "revision": "a7cec249ef074222ea8d2e07e5949c8e"
   },
   {
     "url": "test.png",
