@@ -22,7 +22,7 @@ meta:
 
 ### 博客
 
-* [vuepress搭建网站踩坑](https://maginapp.github.io/sharing-technology-article/blog/about-config/vuepress搭建网站踩坑.html)
+* [vuepress搭建网站踩坑](https://maginapp.github.io/sharing-technology-article/blog/about-config/vuepress-github-website.html)
 
 ### 文章分享
 
