@@ -207,13 +207,41 @@ cond(no)->op
 
 此处使用了vue的方法，$withbase被注入到vue原型上，需要使用vue的语法书写才能调用成功
 
-``` md
-> 失败
-![2020-5-1-token账户进入]($withBase('/webstatic/2020-05-01-token-get.png'))
-> 成功
-<img :src="$withBase('/webstatic/2020-05-01-token-get.png')" alt="2020-5-1-token账户进入">
-> 成功
-<ImgWithBase src="/webstatic/2020-05-01-token-get.png"/>
+
+`![Image from alias](~@alias/test-1.png)`
+
+![/webstatic/0.png']($withBase('/webstatic/0.png'))
+
+<img-with-base :src="$withBase('../../.vuepress/public/webstatic/1.png')" :height="300" alt="vue-$withBase('../../.vuepress/public/webstatic/1.png')"/>
+
+`<img-with-base :src="../../.vuepress/public/webstatic/6.png" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>`
+
+<img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> 
+
+<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')">
+
+<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')">
+
+<ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
+
+
+```
+
+![Image from alias](~@alias/test-1.png) # 打包时加载不成功
+
+![/webstatic/0.png']($withBase('/webstatic/0.png'))
+
+<img-with-base :src="$withBase('../../.vuepress/public/webstatic/1.png')" :height="300" alt="vue-$withBase('../../.vuepress/public/webstatic/1.png')"/>
+
+<img-with-base :src="../../.vuepress/public/webstatic/6.png" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>
+
+<img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> # 字符串静态写法
+
+<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')">
+
+<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')">
+
+<ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
 ```
 
 ```{2,5}

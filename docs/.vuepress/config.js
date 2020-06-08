@@ -132,5 +132,12 @@ module.exports = {
     ['link', { rel: 'manifest', href: '/manifest.json' }],
     // ['meta', { name: 'msapplication-TileImage', content: '/icons/msapplication-icon-144x144.png' }],
     // ['meta', { name: 'msapplication-TileColor', content: '#000000' }]
- ]
+  ],
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@alias': '../../../assets/images'
+      }
+    }
+  }
 }
