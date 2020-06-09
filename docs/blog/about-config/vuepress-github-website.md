@@ -194,54 +194,109 @@ cond(no)->op
 
 * '/test': test.html test/index.html
 
-### 静态资源/图片路径
+### 静态资源-图片路径
 
 
-* 根据vuepress官网配置了alias，没能生效，最后选择了使用相对地址
+* 根据[vuepress官网配置](https://vuepress.vuejs.org/zh/guide/assets.html#%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84)了alias，`~@alias` 配置是生效的
 
-使用此写法会打包到`assets/img/`
+  * 使用绝对路径，会在node_module中查找
 
-* 放置在`.vuepress/public`中的资源会直接打包到根目录中，以`.vuepress/public`为根目录写地址即可
+  * 使用相对路径，需要注意md文件和资源的相对位置
 
-* 由于项目config.js配置了base参数，需要使用$withbase调整地址，此处使用了图片组件完成
+  ```js
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@alias': '../../../assets/images', // /docs/blog/about-config/md 文件中使用
+        '@alias-p': '../../assets/images' // /docs/blog/md 文件中使用
+      }
+    }
+  }
+  ```
 
-此处使用了vue的方法，$withbase被注入到vue原型上，需要使用vue的语法书写才能调用成功
+* vue组件使用图片
+
+  * 组件中直接引用的静态图片打包到`assets/img/`或者base64格式
+
+  * md中使用的vue组件，建议传入`http(s)`或者以`.vuepress/public`为根目录的相对地址`/webstatic/5.png`
+
+  * `.vuepress/config.js`配置了`base`属性后，需要使用动态写法，加入$withBase()
+  
+  > base 路径一旦被设置，它将会自动地作为前缀插入到 .vuepress/config.js 中所有以 / 开始的资源路径中。
+
+* 静态写法
+  
+  *  `./路径` 直接使用相对路径，以当前md文件为基准
+
+  * `/路径`，以`.vuepress/config.js`为根目录
+
+* 放置在`.vuepress/public`中的资源会直接打包到根目录中
+
+  * 以`.vuepress/public`为根目录写地址即可
+
+  * 资源会直接复制到根目录
 
 
-`![Image from alias](~@alias/test-1.png)`
+![Image from alias](~@alias/test-1.png)
+
+<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')"/>
+
+<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')"/>
+
+<ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
+
+<img-test/>
+
+<img src="./7.png" />
+
+<img src="/webstatic/9.png" />
 
 ![/webstatic/0.png']($withBase('/webstatic/0.png'))
 
 <img-with-base :src="$withBase('../../.vuepress/public/webstatic/1.png')" :height="300" alt="vue-$withBase('../../.vuepress/public/webstatic/1.png')"/>
 
-`<img-with-base :src="../../.vuepress/public/webstatic/6.png" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>`
+`<img-with-base :src="'../../.vuepress/public/webstatic/6.png'" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>`
 
 <img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> 
 
-<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')">
+<ImgWithBase src="./7.png" alt="ImgWithBase: ./7.png"/>
 
-<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')">
+`<ImgWithBase src="7.png" alt="ImgWithBase: 7.png"/>`
+
+<img :src="'./../public/webstatic/9.png'" />
+
+```md
+
+![Image from alias](~@alias/test-1.png)
+
+<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')"/>
+
+<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')"/>
 
 <ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
 
+<img-test/>
 
-```
+<img src="./7.png" />
 
-![Image from alias](~@alias/test-1.png) # 打包时加载不成功
+<img src="/webstatic/9.png" />
+
+> 以上 dev 环境成功
 
 ![/webstatic/0.png']($withBase('/webstatic/0.png'))
 
 <img-with-base :src="$withBase('../../.vuepress/public/webstatic/1.png')" :height="300" alt="vue-$withBase('../../.vuepress/public/webstatic/1.png')"/>
 
-<img-with-base :src="../../.vuepress/public/webstatic/6.png" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>
+`<img-with-base :src="'../../.vuepress/public/webstatic/6.png'" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>`
 
-<img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> # 字符串静态写法
+<img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> 
 
-<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')">
+<ImgWithBase src="./7.png" alt="ImgWithBase: ./7.png"/>
 
-<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')">
+`<ImgWithBase src="7.png" alt="ImgWithBase: 7.png"/>`
 
-<ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
+<img :src="'./../public/webstatic/9.png'" />
+
 ```
 
 ```{2,5}

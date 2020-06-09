@@ -104,7 +104,7 @@ module.exports = {
     ['@vuepress/back-to-top', true],
     ['@vuepress/nprogress'],
     ['@maginapp/vuepress-plugin-katex'],
-    ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}],
+    ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}], // 测试传参与合并
     'vuepress-plugin-mermaidjs',
     [
       '@vuepress/pwa', {
@@ -136,7 +136,8 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@alias': '../../../assets/images'
+        '@alias': '../../../assets/images',
+        '@alias-p': '../../assets/images'
       }
     }
   }
