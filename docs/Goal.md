@@ -20,3 +20,7 @@ https://www.jianshu.com/p/098af61bbe04
 https://segmentfault.com/a/1190000015828713
 
 https://segmentfault.com/a/1190000013156728
+
+## git 熟悉
+
+[git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
