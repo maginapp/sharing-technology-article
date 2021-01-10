@@ -37,7 +37,8 @@ const blogSideBar = [
     //   { title: '锚点功能测试', path:'/test-func/锚点功能测试/'}
     // ]
     children: [
-      '/blog/html-test/hash-test'
+      '/blog/html-test/hash-test',
+      '/blog/html-test/just-test',
     ],
     // children: [
     //   '/',
@@ -103,7 +104,10 @@ module.exports = {
     }],
     ['@vuepress/back-to-top', true],
     ['@vuepress/nprogress'],
-    ['@maginapp/vuepress-plugin-katex'],
+    ['@maginapp/vuepress-plugin-katex',
+    {
+      delimiters: 'dollars'
+    }],
     ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}], // 测试传参与合并
     'vuepress-plugin-mermaidjs',
     [

@@ -18,7 +18,7 @@
   "homepage": "https://github.com/maginapp/sharing-technology-article#readme",
   "devDependencies": {
     "@maginapp/vuepress-plugin-flowchart": "^1.0.2",
-    "@maginapp/vuepress-plugin-katex": "^1.0.6",
+    "@maginapp/vuepress-plugin-katex": "^1.0.9",
     "@vuepress/plugin-back-to-top": "^1.5.0",
     "@vuepress/plugin-google-analytics": "^1.5.0",
     "@vuepress/plugin-nprogress": "^1.5.0",
