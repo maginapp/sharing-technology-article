@@ -1,3 +1,4 @@
 /node_modules
 /docs/.vuepress/dist/
 .git/
+package-lock.json

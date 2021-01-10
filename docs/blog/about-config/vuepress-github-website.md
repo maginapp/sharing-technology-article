@@ -108,19 +108,10 @@ cd -
 ### [@maginapp/vuepress-plugin-katex](https://github.com/maginapp/vuepress-plugin-katex)
 
 
-行内公式:  $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$ 
 
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
 
-```
-行内公式:  $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$ 
 
-$$
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-$$
-```
+
 
 ### [vuepress-plugin-mermaidjs](https://github.com/eFrane/vuepress-plugin-mermaidjs)
 

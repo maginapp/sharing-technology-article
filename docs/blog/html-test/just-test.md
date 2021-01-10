@@ -2,7 +2,7 @@
 
 
 $$
-a ~ b 
+a ~ baa 
 $$
 
 space
@@ -23,11 +23,3 @@ $$
 a \space b 
 $$
 
-
-$$
-\frac{a}{c}
-$$
-
-$$
-\frac{a   and \space b}{c ~ and \nobreakspace d}
-$$
