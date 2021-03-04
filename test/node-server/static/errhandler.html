@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    img {
+      min-width: 50px;
+      min-height: 50px;
+      max-width: 400px;
+      border: 1px solid #000;
+    }
+  </style>
 </head>
 <body>
   <div>
@@ -29,23 +37,43 @@
       // 资源加载失败时
       console.log('window.addEventListener 捕获到异常：', e)
     }, true)
+    window.addEventListener('unhandledrejection', function (e) {
+      // 未catch的 promise reject错误
+      console.log('window.unhandledrejection 捕获到异常：', e)
+      return true
+    }, true)
   </script>
   <script>
+    // 事件报错
     const scriptError = document.querySelector('#script-error')
     scriptError.addEventListener('click', () => {
-        const badCode = 'const s;'
+        const badCode = Math.random() > .5 ? 'const s;' : 'const s = "ss'
         eval(badCode)
     })
-  </script>
-  <script>
+    // 桶步
+    try {
+      d = a + dd
+    } catch(e) {
+      console.log('try catch 捕获到同步异常：', e)
+    }
+    // 异步
     try {
       setTimeout(() => {
-        undefined.map(v => v);
+        var a 
+        a.map(v => v);
       }, 1000)
     } catch(e) {
       // 异步无法捕获
       console.log('try catch 捕获到异步异常：', e)
     }
+    // Promise catch
+    Promise.reject('promise error catch').then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log('Promise catch 捕获到异步异常：',err)
+    })
+    // Promise reject
+    Promise.reject('promise error reject')
   </script>
   <script>
     a = 1
@@ -54,10 +82,34 @@
   </script>
   <script>
     try {
-      d = a + dd
+      d = a + 'da
     } catch(e) {
       console.log('try catch 捕获到同步异常：', e)
     }
   </script>
+
+  <script>
+    try {
+      setTimeout(() => {
+        Promise.reject('promise error')
+        new Promise((res,rej) => {
+          rej(1)
+        })
+        new Promise((res) => {
+          adsada = dasdsa
+        })
+      }, 1000)
+    } catch {}
+  </script>
+
+  <iframe src="http://www.baidu.com/iframe.html" frameborder="0"></iframe>
+  <iframe src="./errhandler-frame.html" frameborder="0"></iframe>
+  <script>
+    window.frames[0].onerror = function (message, source, lineno, colno, error) {
+      console.log('捕获到 iframe 异常：',{message, source, lineno, colno, error});
+      return true;
+    };
+  </script>
+  
 </body>
 </html>
