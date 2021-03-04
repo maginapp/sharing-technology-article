@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <div>
+      img:
+      <img src="/dsadsad.png" alt="">
+      <img src="https://cdn-1.azazie.com/upimg/userfiles/images/aa/cb/7074b9dc41446fd7a397f8d38348aacb.jpg.webp" alt="">
+      <img src="https://cdn-1.azazie.com/upimg/userfiles/imagess/9f/bf/ecf875c42efef63a53b4bde7a6549fbf.png.webp" alt="">
+    </div>
+    <div class="controls">
+      <button id="script-error" type="button">Generate script error</button>
+      <img class="bad-img" />
+    </div>
+  </div>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      // js报错 含异步
+      console.log('window.onerror 捕获到异常：', { message, source, lineno, colno, error })
+      // return true // 若该函数返回true，则阻止执行默认事件处理函数。
+      return true
+    }
+    window.addEventListener('error', function (e) {
+      // 资源加载失败时
+      console.log('window.addEventListener 捕获到异常：', e)
+    }, true)
+  </script>
+  <script>
+    const scriptError = document.querySelector('#script-error')
+    scriptError.addEventListener('click', () => {
+        const badCode = 'const s;'
+        eval(badCode)
+    })
+  </script>
+  <script>
+    try {
+      setTimeout(() => {
+        undefined.map(v => v);
+      }, 1000)
+    } catch(e) {
+      // 异步无法捕获
+      console.log('try catch 捕获到异步异常：', e)
+    }
+  </script>
+  <script>
+    a = 1
+    b = a + c
+    console.log('js-end')
+  </script>
+  <script>
+    try {
+      d = a + dd
+    } catch(e) {
+      console.log('try catch 捕获到同步异常：', e)
+    }
+  </script>
+</body>
+</html>

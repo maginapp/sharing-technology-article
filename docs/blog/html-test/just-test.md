@@ -1,5 +1,6 @@
 ## just-test
 
+a sadsa $a~b$ dsaa
 
 $$
 a ~ baa 

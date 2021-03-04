@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "dev": "vuepress dev docs",
-    "build": "vuepress build docs"
+    "build": "vuepress build docs",
+    "node": "node node-server-test.js"
   },
   "repository": {
     "type": "git",
