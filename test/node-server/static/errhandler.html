@@ -25,6 +25,7 @@
       <button id="script-error" type="button">Generate script error</button>
       <img class="bad-img" />
     </div>
+    <img src="https://www.azazie.com/all/" alt="">
   </div>
   <script>
     window.onerror = function(message, source, lineno, colno, error) {
@@ -101,14 +102,19 @@
       }, 1000)
     } catch {}
   </script>
+  
 
   <iframe src="http://www.baidu.com/iframe.html" frameborder="0"></iframe>
   <iframe src="./errhandler-frame.html" frameborder="0"></iframe>
   <script>
     window.frames[0].onerror = function (message, source, lineno, colno, error) {
-      console.log('捕获到 iframe 异常：',{message, source, lineno, colno, error});
-      return true;
-    };
+      console.log('捕获到 iframe onerror 异常：',{message, source, lineno, colno, error})
+      return true
+    }
+    window.frames[0].addEventListener('error', function (message, source, lineno, colno, error) {
+      console.log('捕获到 iframe addEventListener 异常：',{message, source, lineno, colno, error})
+      return true
+    })
   </script>
   
 </body>

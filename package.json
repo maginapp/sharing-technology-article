@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
-    "node": "node node-server-test.js"
+    "node:test": "nodemon node-server-test.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,5 @@
     "vuepress": "^1.4.1",
     "vuepress-plugin-mermaidjs": "^1.5.1",
     "websocket-extensions": ">=0.1.4"
-  },
-  "dependencies": {}
+  }
 }

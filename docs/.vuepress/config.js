@@ -6,7 +6,14 @@ const blogSideBar = [
     // collapsable: false,
     sidebarDepth: 2,
     children: [
-      '/blog/about-config/vuepress-github-website'
+      '/blog/about-config/vuepress-github-website',
+      // { 
+      //   title: '规范',   // 必要的
+      //   path: '/blog/about-config/node-server', 
+      //   children: [
+      //     '/blog/standard/git-commit'
+      //   ]
+      // }
     ]
   },
   {
@@ -25,6 +32,15 @@ const blogSideBar = [
     sidebarDepth: 2,
     children: [
       // '/blog/frontend-records/01-2020-05-11-name'
+    ]
+  },
+  {
+    title: 'node',
+    sidebarDepth: 2,
+    children: [
+      '/blog/node-server/koa-server-init',
+      '/blog/node-server/koa-middleware',
+      '/blog/node-server/koa-router'
     ]
   },
   {
