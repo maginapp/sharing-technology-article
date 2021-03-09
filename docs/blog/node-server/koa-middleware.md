@@ -8,9 +8,33 @@ meta:
 
 # koa2服务端-中间件
 
-## 简介
+## http处理流程
 
-洋葱模型
+* http请求
+  * 路由操作
+  * 权限处理
+  * 数据安全
+* 业务操作
+  * 请求数据解析
+  * 数据库操作
+  * 数据处理
+* http响应
+  * 响应操作
+
+## koa洋葱模型
+
+### 简介
+
+基于 洋葱模型 的HTTP中间件处理流程
+
+* 中间件开始执行
+* 中间件生命周期中
+  * 前置操作
+  * 等待其他中间件执行完成
+  * 后置操作
+* 中间件执行完成
+
+### 示例
 
 ```js
 const Koa = require('Koa');
@@ -18,23 +42,23 @@ const app = new Koa();
 
 // 最外层的中间件
 app.use(async (ctx, next) => {
-    await console.log(`第 1 个执行`);
+    console.log(`第 1 个执行`);
     await next();
-    await console.log(`第 6 个执行`);
+    console.log(`第 6 个执行`);
 });
 
 // 第二层中间件
 app.use(async (ctx, next) => {
-    await console.log(`第 2 个执行`);
+    console.log(`第 2 个执行`);
     await next();
-    await console.log(`第 5 个执行`);
+    console.log(`第 5 个执行`);
 });
 
 // 最里层的中间件
 app.use(async (ctx, next) => {
-    await console.log(`第 3 个执行`);
+    console.log(`第 3 个执行`);
     ctx.body = "Hello world.";
-    await console.log(`第 4 个执行`);
+    console.log(`第 4 个执行`);
 });
 
 app.listen(3000, () => {
@@ -42,13 +66,9 @@ app.listen(3000, () => {
 })
 ```
 
-
-### generator中间件开发
-
-
 ### async中间件开发
 
-```
+```js
 function log( ctx ) {
     console.log( ctx.method, ctx.header.host + ctx.url )
 }
@@ -61,9 +81,9 @@ module.exports = function () {
 }
 ```
 
-## 中间件开发
+## 中间件开发示例
 
-* logger
+### logger
 
 放置于中间件最上层
 
@@ -85,7 +105,7 @@ module.exports = (options) => async (ctx, next) {
 
 ```
 
-* token验证
+### token验证
 
 ``` js
 module.exports = (options) => async (ctx, next) {
@@ -110,7 +130,7 @@ module.exports = (options) => async (ctx, next) {
 ```
 
 
-## 中间件使用
+## 中间件使用示例
 
 ```js
 const Koa = require('Koa');
