@@ -3,7 +3,7 @@ meta:
   - name: keywords
     content: node,koa2,中间件
   - name: description
-    content: 基于nodejs/koa搭建web服务器-中间件开发与使用
+    content: 基于nodejs/koa搭建web服务器 -- 中间件开发与使用
 ---
 
 # koa2服务端-中间件

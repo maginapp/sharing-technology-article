@@ -1,3 +1,11 @@
+---
+meta:
+  - name: keywords
+    content: node,koa2,koa-router
+  - name: description
+    content: 基于nodejs/koa搭建web服务器 -- koa-router使用说明
+---
+
 # koa-router
 
 ##  基础说明
@@ -182,7 +190,8 @@ app
 // app.use(router.routes(), router.allowedMethods());
 ```
 
-自动生成入口文件写法
+## 自动生成入口文件写法
+
 ```js
 // router/index.js
 const router = require('koa-router')();

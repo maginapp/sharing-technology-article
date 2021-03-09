@@ -40,7 +40,8 @@ const blogSideBar = [
     children: [
       '/blog/node-server/koa-server-init',
       '/blog/node-server/koa-middleware',
-      '/blog/node-server/koa-router'
+      '/blog/node-server/koa-router',
+      '/blog/node-server/koa-mysql'
     ]
   },
   {

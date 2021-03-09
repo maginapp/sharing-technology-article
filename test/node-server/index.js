@@ -169,3 +169,7 @@ getCanUsePort(app, 3100)
       console.log(`demo] static-use-middleware is starting at port ${port}`)
     })
   })
+
+
+const fileRouter = require('./router')
+console.log(fileRouter.routes().router.stack) 
