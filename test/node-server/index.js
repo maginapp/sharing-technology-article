@@ -171,5 +171,5 @@ getCanUsePort(app, 3100)
   })
 
 
-const fileRouter = require('./router')
-console.log(fileRouter.routes().router.stack) 
+// const fileRouter = require('./router')
+// console.log(fileRouter.routes().router.stack) 

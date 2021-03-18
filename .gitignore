@@ -2,3 +2,5 @@
 /docs/.vuepress/dist/
 .git/
 /**/node_modules
+/test/node-server/static/images-base-min
+/test/node-server/static/images-base-to-webp

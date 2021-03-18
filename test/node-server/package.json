@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "nodemon index.js",
+    "img:min": "cross-env imgType=min node imageMin.js",
+    "img:webp": "cross-env imgType=webp  node imageMin.js",
+    "img": "cross-env imgType=  node imageMin.js"
   },
   "author": "magina.cheng",
   "license": "ISC",
@@ -17,6 +20,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "log4js": "^6.3.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "sharp": "^0.27.2"
   }
 }

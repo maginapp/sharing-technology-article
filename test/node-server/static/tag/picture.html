@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  1. img => srcset从前向后，切换分辨率等操作满足后面的 资源判断条件后，不能恢复
+  2. pic souce => media 媒体查询 处理分辨率/图片/横竖屏幕 切换
+  3. 提供默认图片 向前兼容
+  4. 图片格式兼容，浏览器根据 source => type 属性确定加载资源
+
+  <p>img1</p>
+  <img srcset="/images/pic-ali.png 1x, /images/pic-tc.png 2x, /images/pc-b-g.png 800w, /images/pc-wp.png 1000w,  /iamges/pc-bd.jpg 1300w" src="/images/pc-wp.png" alt="" size="()">
+
+
+  <p>img2</p>
+  
+  <img srcset="/images/pic-ali.png 1x, /images/pc-wp.png 2x,  /images/pc-bd.jpg 3x, /images/pc-b-g.png 800w" src="/images/pic-ali.png" alt="" size="()">
+
+  
+  <p>异常测试 img3 
+    2.0 时出现异常 渲染了 4x图片  
+    显示时 根据x前的值进行缩放</p>
+  <img srcset="/images/pic-ali.png 1x, /images/pc-wp.png 2.0x, /images/pc-bd.jpg 3x, /images/pic-tc.png 4x, /images/pc-b-g.png 800w" src="/images/pic-ali.png" alt="" size="()">
+
+  
+  <p>异常测试 img4</p>
+  <img srcset="/images/pic-ali.png 1x, /images/pc-wp.png 2x, /images/pc-bd.jpg 3x, /images/pic-tc.png 4.5x, /images/pc-b-g.png 800w" src="/images/pic-ali.png" alt="" size="()">
+
+  
+  <p>异常测试 img4 - 2 1200w</p>
+  <img srcset="/images/pic-ali.png 1x, /images/pc-wp.png 2x, /images/pc-bd.jpg 3x, /images/pic-tc.png 4.5x, /images/pc-b-g.png 1200w" src="/images/pic-ali.png" alt="" size="()">
+
+
+  <p>img5  顺序问题</p>
+  <img srcset="/images/pic-ali.png 1x, /images/pc-wp.png 2x, /images/pc-bd.jpg 4x, /images/pic-tc.png 2x, /images/pc-b-g.png 800w" src="/images/pic-ali.png" alt="" size="()">
+
+  <p>img6 横屏竖屏 
+    img用于兼容不支持的浏览器</p>
+
+  <picture>
+
+    <source media="(orientation: landscape)"
+    
+    srcset="/images/pic-ali.png 600w,
+    /images/pic-tc.png 1000w"
+    
+    sizes="(min-width: 700px) 500px,
+    (min-width: 600px) 400px,
+    100vw">
+    
+    <source media="(orientation: portrait)"
+    
+    srcset="/images/pic-ali.png 600w,
+    /images/pic-tc.png 1000w"
+    
+    sizes="(min-width: 768px) 700px,
+    (min-width: 1024px) 600px,
+    500px">
+    
+    <img src="/images/pc-wp.png" alt="Car">
+    </picture>
+
+    <p>img7 兼容格式</p>
+
+    <picture>
+      <source srcset="/images/pic-t-tc.avif" type="image/avif">
+      <source srcset="/images/pic-t-tc.webp" type="image/webp">
+      <img src="/images/pic-t-tc.png" alt="test image">
+    </picture>
+    <picture>
+      <source srcset="/images/pic-t-tc.avif" type="image/avif1">
+      <source srcset="/images/pic-t-tc.webp" type="image/webp">
+      <img src="/images/pic-t-tc.png" alt="test image">
+    </picture>
+</body>
+</html>
