@@ -2,6 +2,7 @@
 /*
 https://github.com/lovell/sharp
 https://blog.lcddjm.com/sharp-documents-cn/
+https://sharp.pixelplumbing.com/
 */
 
 const sharp = require('sharp')
