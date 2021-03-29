@@ -25,11 +25,9 @@ const blogSideBar = [
   },
   {
     title: '前端笔记',
-    // path: '/blog/frontend-records/',
-    // collapsable: false, // 可选的, 默认值是 true,
     sidebarDepth: 2,
     children: [
-      // '/blog/frontend-records/01-2020-05-11-name'
+      '/blog/frontend-records/promote-of-vue'
     ]
   },
   {
@@ -59,10 +57,34 @@ const blogSideBar = [
     // children: [
     //   '/',
     //   '/blog/',
-    //   '/audition/'
+    //   '/interview/'
     // ]
   }
 ]
+
+const interview = [{
+  title: '分类',
+  collapsable: false,
+  children: [
+    '/interview/js',
+    '/interview/css',
+    '/interview/html'
+  ]
+}, {
+  title: '专题',
+  collapsable: false,
+  children: [
+    '/interview/vue',
+    '/interview/nodejs',
+    '/interview/react',
+    '/interview/webpack',
+    '/interview/小程序'
+  ]
+}, {
+  title: '历史汇总',
+  collapsable: false,
+  path: '/interview/history'
+}]
 
 module.exports = {
   '/blog/': blogSideBar,
@@ -70,27 +92,5 @@ module.exports = {
     collapsable: false,
     title: '博客',  path: '/sharing/', sidebarDepth: 2
   }],
-  '/audition/':  [{
-    title: '分类',
-    collapsable: false,
-    children: [
-      '/audition/js',
-      '/audition/css',
-      '/audition/html'
-    ]
-  }, {
-    title: '专题',
-    collapsable: false,
-    children: [
-      '/audition/vue',
-      '/audition/nodejs',
-      '/audition/react',
-      '/audition/webpack',
-      '/audition/小程序'
-    ]
-  }, {
-    title: '历史汇总',
-    collapsable: false,
-    path: '/audition/history'
-  }]
+  '/interview/':  interview
 }

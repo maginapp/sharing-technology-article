@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="mostly-customized-scrollbar">
+  <style>
+    body {
+      --color-red: red;
+    }
+    div {
+      color: var(--color-red);
+    }
+    p {
+      --color-red: rgba(0, 255, 0, 1);
+      color: var(--color-red);
+    }
+    h3 {
+      color: var(--color-red);
+    }
+    span {
+      /* color: var(--global:color-red); */
+    }
+    span {
+      color: var(--color-red);
+      color: var(--global:color-red);
+      --color-red: rgba(0, 0, 255, 1);
+    }
+    /* body::-webkit-scrollbar {
+      display: none;
+    } */
+    .visible-scrollbar, .invisible-scrollbar, .mostly-customized-scrollbar {
+      display: block;
+      /* width: 10em; */
+      overflow: auto;
+      height: 2em;
+    }
+    .invisible-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Demonstrate a "mostly customized" scrollbar
+    * (won't be visible otherwise if width/height is specified) */
+    .mostly-customized-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 8px;
+      background-color: #aaa; /* or add it to the track */
+    }
+    /* Add a thumb */
+    .mostly-customized-scrollbar::-webkit-scrollbar-thumb {
+        background: #000;
+    }
+  </style>
+  <!-- https://juejin.cn/post/6856668819344392206 -->
+  <div>
+    123 div
+  </div>
+  <p>123 p</p>
+  <h3>123 h3</h3>
+  <span>123  span</span>
+  trl + K Ctrl + D	移动当前选择到下个匹配选择的位置(光标选定) Move last selection to next Find match
+Alt + C / R / W	切换大小写敏感/正则表达式/整词
+<p>多行操作
+<p>** Alt + Click**	插入光标-支持多个
+** Ctrl + Alt + ↑ / ↓**	向上/向下插入光标
+<p>** Ctrl + U **	撤销最后一次光标操作
+Shift + Alt + I	插入光标到选中范围内所有行结束符 Insert cursor at end of each line selected
+Ctrl + I	选中当前行
+<p>Ctrl + Shift + L	选择所有出现在当前选中的行-操作 Select all occurrences of current selection
+<p>Ctrl + F2	匹配当前选中的词并插入光标 Select all occurrences of current word
+Shift + Alt + →	从光标处扩展选中全行 Expand selection
+<p>Shift + Alt + ←	收缩选择区域 Shrink selection
+Shift + Alt + (drag mouse)	鼠标拖动区域，同时在多个行插入光标 Column (box) selection
+<p>Ctrl + Shift + Alt + (arrow key)	Column (box) selection
+<p>Ctrl + Shift + Alt + PgUp/PgDown	Column (box) selection page up/down
+<p>Ctrl + Space	输入建议[智能提示] Trigger suggestion
+<p>Ctrl + Shift + Space	输入建议[智能提示]
+Tab	Emmet指令触发/缩进 Emmet expand abbreviation
+<p>Shift + Alt + F	格式化代码
+Ctrl + K Ctrl + F	格式化选中部分的代码
+trl + K Ctrl + D	移动当前选择到下个匹配选择的位置(光标选定) Move last selection to next Find match
+Alt + C / R / W	切换大小写敏感/正则表达式/整词
+<p>多行操作
+<p>** Alt + Click**	插入光标-支持多个
+** Ctrl + Alt + ↑ / ↓**	向上/向下插入光标
+<p>** Ctrl + U **	撤销最后一次光标操作
+Shift + Alt + I	插入光标到选中范围内所有行结束符 Insert cursor at end of each line selected
+Ctrl + I	选中当前行
+<p>Ctrl + Shift + L	选择所有出现在当前选中的行-操作 Select all occurrences of current selection
+<p>Ctrl + F2	匹配当前选中的词并插入光标 Select all occurrences of current word
+Shift + Alt + →	从光标处扩展选中全行 Expand selection
+<p>Shift + Alt + ←	收缩选择区域 Shrink selection
+Shift + Alt + (drag mouse)	鼠标拖动区域，同时在多个行插入光标 Column (box) selection
+<p>Ctrl + Shift + Alt + (arrow key)	Column (box) selection
+<p>Ctrl + Shift + Alt + PgUp/PgDown	Column (box) selection page up/down
+<p>Ctrl + Space	输入建议[智能提示] Trigger suggestion
+<p>Ctrl + Shift + Space	输入建议[智能提示]
+Tab	Emmet指令触发/缩进 Emmet expand abbreviation
+<p>Shift + Alt + F	格式化代码
+Ctrl + K Ctrl + F	格式化选中部分的代码  trl + K Ctrl + D	移动当前选择到下个匹配选择的位置(光标选定) Move last selection to next Find match
+Alt + C / R / W	切换大小写敏感/正则表达式/整词
+<p>多行操作
+<p>** Alt + Click**	插入光标-支持多个
+** Ctrl + Alt + ↑ / ↓**	向上/向下插入光标
+<p>** Ctrl + U **	撤销最后一次光标操作
+Shift + Alt + I	插入光标到选中范围内所有行结束符 Insert cursor at end of each line selected
+Ctrl + I	选中当前行
+<p>Ctrl + Shift + L	选择所有出现在当前选中的行-操作 Select all occurrences of current selection
+<p>Ctrl + F2	匹配当前选中的词并插入光标 Select all occurrences of current word
+Shift + Alt + →	从光标处扩展选中全行 Expand selection
+<p>Shift + Alt + ←	收缩选择区域 Shrink selection
+Shift + Alt + (drag mouse)	鼠标拖动区域，同时在多个行插入光标 Column (box) selection
+<p>Ctrl + Shift + Alt + (arrow key)	Column (box) selection
+<p>Ctrl + Shift + Alt + PgUp/PgDown	Column (box) selection page up/down
+<p>Ctrl + Space	输入建议[智能提示] Trigger suggestion
+<p>Ctrl + Shift + Space	输入建议[智能提示]
+Tab	Emmet指令触发/缩进 Emmet expand abbreviation
+<p>Shift + Alt + F	格式化代码
+Ctrl + K Ctrl + F	格式化选中部分的代码
+作者：cychen7
+链接：https://www.jianshu.com/p/5686cd97cf43
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+</body>
+</html>

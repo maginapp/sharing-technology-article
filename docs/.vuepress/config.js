@@ -16,7 +16,7 @@ module.exports = {
       { text: 'Home', link: '/' },
       { text: 'Blog', link: '/blog/' },
       { text: 'Sharing', link: '/sharing/' },
-      { text: 'Audition', link: '/audition/' },
+      { text: 'Interview', link: '/interview/' },
       { text: 'Issues', link: 'https://github.com/maginapp/sharing-technology-article/issues' },
     ],
     // displayAllHeaders: true,

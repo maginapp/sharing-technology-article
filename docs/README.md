@@ -13,7 +13,7 @@ meta:
 
 ## 分类
 
-:point_right:[博客](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/audition/)
+:point_right:[博客](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/interview/)
 
 
 > 网站基于Markdown/Vue开发，travis集成发布，github提供静态服务器与域名 :point_right:[网站](https://maginapp.github.io/sharing-technology-article/) :point_right:[仓库](https://github.com/maginapp/sharing-technology-article)
