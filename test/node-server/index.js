@@ -126,6 +126,9 @@ app
   .use(author.routes())
   .use(router.allowedMethods())
 
+const fileRouter = require('./router')
+app.use(fileRouter.routes())
+
 
 app.use(async (ctx) => {
   if (ctx.url === '/') {
