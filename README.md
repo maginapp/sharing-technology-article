@@ -6,28 +6,27 @@
 
 > 网站基于Markdown/Vue开发，travis集成发布，github提供静态服务器与域名 :point_right:[网站](https://maginapp.github.io/sharing-technology-article/) :point_right:[仓库](https://github.com/maginapp/sharing-technology-article)
 
+## test
 
+测试demo与测试服务器位置 [:point_right:](/test) 
 
+### node-server
 
-## 最近
+依赖安装
 
-### 博客
+```bash
+cd test/node-server
+npm install
+```
 
-* [vuepress搭建网站踩坑](https://maginapp.github.io/sharing-technology-article/blog/about-config/vuepress-github-website.html)
+运行服务
 
-* [koa-server-init](https://maginapp.github.io/sharing-technology-article/blog/node-server/koa-server-init.html)
-
-### 文章分享
-
-
-
-### 面试题
-
+```bash
+npm run test
+```
 
 ## 记录
 
 * `2020/05/31` 添加pwa模块，确定网站模板
-
 * `2020/06/01` pwa测试成功，增加了添加网页到桌面功能
-
 * `2020/01/10` 测试服务搭建 [test/node-server](/test)

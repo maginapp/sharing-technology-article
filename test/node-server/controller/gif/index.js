@@ -1,6 +1,6 @@
-const GIFEncoder = require('gifencoder');
-const fs = require('fs');
-const { createCanvas, loadImage } = require('canvas');
+const GIFEncoder = require('gifencoder')
+const fs = require('fs')
+const { createCanvas, loadImage } = require('canvas')
 const path = require('path')
 
 const create = async (context, next) => {
@@ -70,8 +70,6 @@ const createVue = async (context, next) => {
   context.response.set("Content-Type", "application/json; charset=utf-8")
   const body = context.request.body
   const files = context.request.files
-  console.log(files)
-  console.log(body)
 
   const w = +body.w || 300, h = +body.h || 400, r = +body.r || 0, 
     delay = JSON.parse(body.delay), layout = JSON.parse(body.layout), quatity = JSON.parse(body.quatity),
