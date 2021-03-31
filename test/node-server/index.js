@@ -3,6 +3,7 @@ const path = require('path')
 const static = require('koa-static')
 const net = require('net')
 const bodyParser = require('koa-bodyparser')
+const koaBody = require('koa-body')
 const router = require('koa-router')()
 
 const app = new Koa()
@@ -27,6 +28,7 @@ app.use(static(
 // })
 
 
+app.use(koaBody({ multipart: true }))
 app.use(bodyParser())
 
 app.use(async (ctx, next) => {

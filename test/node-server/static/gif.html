@@ -6,21 +6,30 @@
   <title>Document</title>
 </head>
 <body>
-  <form method="post" enctype="multipart/form-data">
-    <div>
-      <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
-      <input type="file" id="image_uploads" name="image_uploads" accept="image/*" multiple>
-    </div>
-    <div class="preview">
-      <p>No files currently selected for upload</p>
-    </div>
-    <div>
-      <button>Submit</button>
-    </div>
-  </form>
+  <div>
+    <label for="image_size">Set images size</label>
+    <input type="text" id="image_size" name="image_size" value="300x400" />
+  </div>
+  <div>
+    <label for="image_cover">Cover images</label>
+    <input type="checkbox" id="image_cover" name="image_cover" checked />
+  </div>
+  <div>
+    <label for="image_uploads">Choose images to upload</label>
+    <input type="file" id="image_uploads" name="image_uploads" accept=".png,.jpg,.jpeg" multiple />
+  </div>
+  <div class="preview">
+    <p>No files currently selected for upload</p>
+  </div>
+  <div>
+    <button id="btn">Submit</button>
+  </div>
+  <div class="gif_preview">
+
+  </div>
   <script>
 
-    const input = document.querySelector('input');
+    const input = document.getElementById('image_uploads');
     const preview = document.querySelector('.preview');
 
     input.style.opacity = 0;
@@ -62,13 +71,13 @@
 
     const fileTypes = [
       'image/jpeg',
-      'image/pjpeg',
+      'image/jpeg',
       'image/png'
     ];
 
     function validFileType(file) {
-      // return fileTypes.includes(file.type);
-      return file.type.includes('image');
+      return fileTypes.includes(file.type);
+      // return file.type.includes('image');
     }
 
     function returnFileSize(number) {
@@ -80,6 +89,54 @@
         return (number/1048576).toFixed(1) + 'MB';
       }
     }
+  </script>
+
+  <script>
+    document.getElementById('btn').addEventListener('click', () => {
+      const input = document.getElementById('image_uploads')
+      const fm = new FormData()
+      ;[...input.files].map(file => {
+        fm.append('img', file)
+      })
+      const size = document.getElementById('image_size').value
+      let regExp = /^\d+([*xX])\d+$/
+      const result = size.match(regExp)
+      let width = 300, height = 400
+      if (result) {
+        const arr = size.split(result[1])
+        width = +arr[0]
+        height = +arr[1]
+      }
+      fm.append('w', width)
+      fm.append('h', height)
+
+      const cover = document.getElementById('image_cover').checked
+      fm.append('c', +cover)
+      
+      var xhr = new XMLHttpRequest(); //创建对象
+
+      xhr.open("POST", "/gif/create"); //链接改成你项目中的
+      // xhr.setRequestHeader('Content-Type', 'multipart/form-data')
+      xhr.send(fm); //发送时  Content-Type默认就是: multipart/form-data; 
+      xhr.onreadystatechange = function() {
+          console.log('state change', xhr.readyState);
+          if (this.readyState == 4 && this.status == 200) {
+              var obj = JSON.parse(xhr.responseText); //返回值
+              console.log(obj);
+              //if (obj.data) {    
+              //  alert('上传成功');
+              //}
+              const preview = document.querySelector('.gif_preview')
+              while(preview.firstChild) {
+                preview.removeChild(preview.firstChild)
+              }
+              img = document.createElement('img')
+              img.src = obj.data.fileName
+              preview.append(img)
+          }
+      }
+
+    })
   </script>
 </body>
 </html>
