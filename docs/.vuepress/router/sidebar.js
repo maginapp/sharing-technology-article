@@ -27,7 +27,8 @@ const blogSideBar = [
     title: '前端笔记',
     sidebarDepth: 2,
     children: [
-      // '/blog/frontend-records/promote-of-vue'
+      '/blog/frontend-records/image-sharp',
+      '/blog/frontend-records/image-gif'
     ]
   },
   {

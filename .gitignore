@@ -2,7 +2,12 @@
 /docs/.vuepress/dist/
 .git/
 /**/node_modules
-/test/node-server/static/images-base-min
-/test/node-server/static/images-base-to-webp
 /docs/.vuepress/public-wait-webp
 /docs/.vuepress/public-wait-min
+
+
+/test/node-server/static/images-base-min
+/test/node-server/static/images-base-to-webp
+
+/test/node-server/static/gif
+
