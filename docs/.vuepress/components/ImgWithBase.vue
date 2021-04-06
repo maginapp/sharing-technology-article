@@ -1,5 +1,5 @@
 <template>
-  <img :src="$withBase(src)" :alt="alt || ''" :height="height" :width="width">
+  <img :src="$withBase(src)" :alt="alt || ''" :height="height" :width="width" :style="style">
 </template>
 
 <script>
@@ -8,7 +8,8 @@ export default {
     'src',
     'alt',
     'height',
-    'width'
+    'width',
+    'style'
   ]
 }
 </script>>

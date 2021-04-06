@@ -5,6 +5,7 @@ const blogSideBar = [
     sidebarDepth: 2,
     children: [
       '/blog/about-config/vuepress-github-website',
+      '/blog/about-config/vscode-multi-column'
       // { 
       //   title: '规范',   // 必要的
       //   path: '/blog/about-config/node-server', 
@@ -35,7 +36,8 @@ const blogSideBar = [
     title: 'Vue',
     sidebarDepth: 2,
     children: [
-      '/blog/vue/promote-of-vue'
+      '/blog/vue/promote-of-vue',
+      '/blog/vue/vue3-reactive'
     ]
   },
   {
