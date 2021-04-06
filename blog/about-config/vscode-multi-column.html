@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VSCode配置多行标签栏 | 分享技术资料-magina</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    <link rel="icon" href="/sharing-technology-article/favicon.ico">
+    <link rel="manifest" href="/sharing-technology-article/manifest.json">
+    <meta name="description" content="vscode-tab多行配置">
+    <meta name="keywords" content="vscode,tab栏多行配置,Custom CSS and JS Loader">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="preload" href="/sharing-technology-article/assets/css/0.styles.7a8123e4.css" as="style"><link rel="preload" href="/sharing-technology-article/assets/js/app.40af5424.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/3.86cb07ac.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/13.45e81514.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/9.1b7e6f64.js" as="script"><link rel="preload" href="/sharing-technology-article/assets/js/4.40fb3784.js" as="script"><link rel="prefetch" href="/sharing-technology-article/assets/js/10.9b661b35.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/11.23c1a823.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/12.414913cf.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/14.7d58562f.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/15.563966ba.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/16.5afa2b8b.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/17.23838104.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/18.dc9bd7b3.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/19.2b51b1de.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/20.07d34360.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/21.18d58894.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/22.764e75dd.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/23.b623e880.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/24.acfc999c.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/25.e0f786c9.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/26.202eaa04.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/27.4594365a.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/28.d068efd3.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/29.544926f2.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/30.de2610b3.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/31.4cfe0007.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/32.5b974377.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/33.80abba45.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/34.f4bc3617.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/35.3abad453.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/36.b5214e4d.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/37.80e50757.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/38.12d38775.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/39.d1e2b23f.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/40.b4a231c4.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/41.776854aa.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/42.8df96bb0.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/5.b3895a0b.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/6.05b04660.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/7.f22923c7.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/8.6cd84d24.js"><link rel="prefetch" href="/sharing-technology-article/assets/js/vendors~flowchart.23bb9e8c.js">
+    <link rel="stylesheet" href="/sharing-technology-article/assets/css/0.styles.7a8123e4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/sharing-technology-article/" class="home-link router-link-active"><!----> <span class="site-name">分享技术资料-magina</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/sharing-technology-article/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/sharing-technology-article/blog/" class="nav-link router-link-active">
+  Blog
+</a></div><div class="nav-item"><a href="/sharing-technology-article/sharing/" class="nav-link">
+  Sharing
+</a></div><div class="nav-item"><a href="/sharing-technology-article/interview/" class="nav-link">
+  Interview
+</a></div><div class="nav-item"><a href="https://github.com/maginapp/sharing-technology-article/issues" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Issues
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/sharing-technology-article/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/sharing-technology-article/blog/" class="nav-link router-link-active">
+  Blog
+</a></div><div class="nav-item"><a href="/sharing-technology-article/sharing/" class="nav-link">
+  Sharing
+</a></div><div class="nav-item"><a href="/sharing-technology-article/interview/" class="nav-link">
+  Interview
+</a></div><div class="nav-item"><a href="https://github.com/maginapp/sharing-technology-article/issues" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Issues
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>配置构建</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/sharing-technology-article/blog/about-config/vuepress-github-website.html" class="sidebar-link">vuepress搭建网站踩坑</a></li><li><a href="/sharing-technology-article/blog/about-config/vscode-multi-column.html" class="active sidebar-link">VSCode配置多行标签栏</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vscode-multi-column.html#方法一：修改workbench-main-css" class="sidebar-link">方法一：修改workbench.main.css</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vscode-multi-column.html#方法二：自定义css文件" class="sidebar-link">方法二：自定义css文件</a></li><li class="sidebar-sub-header"><a href="/sharing-technology-article/blog/about-config/vscode-multi-column.html#引用" class="sidebar-link">引用</a></li></ul></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/sharing-technology-article/blog/standard/" class="sidebar-heading clickable"><span>规范</span> <span class="arrow right"></span></a> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>前端笔记</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Vue</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>node</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><a href="/sharing-technology-article/blog/html-test/summary-test" class="sidebar-heading clickable"><span>测试</span> <span class="arrow right"></span></a> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vscode配置多行标签栏"><a href="#vscode配置多行标签栏" class="header-anchor">#</a> VSCode配置多行标签栏</h1> <blockquote><p>修改<code>workbench.main.css</code>后，VSCode可能会警告VScode的完整性已损坏，请忽略该消息</p></blockquote> <p>VSCode打开多个文件时是在同一行滚动显示的，可以通过添加css样式的方法，修改tab栏样式。</p> <h2 id="方法一：修改workbench-main-css"><a href="#方法一：修改workbench-main-css" class="header-anchor">#</a> 方法一：修改<code>workbench.main.css</code></h2> <ol><li>打开文件<code>[VSCode 安装目录]/resources/app/out/vs/workbench/workbench.main.css</code>，添加如下css样式</li></ol> <div class="language-css line-numbers-mode"><pre class="language-css"><code><span class="token comment">/* 多行 */</span>
+<span class="token selector">.tabs-and-actions-container &gt; .monaco-scrollable-element</span> <span class="token punctuation">{</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> auto <span class="token important">!important</span><span class="token punctuation">;</span>
+	<span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.tabs-and-actions-container &gt; .monaco-scrollable-element &gt; .tabs-container</span> <span class="token punctuation">{</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> auto <span class="token important">!important</span><span class="token punctuation">;</span>
+	<span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 调整高度 */</span>
+<span class="token selector">.monaco-workbench .part.editor &gt; .content .editor-group-container &gt; .title .tabs-container &gt; .tab</span> <span class="token punctuation">{</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> 25px<span class="token punctuation">;</span>
+	<span class="token property">line-height</span><span class="token punctuation">:</span> 25px<span class="token punctuation">;</span>
+	<span class="token property">padding-left</span><span class="token punctuation">:</span> 4px<span class="token punctuation">;</span>
+	<span class="token property">font-size</span><span class="token punctuation">:</span> 0.9em<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.monaco-workbench .part.editor&gt;.content .editor-group-container&gt;.title .tabs-container&gt;.tab .tab-label</span> <span class="token punctuation">{</span>
+	<span class="token property">line-height</span><span class="token punctuation">:</span> 25px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.monaco-workbench .part.editor &gt; .content .editor-group-container &gt; .title .tabs-container &gt; .tab .label-name</span> <span class="token punctuation">{</span>
+	<span class="token property">font-size</span><span class="token punctuation">:</span> inherit <span class="token important">!important</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 调整侧边工具栏 */</span>
+<span class="token selector">.tabs-and-actions-container &gt; .monaco-scrollable-element + div</span> <span class="token punctuation">{</span>
+	<span class="token property">max-width</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+	<span class="token property">height</span><span class="token punctuation">:</span> auto <span class="token important">!important</span><span class="token punctuation">;</span>
+	<span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+	<span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+	<span class="token property">overflow</span><span class="token punctuation">:</span> auto<span class="token important">!important</span><span class="token punctuation">;</span>
+	<span class="token property">background</span><span class="token punctuation">:</span> #000<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.tabs-and-actions-container &gt; .monaco-scrollable-element + div::-webkit-scrollbar</span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 8px<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> #666<span class="token punctuation">;</span> <span class="token comment">/* or add it to the track */</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.tabs-and-actions-container &gt; .monaco-scrollable-element + div::-webkit-scrollbar-thumb</span> <span class="token punctuation">{</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #333<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* 面包屑修改
+.monaco-breadcrumbs {
+	font-size:0.8em;
+}
+*/</span>
+ 
+<span class="token comment">/* 侧边栏测试代码
+
+ .tabs-and-actions-container &gt; .monaco-scrollable-element + div  &gt; div  {
+   height: 90%!important;
+   // background: #0000aa;
+ }
+
+ .tabs-and-actions-container &gt; .monaco-scrollable-element + div  &gt; div &gt; div{
+   background: #000066;
+   width: 80px;
+   height: 50px;
+   display: flex;
+   flex-wrap: wrap;
+   overflow: auto!important;
+}
+
+.tabs-and-actions-container &gt; .monaco-scrollable-element + div  &gt; div &gt; div  div{
+   background: red;
+}
+
+.tabs-and-actions-container &gt; .monaco-scrollable-element + div::-webkit-scrollbar {
+  display: none;
+} 
+*/</span>
+
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br></div></div><ol start="2"><li>重新打开窗口：<code>cmd+shift+p</code>呼出命令框，输入<code>reload</code>，点击<code>Reload Window</code></li></ol> <img src="/sharing-technology-article/sharp/vscode-multi-column.webp" alt="vscode-multi-column" style="width:100%;"> <h2 id="方法二：自定义css文件"><a href="#方法二：自定义css文件" class="header-anchor">#</a> 方法二：自定义css文件</h2> <blockquote><p>此方法测试未成功，自定义的css文件无法生效</p></blockquote> <ol><li><p>安装vscode插件 <code>Custom CSS and JS Loader</code></p></li> <li><p>创建css文件，css样式同上</p></li> <li><p>打开<code>setting.json</code>添加css文件配置：<code>cmd+shift+p</code>呼出命令框，输入<code>setting</code>，点击<code>Open Settings(JSON)</code>，添加以下配置：</p></li></ol> <div class="language-json line-numbers-mode"><pre class="language-json"><code><span class="token property">&quot;vscode_custom_css.imports&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">&quot;ile:///C:/vscode/custom.css&quot;</span>
+<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token property">&quot;vscode_custom_css.policy&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br></div></div><ol start="4"><li><p>按<code>cmd+shift+p</code>呼出命令框，输入<code>Reload Custom CSS and JS</code></p></li> <li><p>重新打开窗口</p></li></ol> <h2 id="引用"><a href="#引用" class="header-anchor">#</a> 引用</h2> <ul><li><a href="https://qastack.cn/programming/42462777/multirow-tabs-for-vscode" target="_blank" rel="noopener noreferrer">VSCode的多行选项卡<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li> <li><a href="https://blog.csdn.net/tangyang8941/article/details/107169763" target="_blank" rel="noopener noreferrer">VSCode打开多个文件时实现标签栏多行显示<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/sharing-technology-article/blog/about-config/vuepress-github-website.html" class="prev">
+        vuepress搭建网站踩坑
+      </a></span> <span class="next"><a href="/sharing-technology-article/blog/standard/git-commit.html">
+        git提交注释规范
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><div class="vuepress-eqn"></div><span class="vuepress-eq"></span><!----></div></div>
+    <script src="/sharing-technology-article/assets/js/app.40af5424.js" defer></script><script src="/sharing-technology-article/assets/js/3.86cb07ac.js" defer></script><script src="/sharing-technology-article/assets/js/13.45e81514.js" defer></script><script src="/sharing-technology-article/assets/js/9.1b7e6f64.js" defer></script><script src="/sharing-technology-article/assets/js/4.40fb3784.js" defer></script>
+  </body>
+</html>
