@@ -29,4 +29,5 @@ npm run test
 
 * `2020/05/31` 添加pwa模块，确定网站模板
 * `2020/06/01` pwa测试成功，增加了添加网页到桌面功能
-* `2020/01/10` 测试服务搭建 [test/node-server](/test)
+* `2020/01/10` 测试服务搭建 [test/node-server](/test/node-server)
+* `2020/01/10` github-issue抓取 [test/node-crawler](/test/node-crawler)
