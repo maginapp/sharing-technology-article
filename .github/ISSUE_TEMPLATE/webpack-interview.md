@@ -2,7 +2,7 @@
 name: webpack interview
 about: 这是提交webpack面试题的模板
 title: "[webpack]"
-labels: ''
+labels: 'webpack'
 assignees: ''
 
 ---
