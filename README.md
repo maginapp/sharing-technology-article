@@ -28,6 +28,25 @@ npm run test
 ## 记录
 
 * `2020/05/31` 添加pwa模块，确定网站模板
+
 * `2020/06/01` pwa测试成功，增加了添加网页到桌面功能
+
 * `2020/01/10` 测试服务搭建 [test/node-server](/test/node-server)
+
+支持`服务端测试`/`图片压缩`/`gif生成`等功能
+
+```bash
+# /test/node-server 目录
+npm install
+```
+
 * `2020/01/10` github-issue抓取 [test/node-crawler](/test/node-crawler)
+
+支持`github-issue抓取`等功能
+
+```bash
+# /test目录
+npm install
+# /test/node-crawler 目录
+npm install
+```

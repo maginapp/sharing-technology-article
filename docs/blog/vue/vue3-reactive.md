@@ -8,13 +8,7 @@ meta:
 
 # vue3 reactivity解析
 
-## 简介
-
-vue3设计目标 => 更小更快
-
-## 
-
-> `Tree shaking` 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 `Dead code elimination`
+基于 `vue3@3.0.0-rc.5`
 
 
 
