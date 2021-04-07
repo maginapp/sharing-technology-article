@@ -48,7 +48,8 @@ const blogSideBar = [
       '/blog/node-server/koa-middleware',
       '/blog/node-server/koa-router',
       '/blog/node-server/koa-mysql',
-      '/blog/node-server/koa-bodyParser-myself'
+      '/blog/node-server/koa-bodyParser-myself',
+      '/blog/node-server/node-crawler'
     ]
   },
   {
@@ -72,35 +73,54 @@ const blogSideBar = [
   }
 ]
 
+// const interview = [{
+//   title: '分类',
+//   collapsable: false,
+//   children: [
+//     '/interview/js',
+//     '/interview/css',
+//     '/interview/html'
+//   ]
+// }, {
+//   title: '专题',
+//   collapsable: false,
+//   children: [
+//     '/interview/vue',
+//     '/interview/nodejs',
+//     '/interview/react',
+//     '/interview/webpack',
+//     '/interview/小程序'
+//   ]
+// }, {
+//   title: '历史汇总',
+//   collapsable: false,
+//   path: '/interview/history'
+// }]
+
 const interview = [{
-  title: '分类',
-  collapsable: false,
-  children: [
-    '/interview/js',
-    '/interview/css',
-    '/interview/html'
-  ]
+  title: '汇总',
+  collapsable: true,
+  path: '/interview/',
+  sidebarDepth: 2
 }, {
-  title: '专题',
-  collapsable: false,
-  children: [
-    '/interview/vue',
-    '/interview/nodejs',
-    '/interview/react',
-    '/interview/webpack',
-    '/interview/小程序'
-  ]
-}, {
-  title: '历史汇总',
-  collapsable: false,
-  path: '/interview/history'
+  title: '引用',
+  collapsable: true,
+  path: '/interview/quote',
+  sidebarDepth: 2
+  // children: [
+  //   '/interview/js',
+  //   '/interview/css',
+  //   '/interview/html'
+  // ]
 }]
 
 module.exports = {
   '/blog/': blogSideBar,
   '/sharing/': [{
-    collapsable: false,
-    title: '博客',  path: '/sharing/', sidebarDepth: 2
+    collapsable: true,
+    title: '博客', 
+    path: '/sharing/',
+    sidebarDepth: 2
   }],
   '/interview/':  interview
 }

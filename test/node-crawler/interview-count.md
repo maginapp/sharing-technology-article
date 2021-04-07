@@ -2,8 +2,6 @@
 meta:
   - name: keywords
     content: 前端面试题,maginapp,interview
-  - name: description
-    content: 前端面试题汇总
 ---
 
 # interview
