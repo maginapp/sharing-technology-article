@@ -1,11 +1,12 @@
 const blogSideBar = [
   {
-    title: '配置构建',
+    title: '配置构建与规范',
     // collapsable: false,
     sidebarDepth: 2,
     children: [
       '/blog/about-config/vuepress-github-website',
-      '/blog/about-config/vscode-multi-column'
+      '/blog/about-config/vscode-multi-column',
+      '/blog/standard/git-commit'
       // { 
       //   title: '规范',   // 必要的
       //   path: '/blog/about-config/node-server', 
@@ -13,15 +14,6 @@ const blogSideBar = [
       //     '/blog/standard/git-commit'
       //   ]
       // }
-    ]
-  },
-  {
-    title: '规范',   // 必要的
-    path: '/blog/standard/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-    // collapsable: false, // 可选的, 默认值是 true,
-    sidebarDepth: 2,    // 可选的, 默认值是 1
-    children: [
-      '/blog/standard/git-commit'
     ]
   },
   {
@@ -35,6 +27,7 @@ const blogSideBar = [
   {
     title: 'Vue',
     sidebarDepth: 2,
+    collapsable: true,
     children: [
       '/blog/vue/promote-of-vue',
       '/blog/vue/vue3-introduce',

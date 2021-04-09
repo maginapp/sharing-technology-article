@@ -25,6 +25,8 @@ vue3设计目标:
 
 ## vue3-rfcs
 
+[尤雨溪: Vue Function-based API RFC](https://zhuanlan.zhihu.com/p/68477600)
+
 [vuejs/rfcs/active-rfcs/](https://github.com/vuejs/rfcs/tree/master/active-rfcs)
 
 * componsition api
@@ -43,6 +45,7 @@ vue3设计目标:
 
 ## 源码学习
 
-基于 `vue3@3.0.0-rc.5`
+基于 `vue3@3.0.9` ~~基于 `vue3@3.0.0-rc.5`~~
 
-* `/packages/reactivity` 响应式核心代码
+
+* */packages/reactivity* 响应式核心代码

@@ -12,10 +12,12 @@
 
 ### node-server
 
+支持`服务端测试`/`图片压缩`/`gif生成`等功能
+
 依赖安装
 
 ```bash
-cd test/node-server
+# /test/node-server 目录
 npm install
 ```
 
@@ -23,6 +25,17 @@ npm install
 
 ```bash
 npm run test
+```
+
+### node-crawler
+
+支持`本项目仓库github-issue抓取`等功能
+
+```bash
+# /test目录
+npm install
+# /test/node-crawler 目录
+npm install
 ```
 
 ## 记录
@@ -33,20 +46,6 @@ npm run test
 
 * `2020/01/10` 测试服务搭建 [test/node-server](/test/node-server)
 
-支持`服务端测试`/`图片压缩`/`gif生成`等功能
+* `2020/04/07` github-issue抓取 [test/node-crawler](/test/node-crawler)
 
-```bash
-# /test/node-server 目录
-npm install
-```
-
-* `2020/01/10` github-issue抓取 [test/node-crawler](/test/node-crawler)
-
-支持`github-issue抓取`等功能
-
-```bash
-# /test目录
-npm install
-# /test/node-crawler 目录
-npm install
-```
+* `2020/04/07` 新增[图片仓库](https://github.com/maginapp/static-website)，利用travis搭建网站，减小本项目仓库图片数量
