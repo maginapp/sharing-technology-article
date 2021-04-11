@@ -8,7 +8,7 @@ meta:
 
 # vue3 reactivity解析
 
-基于 `vue3@3.0.9`
+vue3解析基于 `vue3@3.0.9`版本
 
 ## ref
 

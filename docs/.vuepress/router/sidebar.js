@@ -21,7 +21,8 @@ const blogSideBar = [
     sidebarDepth: 2,
     children: [
       '/blog/frontend-records/image-sharp',
-      '/blog/frontend-records/image-gif'
+      '/blog/frontend-records/image-gif',
+      '/blog/frontend-records/special-css',
     ]
   },
   {

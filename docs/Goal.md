@@ -65,4 +65,7 @@ https://segmentfault.com/a/1190000013156728
 
 ## 错误处理
 
-## 图片处理
+## github
+
+[github克隆失败提示“443：Timed out”怎么解决？](https://www.zhihu.com/question/401499640)
+[解决连不上GitHub，也ping不通](https://blog.csdn.net/believe_s/article/details/81539747)

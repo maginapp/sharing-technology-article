@@ -9,6 +9,7 @@
     "img:webpT": "cross-env imgType=webpT  node imageMin.js",
     "img:min": "cross-env imgType=min  node imageMin.js",
     "img:webp": "cross-env imgType=webp  node imageMin.js",
+    "img:website": "cross-env imgType=website  node imageMin.js",
     "img": "cross-env imgType=  node imageMin.js",
     "img:test": "npm run img:minT && npm run img:webpT",
     "img:docs": "npm run img:min && npm run img:webp"

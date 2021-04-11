@@ -8,6 +8,8 @@
 
 /test/node-server/static/images-base-min
 /test/node-server/static/images-base-to-webp
+/test/node-server/static/images-base-static-website
+/test/node-server/static/images-base-static-website-webp
 
 /test/node-server/static/gif
 

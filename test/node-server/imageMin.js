@@ -115,7 +115,8 @@ const params = {
   webpT: [baseWebpPath, newBasePath, '/**/*', 'webp'],
   minT: [basePath, newBasePath, '/**/*'],
   min: [ './../../docs/.vuepress/public-wait-min', docsNewBasePath, '/**/*', '', 80],
-  webp: ['./../../docs/.vuepress/public-wait-webp', docsNewBasePath, '/**/*', 'webp', 80]
+  webp: ['./../../docs/.vuepress/public-wait-webp', docsNewBasePath, '/**/*', 'webp', 80],
+  website: ['./static/images-base-static-website-webp', './static/images-base-static-website', '/**/*', 'webp', 80]
 }
 
 
