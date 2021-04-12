@@ -57,7 +57,7 @@ class RefImpl<T> {
 }
 ```
 
-utils函数:
+#### utils函数
 
 `convert`判断数据类型；`hasChanged`判断数据变更
 
@@ -185,7 +185,7 @@ export function reactive(target: object) {
 }
 ```
 
-`createReactiveObject` 包装数据
+`createReactiveObject` 使用Proxy包装数据
 
 ```ts
 function createReactiveObject(
@@ -263,17 +263,20 @@ const set = /*#__PURE__*/ createSetter()
 
 #### createSetter
 
+触发依赖（触发`trigger`方法）时区分是首次赋值，还是修改数据，
+
 ```ts
 function createSetter(shallow = false) {
   return function set(
-    target: object,
+    target: object, // 源数据
     key: string | symbol,
     value: unknown,
-    receiver: object
+    receiver: object // Proxy<源数据>
   ): boolean {
-    const oldValue = (target as any)[key]
+    const oldValue = (target as any)[key] // 获取旧数据
     if (!shallow) {
       value = toRaw(value)
+      // target非数组 => 旧数据是ref类型 且新数据不是ref类型 ==> 直接赋值 ????
       if (!isArray(target) && isRef(oldValue) && !isRef(value)) {
         oldValue.value = value
         return true
@@ -282,13 +285,15 @@ function createSetter(shallow = false) {
       // in shallow mode, objects are set as-is regardless of reactive or not
     }
 
+    // 判断是否有该key 用于设置trigger是否有原值
     const hadKey =
       isArray(target) && isIntegerKey(key)
         ? Number(key) < target.length
         : hasOwn(target, key)
+    // 赋值    
     const result = Reflect.set(target, key, value, receiver)
     // don't trigger if target is something up in the prototype chain of original
-    if (target === toRaw(receiver)) {
+    if (target === toRaw(receiver)) { // targer 与receiver 源数据相同
       if (!hadKey) {
         trigger(target, TriggerOpTypes.ADD, key, value)
       } else if (hasChanged(value, oldValue)) {
@@ -297,6 +302,278 @@ function createSetter(shallow = false) {
     }
     return result
   }
+}
+```
+
+#### createGetter
+
+获取键值时，会触发`track`方法收集依赖
+
+1. 部分数组的方法会进行特殊处理
+2. 子数据首次获取值时，才会进行响应式处理，提升性能
+3. 部分属性名特殊处理[`ReactiveFlags`](#utils函数)
+
+
+```ts
+function createGetter(isReadonly = false, shallow = false) {
+  return function get(target: Target, key: string | symbol, receiver: object) {
+    // ...
+    const targetIsArray = isArray(target)
+    // 数组部分方法处理
+    if (!isReadonly && targetIsArray && hasOwn(arrayInstrumentations, key)) {
+      return Reflect.get(arrayInstrumentations, key, receiver)
+    }
+    // 获取数据
+    const res = Reflect.get(target, key, receiver)
+
+    if (
+      isSymbol(key)
+        ? builtInSymbols.has(key as symbol)
+        : isNonTrackableKeys(key)
+    ) {
+      return res
+    }
+    // 依赖收集
+    if (!isReadonly) {
+      track(target, TrackOpTypes.GET, key)
+    }
+
+    if (shallow) {
+      return res
+    }
+
+    if (isRef(res)) {
+      // ref unwrapping - 非数组 或者 非int键名 ????非int键名 {1:2}
+      const shouldUnwrap = !targetIsArray || !isIntegerKey(key)
+      return shouldUnwrap ? res.value : res
+    }
+    // 引用类型 获取数时才会对子数据进行劫持 ==> vue3的优化🔶
+    if (isObject(res)) {
+      return isReadonly ? readonly(res) : reactive(res)
+    }
+
+    return res
+  }
+}
+```
+
+#### 数组的特殊处理
+
+`arrayInstrumentations` 重写部分数组方法
+
+1. 调用 `'includes', 'indexOf', 'lastIndexOf'` 添加对所有值的依赖收集
+2. `'push', 'pop', 'shift', 'unshift', 'splice'`  需要避免对length的依赖收集
+
+
+```ts
+const arrayInstrumentations: Record<string, Function> = {}
+
+;(['includes', 'indexOf', 'lastIndexOf'] as const).forEach(key => {
+  const method = Array.prototype[key] as any
+  arrayInstrumentations[key] = function(this: unknown[], ...args: unknown[]) {
+    const arr = toRaw(this)
+    for (let i = 0, l = this.length; i < l; i++) {
+      track(arr, TrackOpTypes.GET, i + '')
+    }
+    // we run the method using the original args first (which may be reactive)
+    const res = method.apply(arr, args)
+    if (res === -1 || res === false) {
+      // if that didn't work, run it again using raw values.
+      return method.apply(arr, args.map(toRaw))
+    } else {
+      return res
+    }
+  }
+})
+// instrument length-altering mutation methods to avoid length being tracked
+// which leads to infinite loops in some cases (#2137)
+;(['push', 'pop', 'shift', 'unshift', 'splice'] as const).forEach(key => {
+  const method = Array.prototype[key] as any
+  arrayInstrumentations[key] = function(this: unknown[], ...args: unknown[]) {
+    pauseTracking()
+    const res = method.apply(this, args)
+    resetTracking()
+    return res
+  }
+})
+```
+
+## 依赖处理
+
+### track
+
+```ts
+const targetMap = new WeakMap<any, KeyToDepMap>()
+
+export function track(target: object, type: TrackOpTypes, key: unknown) {
+  // createReactiveEffect内部为 activeEffect 赋值
+  if (!shouldTrack || activeEffect === undefined) {
+    return
+  }
+  // 获取target的deps Map集合
+  let depsMap = targetMap.get(target) // Map
+  if (!depsMap) {
+    targetMap.set(target, (depsMap = new Map()))
+  }
+  // 获取target=>key对应的effect set集合
+  let dep = depsMap.get(key) // set
+  if (!dep) {
+    depsMap.set(key, (dep = new Set()))
+  }
+  if (!dep.has(activeEffect)) {
+    dep.add(activeEffect) // object => key => dep添加effect
+    activeEffect.deps.push(dep) // effect => deps添加dep
+  }
+}
+```
+
+### trigger
+
+```ts
+export function trigger(
+  target: object,
+  type: TriggerOpTypes,
+  key?: unknown,
+  newValue?: unknown,
+  oldValue?: unknown,
+  oldTarget?: Map<unknown, unknown> | Set<unknown>
+) {
+  const depsMap = targetMap.get(target)
+  if (!depsMap) {
+    // never been tracked
+    return
+  }
+
+  const effects = new Set<ReactiveEffect>()  // 存储effect
+  // effects.add(effect)
+  const add = (effectsToAdd: Set<ReactiveEffect> | undefined) => {
+    if (effectsToAdd) {
+      effectsToAdd.forEach(effect => {
+        if (effect !== activeEffect || effect.allowRecurse) {
+          effects.add(effect)
+        }
+      })
+    }
+  }
+
+  if (type === TriggerOpTypes.CLEAR) {
+    // collection being cleared  => Map Set集合类型处理
+    depsMap.forEach(add) // 遍历清除target的所有键名的的dep
+  } else if (key === 'length' && isArray(target)) { // Array length
+    depsMap.forEach((dep, key) => { // length 或者 将被删除的值
+      if (key === 'length' || key >= (newValue as number)) {
+        add(dep)
+      }
+    })
+  } else {
+    // schedule runs for SET | ADD | DELETE
+    if (key !== void 0) {
+      add(depsMap.get(key))
+    }
+
+    // ADD | DELETE | Map.SET 需要触发遍历器相关方法 的依赖
+    // ['keys', 'values', 'entries', Symbol.iterator] 集合遍历的依赖
+    // Array => length
+    switch (type) {
+      case TriggerOpTypes.ADD:
+        if (!isArray(target)) {
+          add(depsMap.get(ITERATE_KEY))
+          if (isMap(target)) {
+            add(depsMap.get(MAP_KEY_ITERATE_KEY))
+          }
+        } else if (isIntegerKey(key)) {
+          // 数组新增值，长度增加
+          add(depsMap.get('length'))
+        }
+        break
+      // TriggerOpTypes.DELETE 不会导致数组长度变化
+      // const a = [1, 2]; delete a[1]; => [1, empty]
+      case TriggerOpTypes.DELETE: 
+        if (!isArray(target)) {
+          add(depsMap.get(ITERATE_KEY))
+          if (isMap(target)) {
+            add(depsMap.get(MAP_KEY_ITERATE_KEY))
+          }
+        }
+        break
+      case TriggerOpTypes.SET:
+        if (isMap(target)) {
+          add(depsMap.get(ITERATE_KEY))
+        }
+        break
+    }
+  }
+
+  const run = (effect: ReactiveEffect) => {
+    if (effect.options.scheduler) {
+      effect.options.scheduler(effect) // apiWatch => doWatch
+    } else {
+      effect() // 执行副作用方法
+    }
+  }
+
+  effects.forEach(run)
+}
+export const ITERATE_KEY = Symbol(__DEV__ ? 'iterate' : '')
+export const MAP_KEY_ITERATE_KEY = Symbol(__DEV__ ? 'Map key iterate' : '') // 仅获取key值
+```
+
+## effect
+
+```ts
+export function effect<T = any>(
+  fn: () => T,
+  options: ReactiveEffectOptions = EMPTY_OBJ
+): ReactiveEffect<T> {
+  // effect函数 获取原值
+  if (isEffect(fn)) {
+    fn = fn.raw
+  }
+  // 创建副作用函数
+  const effect = createReactiveEffect(fn, options)
+  if (!options.lazy) { // 立即执行
+    effect()
+  }
+  return effect
+}
+```
+### createReactiveEffect
+
+```ts
+const effectStack: ReactiveEffect[] = []
+let activeEffect: ReactiveEffect | undefined
+let uid = 0 // effect 唯一id
+
+function createReactiveEffect<T = any>(
+  fn: () => T,
+  options: ReactiveEffectOptions
+): ReactiveEffect<T> {
+  const effect = function reactiveEffect(): unknown {
+    if (!effect.active) {
+      return options.scheduler ? undefined : fn()
+    }
+    if (!effectStack.includes(effect)) {
+      cleanup(effect)
+      try {
+        enableTracking()
+        effectStack.push(effect)
+        activeEffect = effect
+        return fn()
+      } finally {
+        effectStack.pop()
+        resetTracking()
+        activeEffect = effectStack[effectStack.length - 1]
+      }
+    }
+  } as ReactiveEffect
+  effect.id = uid++
+  effect.allowRecurse = !!options.allowRecurse
+  effect._isEffect = true
+  effect.active = true
+  effect.raw = fn
+  effect.deps = []
+  effect.options = options
+  return effect
 }
 ```
 
