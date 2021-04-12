@@ -402,6 +402,8 @@ const arrayInstrumentations: Record<string, Function> = {}
 
 ### track
 
+`track`函数会搜集当前的依赖，`targetMap`存储依赖，`activeEffect`是当前的触发effct
+
 ```ts
 const targetMap = new WeakMap<any, KeyToDepMap>()
 
@@ -428,6 +430,9 @@ export function track(target: object, type: TrackOpTypes, key: unknown) {
 ```
 
 ### trigger
+
+1. 根据 `type:TriggerOpTypes` 统计需要触发的 `effct`
+2. 遍历`effects`，使用`run`函数，逐一执行`effect`函数
 
 ```ts
 export function trigger(
@@ -520,6 +525,8 @@ export const MAP_KEY_ITERATE_KEY = Symbol(__DEV__ ? 'Map key iterate' : '') // �
 
 ## effect
 
+执行`computed`，`watch`，`tempale模板渲染`等的过程中，生成`effect`
+
 ```ts
 export function effect<T = any>(
   fn: () => T,
@@ -537,10 +544,13 @@ export function effect<T = any>(
   return effect
 }
 ```
+
 ### createReactiveEffect
 
+`effectStack`是存储`effect`的栈，`effct`执行时，会将当前的`effect`推到栈的顶部，执行完回调函数`fn`后，再进行出栈
+
 ```ts
-const effectStack: ReactiveEffect[] = []
+const effectStack: ReactiveEffect[] = [] // 存储effct的栈
 let activeEffect: ReactiveEffect | undefined
 let uid = 0 // effect 唯一id
 
@@ -552,15 +562,17 @@ function createReactiveEffect<T = any>(
     if (!effect.active) {
       return options.scheduler ? undefined : fn()
     }
-    if (!effectStack.includes(effect)) {
+    // effectStack避免重复执行effct  fn()
+    if (!effectStack.includes(effect)) { 
       cleanup(effect)
       try {
         enableTracking()
-        effectStack.push(effect)
+        effectStack.push(effect) // 入栈
         activeEffect = effect
-        return fn()
+        return fn() // => 执行时activeEffect对于当前effct
       } finally {
-        effectStack.pop()
+        // 执行完成后，stack清除当前effect，activeEffect指向前一个effct
+        effectStack.pop()  // 出栈
         resetTracking()
         activeEffect = effectStack[effectStack.length - 1]
       }
@@ -575,5 +587,16 @@ function createReactiveEffect<T = any>(
   effect.options = options
   return effect
 }
-```
 
+// 清除effect.deps中 每个dep绑定的当前effct
+// 删除后，无依赖，deps置空
+function cleanup(effect: ReactiveEffect) {
+  const { deps } = effect
+  if (deps.length) {
+    for (let i = 0; i < deps.length; i++) {
+      deps[i].delete(effect)
+    }
+    deps.length = 0
+  }
+}
+```
