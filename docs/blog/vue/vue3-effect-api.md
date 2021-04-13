@@ -70,7 +70,7 @@ export function computed<T>(
 4. `_dirty: true` => 需要更新computed值
 
     1. 执行computedEffect，调用时会执行track，收集computed对内部响应式数据(以下称为`reactive`)的依赖
-    2. computedEffect执行结果赋值给computed
+    2. computedEffect执行结果赋值给computed，使用computed._value缓存结果
     3. `_dirty: true` =>  `_dirty: false`， 避免重复调用`getter`
 5. 模板渲染收集computedEffect
 
@@ -104,9 +104,11 @@ class ComputedRefImpl<T> {
       lazy: true, // 不会立即执行
       scheduler: () => {
         // computed内部依赖的响应式数据变更 => trigger触发scheduler 
-        if (!this._dirty) { // _dirty:false => 执行过当前的effect => 内部依赖收集了
+        //    _dirty:false => 依赖数据已经更新 => 记录需要执行effect=>getter
+        // _dirty:true => 结果已缓存
+        if (!this._dirty) { 
           this._dirty = true // => dirty变更为true
-          trigger(toRaw(this), TriggerOpTypes.SET, 'value')
+          trigger(toRaw(this), TriggerOpTypes.SET, 'value') // 触发依赖computed的effect
         }
       }
     })
@@ -152,7 +154,7 @@ const onBtnClick= () => {
 }
 
 watchEffect(() => {
-    console.log(data.a) // just a
+    console.log('watchEffect', data.a) // 1
 })
 
 watch(() => num.value, (val, preVal) => {

@@ -13922,3 +13922,5 @@ var Vue = (function (exports) {
   return exports;
 
 }({}));
+
+console.log('vue')
