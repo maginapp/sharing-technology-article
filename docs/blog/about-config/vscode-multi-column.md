@@ -28,6 +28,12 @@ VSCode打开多个文件时是在同一行滚动显示的，可以通过添加cs
 	flex-wrap: wrap;
 }
 
+/* 设置最大高度 */
+.tabs-container {
+	max-height: 150px !important;
+	overflow: auto !important;
+}
+
 /* 调整高度 */
 .monaco-workbench .part.editor > .content .editor-group-container > .title .tabs-container > .tab {
 	height: 25px;

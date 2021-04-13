@@ -32,7 +32,8 @@ const blogSideBar = [
     children: [
       '/blog/vue/promote-of-vue',
       '/blog/vue/vue3-introduce',
-      '/blog/vue/vue3-reactive'
+      '/blog/vue/vue3-reactive',
+      '/blog/vue/vue3-effect-api'
     ]
   },
   {

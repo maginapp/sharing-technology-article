@@ -197,13 +197,17 @@ export function watchEffect(
 
 1. `watch source` 生成 `getter`函数
   * watch source 只能是 `getter/effect function` , `ref`数据 , `reactive`数据，这些数据格式的`array`，`doWatch`内部是统一生成`getter`函数
-2. runner 基于getter 生成 effect
-3. 创建 `job: SchedulerJob`，内部执行 `getter`和`cb`
-  * callWithAsyncErrorHandling 执行 `cb`
+2. 创建 `runner`: 基于getter 生成的`effect`
+3. 创建 `job: SchedulerJob`，内部执行 runner 和`cb`
+  * 无`cb`，直接执行runner
+  * 有`cb`，runner()后，再调用 callWithAsyncErrorHandling 执行 `cb`
 4. 创建`scheduler: ReactiveEffectOptions['scheduler']`，确定`job`的调用时间，[副作用刷新时机](https://v3.cn.vuejs.org/guide/reactivity-computed-watchers.html#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%88%B7%E6%96%B0%E6%97%B6%E6%9C%BA)
   * `flush:pre` 默认
   * `flush:post` 在组件更新后触发，这样你就可以访问更新的 DOM，注意：这也将推迟副作用的初始运行，直到组件的首次渲染完成。
   * `flush:sync` 强制始终同步触发。然而，这是低效的，应该很少需要
+5. recordInstanceBoundEffect 记录 effects和component，方便卸载组件是处理
+6. 根据doWatch 传入参数，确定执行 `runner` 和 `cb`
+7. 返回watch清除方法
 
 ```ts
 function doWatch(
@@ -336,16 +340,14 @@ function doWatch(
     scheduler
   })
 
-  // 以下暂未开始
-
   recordInstanceBoundEffect(runner, instance)
 
   // initial run
   if (cb) {
     if (immediate) {
-      job()
+      job() // 依次执行 runner cb
     } else {
-      oldValue = runner()
+      oldValue = runner() // 只执行runner
     }
   } else if (flush === 'post') {
     queuePostRenderEffect(runner, instance && instance.suspense)
@@ -353,6 +355,7 @@ function doWatch(
     runner()
   }
 
+  // 返回watch清除方法
   return () => {
     stop(runner)
     if (instance) {
@@ -364,4 +367,75 @@ function doWatch(
 
 ## mountComponent
 
-`renderer.ts`
+`renderer.ts`，mountComponent中会创建`effect`，收集依赖，并赋值到`intance.update`
+
+组件更新时，会触发`updateComponent`，其内部会调用`intance.update`
+
+
+
+```ts
+const mountComponent: MountComponentFn = (
+  initialVNode,
+  container,
+  anchor,
+  parentComponent,
+  parentSuspense,
+  isSVG,
+  optimized
+) => {
+  // 创建实例
+  const instance: ComponentInternalInstance = (initialVNode.component = createComponentInstance(
+    initialVNode,
+    parentComponent,
+    parentSuspense
+  ))
+
+  // inject renderer internals for keepAlive
+  if (isKeepAlive(initialVNode)) {
+    ;(instance.ctx as KeepAliveContext).renderer = internals
+  }
+
+  // setup() is async. This component relies on async logic to be resolved
+  // before proceeding
+  if (__FEATURE_SUSPENSE__ && instance.asyncDep) {
+    parentSuspense && parentSuspense.registerDep(instance, setupRenderEffect)
+
+    // Give it a placeholder if this is not hydration
+    // TODO handle self-defined fallback
+    if (!initialVNode.el) {
+      const placeholder = (instance.subTree = createVNode(Comment))
+      processCommentNode(null, placeholder, container!, anchor)
+    }
+    return
+  }
+  // 创建effect
+  setupRenderEffect(
+    instance,
+    initialVNode,
+    container,
+    anchor,
+    parentSuspense,
+    isSVG,
+    optimized
+  )
+}
+
+const setupRenderEffect: SetupRenderEffectFn = (
+  instance,
+  initialVNode,
+  container,
+  anchor,
+  parentSuspense,
+  isSVG,
+  optimized
+) => {
+  // create reactive effect for rendering
+  instance.update = effect(function componentEffect() {
+    if (!instance.isMounted) {
+      ...
+    } else {
+      ...
+    }
+  }, __DEV__ ? createDevEffectOptions(instance) : prodEffectOptions)
+}
+```
