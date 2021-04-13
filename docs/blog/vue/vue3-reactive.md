@@ -422,6 +422,7 @@ export function track(target: object, type: TrackOpTypes, key: unknown) {
   if (!dep) {
     depsMap.set(key, (dep = new Set()))
   }
+  // 避免重复添加
   if (!dep.has(activeEffect)) {
     dep.add(activeEffect) // object => key => dep添加effect
     activeEffect.deps.push(dep) // effect => deps添加dep
@@ -510,7 +511,7 @@ export function trigger(
   }
 
   const run = (effect: ReactiveEffect) => {
-    if (effect.options.scheduler) {
+    if (effect.options.scheduler) { // 执行effect.options的scheduler收集依赖
       effect.options.scheduler(effect) // apiWatch => doWatch
     } else {
       effect() // 执行副作用方法
