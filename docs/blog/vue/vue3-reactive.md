@@ -158,7 +158,17 @@ export function unref<T>(ref: T): T extends Ref<infer V> ? V : T {
 
 ## reactive
 
+### 简介
+
+对比vue2的优势:
+
+* 使用了js原生Proxy语法，不用递归的定义Object.defineProperty，初始化数据更快速，子数据调用时才会进行Proxy劫持
+* 支持动态的添加object新属性
+* Proxy支持array、map数组原生方法，仅有部分涉及`length更改`、`map遍历`的需要特殊处理
+
+
 **WeakMap**创建 键名弱引用对象，用于缓存响应式处理结果
+
 
 ```ts
 export const reactiveMap = new WeakMap<Target, any>() // 存储源数据和proxy
