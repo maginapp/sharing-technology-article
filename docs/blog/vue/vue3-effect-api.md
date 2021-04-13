@@ -63,20 +63,21 @@ export function computed<T>(
 
 ```
 
-1. 生成computed，创建effct实例(以下称为`computedEffect`)，`_dirty: true`
+1. 生成computed，基于`getter`创建effct实例(以下称为`computedEffect`)，`_dirty: true`
 
 2. 模板渲染获取computed
 3. 执行get value
-4. `_dirty: true` => 执行computedEffect，收集computed对内部响应式数据`reactive`的依赖
-5. `_dirty: true` =>  `_dirty: false`， 避免重复收集???增加watch???
-6. 模板渲染收集computedEffect
+4. `_dirty: true` => 需要更新computed值
+  1. 执行computedEffect，调用时会执行track，收集computed对内部响应式数据(以下称为`reactive`)的依赖
+  2. computedEffect执行结果赋值给computed
+  3. `_dirty: true` =>  `_dirty: false`， 避免重复调用`getter`
+5. 模板渲染收集computedEffect
 
-7. `reactive`变更
-8. 执行`computedEffect`的options.scheduler
-9. `_dirty: false` => `_dirty: true`
-10.  触发依赖computed的所有`effect`
-
-11. 内部执行调用get value，重复第3步
+6. `reactive`数据变更
+7. 执行`computedEffect`的options.scheduler
+  1. `_dirty: false` => `_dirty: true` 标识computed需要更新了
+  2.  触发依赖computed的所有`effect`
+  3. 这些`effect`内部执行调用get value，重复第3步
 
 
 ```ts
