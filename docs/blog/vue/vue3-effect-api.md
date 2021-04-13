@@ -1,12 +1,12 @@
 ---
 meta:
   - name: keywords
-    content: vue3,响应式effect-api
+    content: vue3解析,computed,watch/watchEffect
   - name: description
-    content: vue3 effect相关解析
+    content: vue3的effect-api相关解析
 ---
 
-# vue3-effect相关解析
+# vue3-effect-api相关解析
 `packages/runtime-core/`
 
 ## computed
@@ -68,16 +68,18 @@ export function computed<T>(
 2. 模板渲染获取computed
 3. 执行get value
 4. `_dirty: true` => 需要更新computed值
-  1. 执行computedEffect，调用时会执行track，收集computed对内部响应式数据(以下称为`reactive`)的依赖
-  2. computedEffect执行结果赋值给computed
-  3. `_dirty: true` =>  `_dirty: false`， 避免重复调用`getter`
+
+    1. 执行computedEffect，调用时会执行track，收集computed对内部响应式数据(以下称为`reactive`)的依赖
+    2. computedEffect执行结果赋值给computed
+    3. `_dirty: true` =>  `_dirty: false`， 避免重复调用`getter`
 5. 模板渲染收集computedEffect
 
 6. `reactive`数据变更
 7. 执行`computedEffect`的options.scheduler
-  1. `_dirty: false` => `_dirty: true` 标识computed需要更新了
-  2.  触发依赖computed的所有`effect`
-  3. 这些`effect`内部执行调用get value，重复第3步
+
+    1. `_dirty: false` => `_dirty: true` 标识computed需要更新了
+    2.  触发依赖computed的所有`effect`
+    3. 这些`effect`内部执行调用get value，重复第3步
 
 
 ```ts
@@ -196,16 +198,16 @@ export function watchEffect(
 
 #### doWatch
 
-1. `watch source` 生成 `getter`函数
-  * watch source 只能是 `getter/effect function` , `ref`数据 , `reactive`数据，这些数据格式的`array`，`doWatch`内部是统一生成`getter`函数
+1. 将传入的`watch source` 转化成 `getter`函数
+    * watch source 只能是 `getter/effect function` , `ref`数据 , `reactive`数据，这些数据格式的`array`，`doWatch`内部是统一生成`getter`函数
 2. 创建 `runner`: 基于getter 生成的`effect`
 3. 创建 `job: SchedulerJob`，内部执行 runner 和`cb`
-  * 无`cb`，直接执行runner
-  * 有`cb`，runner()后，再调用 callWithAsyncErrorHandling 执行 `cb`
+    * 无`cb`，直接执行runner
+    * 有`cb`，runner()后，再调用 callWithAsyncErrorHandling 执行 `cb`
 4. 创建`scheduler: ReactiveEffectOptions['scheduler']`，确定`job`的调用时间，[副作用刷新时机](https://v3.cn.vuejs.org/guide/reactivity-computed-watchers.html#%E5%89%AF%E4%BD%9C%E7%94%A8%E5%88%B7%E6%96%B0%E6%97%B6%E6%9C%BA)
-  * `flush:pre` 默认
-  * `flush:post` 在组件更新后触发，这样你就可以访问更新的 DOM，注意：这也将推迟副作用的初始运行，直到组件的首次渲染完成。
-  * `flush:sync` 强制始终同步触发。然而，这是低效的，应该很少需要
+    * `flush:pre` 默认
+    * `flush:post` 在组件更新后触发，这样你就可以访问更新的 DOM，注意：这也将推迟副作用的初始运行，直到组件的首次渲染完成。
+    * `flush:sync` 强制始终同步触发。然而，这是低效的，应该很少需要
 5. recordInstanceBoundEffect 记录 effects和component，方便卸载组件是处理
 6. 根据doWatch 传入参数，确定执行 `runner` 和 `cb`
 7. 返回watch清除方法
@@ -218,7 +220,7 @@ function doWatch(
   instance = currentInstance
 ): WatchStopHandle {
   
-  // 生成getter函数
+  // 生成getter函数  ==>
   let getter: () => any
   let forceTrigger = false
   if (isRef(source)) {
@@ -252,38 +254,20 @@ function doWatch(
     } else {
       // no cb -> simple effect
       getter = () => {
-        if (instance && instance.isUnmounted) {
-          return
-        }
-        if (cleanup) {
-          cleanup()
-        }
-        return callWithAsyncErrorHandling(
-          source,
-          instance,
-          ErrorCodes.WATCH_CALLBACK,
-          [onInvalidate]
-        )
+        ...
+        return callWithAsyncErrorHandling( source,instance,ErrorCodes.WATCH_CALLBACK,)
       }
     }
-  } else {
-    getter = NOOP
-    __DEV__ && warnInvalidSource(source)
-  }
-
-  if (cb && deep) {
+  } else { getter = NOOP; ... }
+  
+  if (cb && deep) { // cb && deep 包装getter数据
     const baseGetter = getter
     getter = () => traverse(baseGetter())
   }
 
-  let cleanup: () => void
-  let onInvalidate: InvalidateCbRegistrator = (fn: () => void) => {
-    cleanup = runner.options.onStop = () => {
-      callWithErrorHandling(fn, instance, ErrorCodes.WATCH_CLEANUP)
-    }
-  }
+  ...
 
-  // job生成
+  // job生成 ==>
   let oldValue = isArray(source) ? [] : INITIAL_WATCHER_VALUE
   const job: SchedulerJob = () => {
     if (!runner.active) {
@@ -294,9 +278,7 @@ function doWatch(
       const newValue = runner()
       if (deep || forceTrigger || hasChanged(newValue, oldValue)) {
         // cleanup before running cb again
-        if (cleanup) {
-          cleanup()
-        }
+        ...
         callWithAsyncErrorHandling(cb, instance, ErrorCodes.WATCH_CALLBACK, [
           newValue,
           // pass undefined as the old value when it's changed for the first time
@@ -314,7 +296,8 @@ function doWatch(
   // important: mark the job as a watcher callback so that scheduler knows
   // it is allowed to self-trigger (#1727)
   job.allowRecurse = !!cb
-  // scheduler创建
+
+  // scheduler创建 ==> 包装job
   let scheduler: ReactiveEffectOptions['scheduler']
   if (flush === 'sync') {
     scheduler = job
@@ -333,17 +316,12 @@ function doWatch(
     }
   }
 
-  // runner 基于getter 生成effect
-  const runner = effect(getter, {
-    lazy: true,
-    onTrack,
-    onTrigger,
-    scheduler
-  })
-
+  // runner 基于getter 生成effect ==>
+  const runner = effect(getter, {lazy: true,onTrack, onTrigger,scheduler})
+  // 绑定当前computedEffect和实例instance ==>
   recordInstanceBoundEffect(runner, instance)
 
-  // initial run
+  // runner cb的执行 ==>
   if (cb) {
     if (immediate) {
       job() // 依次执行 runner cb
@@ -356,7 +334,7 @@ function doWatch(
     runner()
   }
 
-  // 返回watch清除方法
+  // 返回watch清除方法 ==>
   return () => {
     stop(runner)
     if (instance) {
@@ -372,24 +350,10 @@ function doWatch(
 
 组件更新时，会触发`updateComponent`，其内部会调用`intance.update`
 
-
-
 ```ts
-const mountComponent: MountComponentFn = (
-  initialVNode,
-  container,
-  anchor,
-  parentComponent,
-  parentSuspense,
-  isSVG,
-  optimized
-) => {
+const mountComponent: MountComponentFn = (initialVNode,container,anchor, parentComponent,parentSuspense, isSVG,optimized) => {
   // 创建实例
-  const instance: ComponentInternalInstance = (initialVNode.component = createComponentInstance(
-    initialVNode,
-    parentComponent,
-    parentSuspense
-  ))
+  const instance: ComponentInternalInstance = (initialVNode.component = createComponentInstance(initialVNode,parentComponent,parentSuspense))
 
   // inject renderer internals for keepAlive
   if (isKeepAlive(initialVNode)) {
@@ -410,33 +374,13 @@ const mountComponent: MountComponentFn = (
     return
   }
   // 创建effect
-  setupRenderEffect(
-    instance,
-    initialVNode,
-    container,
-    anchor,
-    parentSuspense,
-    isSVG,
-    optimized
-  )
+  setupRenderEffect(instance,initialVNode,container,anchor,parentSuspense,isSVG,optimized)
 }
 
-const setupRenderEffect: SetupRenderEffectFn = (
-  instance,
-  initialVNode,
-  container,
-  anchor,
-  parentSuspense,
-  isSVG,
-  optimized
-) => {
+const setupRenderEffect: SetupRenderEffectFn = (instance, initialVNode,container,anchor,parentSuspense,isSVG,optimized) => {
   // create reactive effect for rendering
   instance.update = effect(function componentEffect() {
-    if (!instance.isMounted) {
-      ...
-    } else {
-      ...
-    }
+    if (!instance.isMounted) {...} else {...}
   }, __DEV__ ? createDevEffectOptions(instance) : prodEffectOptions)
 }
 ```
