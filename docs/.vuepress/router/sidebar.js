@@ -24,6 +24,7 @@ const blogSidebar = [
       '/blog/frontend-records/image-gif',
       '/blog/frontend-records/special-css',
       '/blog/frontend-records/ecmascript',
+      '/blog/frontend-records/css/sticky',
     ]
   },
   {

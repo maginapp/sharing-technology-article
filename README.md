@@ -49,3 +49,5 @@ npm install
 * `2020/04/07` github-issue抓取 [test/node-crawler](/test/node-crawler)
 
 * `2020/04/07` 新增[图片仓库](https://github.com/maginapp/static-website)，利用travis搭建网站，减小本项目仓库图片数量
+
+* `2020/04/14` 新增code区域代码复制功能

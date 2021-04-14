@@ -28,9 +28,15 @@ https://segmentfault.com/a/1190000013156728
 [git 200](vue-cli-plugin-style-resources-loader)
 
 
-## css
+## webpack
 
-### 全局变量配置
+### scope hoisting 是 webpack3 的新功能，直译过来就是「作用域提升」
+
+https://ssshooter.com/2019-02-20-webpack-scope-hoisting/
+
+https://segmentfault.com/a/1190000018220850
+
+### css 全局变量配置
 
 [sass-resources-loader](https://segmentfault.com/a/1190000020392688?utm_source=sf-related)
 
