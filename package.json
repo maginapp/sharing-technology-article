@@ -27,5 +27,8 @@
     "vuepress": "^1.4.1",
     "vuepress-plugin-mermaidjs": "^1.5.1",
     "websocket-extensions": ">=0.1.4"
+  },
+  "dependencies": {
+    "vuepress-plugin-code-copy": "^1.0.6"
   }
 }

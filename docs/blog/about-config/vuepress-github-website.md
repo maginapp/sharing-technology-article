@@ -186,6 +186,31 @@ cond(yes)->e
 cond(no)->op
 ```
 
+### vuepress-plugin-code-copy
+
+[znicholasbrown/vuepress-plugin-code-copy](https://github.com/znicholasbrown/vuepress-plugin-code-copy)试下代码复制功能
+
+usage
+
+```js
+module.exports = {
+    plugins: [['vuepress-plugin-code-copy', true]]
+}
+module.exports = {
+  plugins: [
+    ["vuepress-plugin-code-copy", {
+        selector: String,
+        align: String,
+        color: String,
+        backgroundTransition: Boolean,
+        backgroundColor: String,
+        successText: String
+        }
+    ]
+  ]
+}
+```
+
 ## tips/md语法扩展
 
 ### sidebar 路径设置

@@ -33,6 +33,7 @@ module.exports = {
     {
       delimiters: 'dollars'
     }],
+    ['vuepress-plugin-code-copy', true],
     ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}], // 测试传参与合并
     'vuepress-plugin-mermaidjs',
     [

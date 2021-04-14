@@ -1,4 +1,4 @@
-const blogSideBar = [
+const blogSidebar = [
   {
     title: '配置构建与规范',
     // collapsable: false,
@@ -23,6 +23,7 @@ const blogSideBar = [
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
       '/blog/frontend-records/special-css',
+      '/blog/frontend-records/ecmascript',
     ]
   },
   {
@@ -69,6 +70,43 @@ const blogSideBar = [
   }
 ]
 
+const interview = [{
+  title: '汇总',
+  collapsable: true,
+  path: '/interview/',
+  sidebarDepth: 2
+}, {
+  title: '引用',
+  collapsable: true,
+  path: '/interview/quote',
+  sidebarDepth: 2
+  // children: [
+  //   '/interview/js',
+  //   '/interview/css',
+  //   '/interview/html'
+  // ]
+}]
+
+
+
+const sharingSidebar = [{
+  collapsable: true,
+  title: 'sharing', 
+  sidebarDepth: 2,
+  children: [
+    '/sharing/',
+    '/sharing/utils-web',
+    '/sharing/sharing-blog',
+    '/sharing/software',
+  ]
+}]
+
+module.exports = {
+  '/blog/': blogSidebar,
+  '/sharing/': sharingSidebar,
+  '/interview/':  interview
+}
+
 // const interview = [{
 //   title: '分类',
 //   collapsable: false,
@@ -93,30 +131,24 @@ const blogSideBar = [
 //   path: '/interview/history'
 // }]
 
-const interview = [{
-  title: '汇总',
-  collapsable: true,
-  path: '/interview/',
-  sidebarDepth: 2
-}, {
-  title: '引用',
-  collapsable: true,
-  path: '/interview/quote',
-  sidebarDepth: 2
-  // children: [
-  //   '/interview/js',
-  //   '/interview/css',
-  //   '/interview/html'
-  // ]
-}]
-
-module.exports = {
-  '/blog/': blogSideBar,
-  '/sharing/': [{
-    collapsable: true,
-    title: '博客', 
-    path: '/sharing/',
-    sidebarDepth: 2
-  }],
-  '/interview/':  interview
-}
+// const sharingSidebar = [{
+//   title: '文章分享', 
+//   collapsable: true,
+//   path: '/sharing/',
+//   sidebarDepth: 2
+// }, {
+//   title: '常用工具网站', 
+//   collapsable: true,
+//   path: '/sharing/utils-web',
+//   sidebarDepth: 2
+// },  {
+//   title: '博客', 
+//   collapsable: true,
+//   path: '/sharing/sharing-blog',
+//   sidebarDepth: 2
+// }, {
+//   title: '常用软件', 
+//   collapsable: true,
+//   path: '/sharing/software',
+//   sidebarDepth: 2
+// }]
