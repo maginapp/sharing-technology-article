@@ -30,6 +30,10 @@ https://segmentfault.com/a/1190000013156728
 
 ## webpack
 
+### 流程
+
+https://mp.weixin.qq.com/s/2-zNlGrKUngWdQNvlcgESw
+
 ### scope hoisting 是 webpack3 的新功能，直译过来就是「作用域提升」
 
 https://ssshooter.com/2019-02-20-webpack-scope-hoisting/
