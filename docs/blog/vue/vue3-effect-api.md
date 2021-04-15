@@ -177,7 +177,7 @@ watch([num, () => data.a], ([num, a], [numOld, aOld]) => {
 
 ### 解析
 
-`watch`/`watchEffect`都是调用`doWatch`方法
+`watch`/`watchEffect`都是调用`doWatch`方法，创建`effect`
 
 ```ts
 // watch
@@ -213,6 +213,8 @@ export function watchEffect(
 5. recordInstanceBoundEffect 记录 effects和component，方便卸载组件是处理
 6. 根据doWatch 传入参数，确定执行 `runner` 和 `cb`
 7. 返回watch清除方法
+
+> [`scheduler`机制详见](./vue3-scheduler.html)
 
 ```ts
 function doWatch(

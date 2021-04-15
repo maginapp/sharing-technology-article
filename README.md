@@ -12,7 +12,7 @@
 
 ### node-server
 
-支持`服务端测试`/`图片压缩`/`gif生成`等功能
+*/test/node-server/*: 支持`服务端测试`/`图片压缩`/`gif生成`等功能
 
 依赖安装
 
@@ -29,13 +29,23 @@ npm run test
 
 ### node-crawler
 
-支持`本项目仓库github-issue抓取`等功能
+*/test/node-crawler/*: 支持`本项目仓库github-issue抓取`等功能
 
 ```bash
 # /test目录
 npm install
 # /test/node-crawler 目录
 npm install
+```
+
+### ts
+
+*/test/ts/*: `TypeScript`测试
+
+```bash
+npm install -g typescript
+# /test/ts 目录 编译ts文件
+npm run tsc
 ```
 
 ## 记录
@@ -51,3 +61,6 @@ npm install
 * `2020/04/07` 新增[图片仓库](https://github.com/maginapp/static-website)，利用travis搭建网站，减小本项目仓库图片数量
 
 * `2020/04/14` 新增code区域代码复制功能
+
+* `2020/04/15` 新增`typescrit`测试文件
+
