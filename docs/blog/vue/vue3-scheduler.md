@@ -10,7 +10,11 @@ meta:
 
 ## nextTick
 
-当前`flushJobs`执行完成后，再执行回调
+当前任务队列`queue`执行完成后，执行`nextTick`微任务回调
+
+nextTick是基于`Promise.resolve()`执行下次微任务的：
+  * `Promise.resolve()`
+  * [`resolvedPromise.then(flushJobs)`](#queueFlush): 当前[`flushJobs`](#flushJobs)执行完成后，再使用`then`执行微任务回调`fn`
 
 ```ts
 const resolvedPromise: Promise<any> = Promise.resolve()
@@ -27,9 +31,9 @@ export function nextTick(
 
 ## $nextTick
 
-`this` 会自动绑定当前实例
+`$nextTick`是组件实例中绑定的方法，`this` 会自动绑定当前实例
 
-* usage
+### usage
 
 > demo来源于 [vue3官网](https://v3.cn.vuejs.org/api/instance-methods.html#nexttick)
 
@@ -51,6 +55,7 @@ Vue.createApp({
   }
 })
 ```
+### 解析
 
 $nextTick: */packages/runtime-core/src/componentPublicInstance.ts*
 
@@ -110,4 +115,82 @@ export function createRenderContext(instance: ComponentInternalInstance) {
   return target as ComponentRenderContext
 }
 
+```
+
+## scheduler
+
+### 全局变量
+
+```ts
+let isFlushing = false // 标识 flushJobs 执行状态
+let isFlushPending = false // 标识 queueFlush 执行状态
+
+const queue: SchedulerJob[] = [] // job队列
+let flushIndex = 0
+
+const pendingPreFlushCbs: SchedulerCb[] = [] // pre队列
+let activePreFlushCbs: SchedulerCb[] | null = null
+let preFlushIndex = 0
+
+const pendingPostFlushCbs: SchedulerCb[] = [] // post队列
+let activePostFlushCbs: SchedulerCb[] | null = null
+let postFlushIndex = 0
+
+let currentPreFlushParentJob: SchedulerJob | null = null
+
+```
+
+### flushJobs
+
+flushJobs: 会执行当前记录的队列
+  1. flushPreFlushCbs
+  2. 执行`queue`队列
+  3. flushPostFlushCbs
+  4. 判断`queue`和`pendingPostFlushCbs`队列数据，确定是否需要再次执行 flushJobs
+
+```ts
+function flushJobs(seen?: CountMap) {
+  isFlushPending = false
+  isFlushing = true // 执行jobs flush
+
+  flushPreFlushCbs(seen)
+
+  // flush 前对sort进行排序：
+  // 1. 先更新父组件再更新子组件（父组件总是先创建，id小于子组件）
+  // 2. 如果父组件更新时，卸载了子组件，那么这个子组件渲染可以被跳过
+  queue.sort((a, b) => getId(a) - getId(b))
+
+  try {
+    for (flushIndex = 0; flushIndex < queue.length; flushIndex++) {
+      const job = queue[flushIndex]
+      if (job) {
+        callWithErrorHandling(job, null, ErrorCodes.SCHEDULER)
+      }
+    }
+  } finally {
+    flushIndex = 0
+    queue.length = 0
+
+    flushPostFlushCbs(seen)
+
+    isFlushing = false
+    currentFlushPromise = null
+    // some postFlushCb queued jobs!
+    // keep flushing until it drains.
+    if (queue.length || pendingPostFlushCbs.length) {
+      flushJobs(seen)
+    }
+  }
+}
+```
+
+#### queueFlush
+
+```ts
+function queueFlush() {
+  if (!isFlushing && !isFlushPending) {
+    isFlushPending = true
+    currentFlushPromise = resolvedPromise.then(flushJobs)
+  }
+}
 ```
