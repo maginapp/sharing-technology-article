@@ -22,9 +22,15 @@ const blogSidebar = [
     children: [
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
-      '/blog/frontend-records/special-css',
       '/blog/frontend-records/ecmascript',
-      '/blog/frontend-records/css/sticky',
+      { 
+        title: 'CSS',   // 必要的
+        sidebarDepth: 2,
+        children: [
+          '/blog/frontend-records/special-css',
+          '/blog/frontend-records/css/sticky',
+        ]
+      }
     ]
   },
   {

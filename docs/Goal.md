@@ -1,17 +1,4 @@
-## 网络通信
-
-## 浏览器渲染
-
-## 迭代器 await 
-
-## vue 权限控制 https://www.cnblogs.com/ssh-007/p/10295575.html
-
-## node事件循环
-
-## ios重影
-
-## 语法解析 预编译 执行 => 遇到函数执行 预编译 执行
-
+# goal
 
 ## pwa 
 
@@ -73,9 +60,20 @@ https://segmentfault.com/a/1190000018220850
   }
 ```
 
-## 错误处理
+
 
 ## github
 
 [github克隆失败提示“443：Timed out”怎么解决？](https://www.zhihu.com/question/401499640)
 [解决连不上GitHub，也ping不通](https://blog.csdn.net/believe_s/article/details/81539747)
+
+## next
+### 网络通信
+
+### 浏览器渲染
+
+### node事件循环
+
+### 语法解析 预编译 执行 => 遇到函数执行 预编译 执行
+
+### 错误处理
