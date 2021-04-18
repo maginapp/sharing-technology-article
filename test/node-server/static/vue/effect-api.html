@@ -19,9 +19,19 @@
   <hr><button @click="onBtnDeepClick">onBtnDeepClick</button>
 </div>
 <script>
-  const { ref, computed, reactive, watch, watchEffect } = Vue
+  const { ref, computed, reactive, watch, watchEffect, nextTick } = Vue
   const app = Vue.createApp({
     setup() {
+      const fn = async  () => {
+        console.log(1)
+        await nextTick()
+        console.log(3)
+        nextTick(() => {
+          console.log(4)
+        })
+      }
+      fn()
+      console.log(2)
       // ref
       const num = ref(1)
       const numAdd = computed(() => num.value + 1) // numAdd 2

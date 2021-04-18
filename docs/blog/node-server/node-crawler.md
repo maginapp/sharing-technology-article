@@ -66,7 +66,7 @@ fs.writeFile('./test.md', '', function () {
 }) 
 ```
 
-<ImgWithBase src="/sharp/node-crawler-demo.webp" alt="node-crawler-demo" style="width:100%;max-width: 800px;"/>
+<ImgWithBase src="/sharp/node-crawler-demo.webp" alt="node-crawler-demo" styleData="width:100%;max-width: 800px;"/>
 
 ## 使用中出现的问题
 

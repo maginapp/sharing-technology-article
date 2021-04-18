@@ -52,7 +52,7 @@ p {
 }
 ```
 
-<ImgWithBase src="https://maginapp.github.io/static-website/images/speacial-css-backdrop-filter-demo-1.webp" alt="backdrop-filter" style="width:100%;max-width: 520px;"/>
+<ImgWithBase src="https://maginapp.github.io/static-website/images/speacial-css-backdrop-filter-demo-1.webp" alt="backdrop-filter" styleData="width:100%;max-width: 520px;"/>
 
 
 

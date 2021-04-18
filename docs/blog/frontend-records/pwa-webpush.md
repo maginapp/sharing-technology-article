@@ -8,6 +8,13 @@ meta:
 
 # webpsuh
 
+> 最近遇到了个新的需求，需要追踪用户浏览页面的行为，并依据此数据向用户发送提示邮件和推送信息。其中推送信息功能是基于[第三方插件](https://www.pushengage.com/)开发的，核心是前端的`Service Worker`和`Web Push`。
+
+本文将对`Web Push`进行简单介绍，并基于谷歌FCM完成demo开发
+
+
+## tips
+
 > 使用node推送时，始终报链接错误 `read ECONNRESET`，怀疑是连接不上fcm服务
 
 `/test/webpush-test`

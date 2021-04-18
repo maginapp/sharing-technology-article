@@ -18,7 +18,7 @@
 
 须指定 top, right, bottom 或 left 四个阈值其中之一，才可使粘性定位生效。否则其展现效果与相对定位相同。
 
-## demo
+## code
 
 ```css
 .demo-box {
@@ -96,6 +96,8 @@ dd + dd {
   </div>
 </div>
 ```
+
+## demo
 
 <style>
 .demo-box {
