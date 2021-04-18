@@ -6,7 +6,7 @@ meta:
     content: vue3源码解析-响应式原理
 ---
 
-# vue3 reactivity解析
+# vue3-reactivity响应式简析
 
 vue3解析基于 `vue3@3.0.9`版本
 

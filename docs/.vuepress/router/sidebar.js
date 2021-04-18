@@ -43,6 +43,10 @@ const blogSidebar = [
       '/blog/vue/vue3-reactive',
       '/blog/vue/vue3-effect-api',
       '/blog/vue/vue3-scheduler',
+      '/blog/vue/vue3-vnode',
+      '/blog/vue/vue3-render',
+      '/blog/vue/vue3-diff', 
+      '/blog/vue/vue3-lifecycle'
     ]
   },
   {

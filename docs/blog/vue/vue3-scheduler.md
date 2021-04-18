@@ -6,7 +6,7 @@ meta:
     content: vue3源码解析-scheduler事务机制解析，$nextTick解析
 ---
 
-# scheduler
+# vue3-scheduler
 
 基于nextTick熟悉vue3的scheduler机制
 ## nextTick
