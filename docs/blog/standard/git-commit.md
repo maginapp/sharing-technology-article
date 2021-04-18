@@ -41,8 +41,8 @@ bug连接 http://bug.bug
 * `perf` `optimize`【性能优化】-【代码更改可以提高性能, 提升用户体验】
 * `test`【测试代码】-【添加缺失测试或更正现有测试】
 * `chore` 【构建编译】- 【改版构建流程、增加依赖库、工具】
-~~* `build`【编译代码】-【影响构建系统或外部依赖项的更改:build.gradle、package.json、Podfile等 glup，webpack，rollup的配置等】~~
-~~* `ci`【持续集成】-【我们的CI配置文件和脚本的更改:Jenkinsfile，Travis，GitLab CI,Circle】~~
+* ~~`build`【编译代码】-【影响构建系统或外部依赖项的更改:build.gradle、package.json、Podfile等 glup，webpack，rollup的配置等~~
+* ~~`ci`【持续集成】-【我们的CI配置文件和脚本的更改:Jenkinsfile，Travis，GitLab CI,Circle~~
 * `revert` 【回退更改】-【代码回退提交更改】
 * `other` 【其他提交】-【除以上所有类型之外的提交更改】
 
