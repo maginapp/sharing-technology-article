@@ -22,16 +22,19 @@ meta:
 
 ### 博客
 
-* [vuepress搭建网站踩坑](https://maginapp.github.io/sharing-technology-article/blog/about-config/vuepress-github-website.html)
 
-* [koa-server-init](https://maginapp.github.io/sharing-technology-article/blog/node-server/koa-server-init.html)
+* [vue3-简介](./blog/vue/vue3-introduce.html)
+* [ES6-ES12新特性](./blog//frontend-records/ecmascript.html)
+* [koa-server-init](./blog/node-server/koa-server-init.html)
+* [vuepress搭建网站踩坑](./blog/about-config/vuepress-github-website.html)
 
 
 ### 文章分享
 
-
+[详见:point_right:](./sharing)
 
 ### 面试题
 
+[详见:point_right:](./interview)
 
 
