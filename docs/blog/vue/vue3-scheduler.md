@@ -46,11 +46,11 @@ export function nextTick(
 }
 ```
 
-## $nextTick
+### $nextTick
 
 `$nextTick`是组件实例中绑定的方法，`$nextTick`中的`this`会自动绑定当前实例
 
-### usage
+#### usage
 
 > demo来源于 [vue3官网](https://v3.cn.vuejs.org/api/instance-methods.html#nexttick)
 
@@ -72,7 +72,7 @@ Vue.createApp({
   }
 })
 ```
-### 解析
+#### 解析
 
 $nextTick: */packages/runtime-core/src/componentPublicInstance.ts*：
 
@@ -298,10 +298,12 @@ export function flushPostFlushCbs(seen?: CountMap) {
 2. job 按序插入queue 
 3. 执行[`queueFlush`](#queueFlush)
 
+> [doWatch详见](./vue3-effect-api.html#dowatch)
+
 ```ts
 export function queueJob(job: SchedulerJob) {
-  // flushIndex => 当前正在执行的任务 job.allowRecurse => watchEffect/渲染effect标识
-  // 这类情况 从flushIndex + 1检索，允许它递归地触发自身，用户需要避免无线循环调用，官方注释此处指 watch回调
+  // flushIndex => 当前正在执行的任务 job.allowRecurse => watchEffect/渲染effect有此参数 =>  doWatch-sync直接执行♦ ==> 官网注释此处指watchEffect
+  // 这类情况 从flushIndex + 1检索，允许它递归地触发自身，用户需要避免无限循环调用
   // 非以上情况，当前flushIndex(job)会被剔除
   if (
     (!queue.length ||
@@ -349,7 +351,9 @@ function findInsertionIndex(job: SchedulerJob) {
 
 ### queueCb
 
-`queuePreFlushCb`/`queuePostFlushCb`核心是使用`queueCb`将job插入到对应的待执行任务队列
+`queuePreFlushCb`/`queuePostFlushCb`核心是使用`queueCb`将job插入到对应的**待执行任务队列**
+
+> 其中`queuePreFlushCb`仅[doWatch](./vue3-effect-api.html#dowatch)中会调用
 
 ```ts
 function queueCb(
