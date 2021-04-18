@@ -13,7 +13,7 @@ export default ({ router }) => {
             if (element) element.scrollIntoView()
           }
 				}, 200)
-			});	
-		});
+			})
+		})
 	}
 }
