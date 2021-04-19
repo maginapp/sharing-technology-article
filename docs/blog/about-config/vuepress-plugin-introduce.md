@@ -26,18 +26,19 @@ meta:
 ```bash
 npm install @vssue/vuepress-plugin-vssue
 # 需要登录
-npm install @vssue/api-github-v4 
+npm install @vssue/api-github-v3
 # or 无需登录，调用次数有限制
-# npm install @vssue/api-github-v3
+# npm install @vssue/api-github-v4 
 ```
 
-#### 配置
+#### 基础配置
 
 > [vssue配置](https://vssue.js.org/zh/options/)
 
+
 ```js
 ['@vssue/vuepress-plugin-vssue', {
-  platform: 'github-v4', // v3 => github，v4 => github-v4
+  platform: 'github', // v3 => github，v4 => github-v4
   // 其他的 Vssue 配置
   locale: 'zh', // 语言
   owner: 'maginapp', // github账户名
@@ -70,10 +71,10 @@ npm install @vssue/api-github-v4
 
 <imgWithBase src="https://maginapp.github.io/static-website/images/images-wait-sharp/about-config/githun-setting-auth-knock-review.png" />
 
-### 页面自动生成issue
+#### 页面自动生成issue
 
-设置配置项`autoCreateIssue`为true，会自动生成issue
-### 页面自动添加vssue
+设置配置项`autoCreateIssue`为true，新页面访问后会自动生成对应的issue，不用手动点击创建问题
+#### 页面自动添加vssue
 
 利用vuepress的`theme`配置，添加vssue组件
 
@@ -106,6 +107,10 @@ module.exports = {
   extend: '@vuepress/theme-default'
 }
 ```
+
+## 存在问题
+
+> 本地dev环境访问时，vssue模块未自动更新，还是之前的问题与评论
 
 ## vuepress-plugin-code-copy
 
