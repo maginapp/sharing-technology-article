@@ -6,7 +6,8 @@ const blogSidebar = [
     children: [
       '/blog/about-config/vuepress-github-website',
       '/blog/about-config/vscode-multi-column',
-      '/blog/standard/git-commit'
+      '/blog/standard/git-commit',
+      '/blog/about-config/vuepress-plugin-introduce',
       // { 
       //   title: '规范',   // 必要的
       //   path: '/blog/about-config/node-server', 

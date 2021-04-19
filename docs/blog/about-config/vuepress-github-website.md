@@ -1,3 +1,11 @@
+---
+meta:
+  - name: keywords
+    content: vuepress,博客,个人网站
+  - name: description
+    content: vuepress搭建网站踩坑
+---
+
 # vuepress搭建网站踩坑
 
 ## 准备
@@ -210,6 +218,10 @@ module.exports = {
   ]
 }
 ```
+
+### @vssue/vuepress-plugin-vssue
+
+[vssue评论功能](./vuepress-plugin-introduce.html#vssue评论功能)
 
 ## tips/md语法扩展
 
