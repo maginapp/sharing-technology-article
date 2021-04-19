@@ -12,7 +12,9 @@
 
 ### node-server
 
-*/test/node-server/*: 支持`服务端测试`/`图片压缩`/`gif生成`等功能
+*/test/node-server/*: 
+
+`服务端测试`/`图片在线压缩`/`gif在线生成`/`在线编译ts`等功能
 
 依赖安装
 
