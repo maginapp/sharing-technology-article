@@ -6,7 +6,7 @@ meta:
     content: vuepress实用插件简介
 ---
 
-# vuepress实用插件简介
+# vuepress实用功能及插件简介
 
 ## vssue评论功能
 
@@ -17,11 +17,11 @@ meta:
 > 你可以前往 [Issue]() 页面来取消订阅提醒（unsubscribe the notifications）。
 
 
-## 配置流程
+### 配置流程
 
 > 本文是基于github仓库和issues系统，配置的vssue
 
-### 依赖安装
+#### 依赖安装
 
 ```bash
 npm install @vssue/vuepress-plugin-vssue
@@ -31,7 +31,7 @@ npm install @vssue/api-github-v4
 # npm install @vssue/api-github-v3
 ```
 
-### 配置
+#### 配置
 
 > [vssue配置](https://vssue.js.org/zh/options/)
 
@@ -44,11 +44,11 @@ npm install @vssue/api-github-v4
   repo: 'sharing-technology-article-comment', //github项目名称 => 存储 Issue 和评论
   clientId: 'clientId',// Client ID
   clientSecret: 'clientSecret ',// Client Secret
-  autoCreateIssue: true // 自动创建评论，默认是false，避免首次进入页面的时候需要点击创建评论的按钮
+  // autoCreateIssue: true // 自动创建评论，默认是false，避免首次进入页面的时候需要点击创建评论的按钮
 }]
 ```
 
-## Auth Apps设置，获取clientId和clientSecret
+### Auth Apps设置，获取clientId和clientSecret
 
 1. 登录`github`，进入`OAuth Apps`
 
@@ -64,12 +64,15 @@ npm install @vssue/api-github-v4
 
 <imgWithBase src="https://maginapp.github.io/static-website/images/images-wait-sharp/about-config/githun-setting-auth-knock-blog-comment.png" />
 
-## 插件使用
+### 插件使用
 
 `@vssue/vuepress-plugin-vssue`会注册全局组件`Vssue`，再需要添加的页面中增加`<Vssue />`即可生效
 
 <imgWithBase src="https://maginapp.github.io/static-website/images/images-wait-sharp/about-config/githun-setting-auth-knock-review.png" />
 
+### 页面自动生成issue
+
+设置配置项`autoCreateIssue`为true，会自动生成issue
 ### 页面自动添加vssue
 
 利用vuepress的`theme`配置，添加vssue组件
@@ -108,7 +111,7 @@ module.exports = {
 
 [znicholasbrown/vuepress-plugin-code-copy](https://github.com/znicholasbrown/vuepress-plugin-code-copy)试下代码复制功能
 
-usage
+### usage
 
 ```js
 module.exports = {
@@ -126,6 +129,57 @@ module.exports = {
         }
     ]
   ]
+}
+```
+
+## 简易锚点滚动特性
+
+基于原生[`scrollIntoView`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollIntoView)开发
+
+在`.vuepress`文件夹下添加`enhanceApp.js`文件，并加入如下代码：
+
+```js
+export default ({ router }) => {
+	if(typeof process === 'undefined' || process.env.VUE_ENV !== 'server') {
+		router.onReady(() => {
+			const { app } = router;
+			app.$once("hook:mounted", () => {
+        console.log('hook:mounted')
+				setTimeout(() => {
+					const { hash } = document.location;
+            if (hash.length > 1) {
+            const id = decodeURIComponent(hash.substring(1))
+            const element = document.getElementById(id)
+            if (element) element.scrollIntoView()
+          }
+				}, 200)
+				document.body.addEventListener('click', (e) => {
+					if (e.target) {
+						const node = e.target
+						if (node.href) return
+						let url
+						try {
+							url = new URL(node.href)
+						} catch{
+							return
+						}
+						if (node.nodeName === 'A' && url.hash) {
+							const local = new URL(location.href)
+							if (local.pathname === url.pathname) {
+								const id = decodeURIComponent(url.hash.substring(1))
+								const element = document.getElementById(id)
+								if (element) {
+									element.scrollIntoView({behavior: "smooth"})
+									e.stopPropagation()
+									e.preventDefault()
+								}
+							}
+						}
+					}
+				}, true)
+			})
+		})
+	}
 }
 ```
 
