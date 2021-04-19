@@ -15,7 +15,13 @@ export default ({ router }) => {
 				document.body.addEventListener('click', (e) => {
 					if (e.target) {
 						const node = e.target
-						const url = new URL(node.href)
+						if (node.href) return
+						let url
+						try {
+							url = new URL(node.href)
+						} catch{
+							return
+						}
 						if (node.nodeName === 'A' && url.hash) {
 							const local = new URL(location.href)
 							if (local.pathname === url.pathname) {

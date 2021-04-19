@@ -51,7 +51,7 @@ module.exports = {
       owner: 'maginapp', // github账户名
       repo: 'sharing-technology-article-comment', //github项目名称 => 存储 Issue 和评论
       clientId: '90222c6039de1067acee',// Client ID
-      clientSecret: 'a7327cdc69e90f0c00b7853d836fdf8bf7ae9997 ',// Client Secret
+      clientSecret: '6b68b195bbc7a9e05258c7be427ff9c7be8430cb ',// Client Secret
       autoCreateIssue: true // 自动创建评论，默认是false，避免首次进入页面的时候需要点击创建评论的按钮
     }]
     // 以下替换为magina系列插件
