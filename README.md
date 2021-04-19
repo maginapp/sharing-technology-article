@@ -51,16 +51,10 @@ npm run tsc
 ## 记录
 
 * `2020/05/31` 添加pwa模块，确定网站模板
-
 * `2020/06/01` pwa测试成功，增加了添加网页到桌面功能
-
 * `2020/01/10` 测试服务搭建 [test/node-server](/test/node-server)
-
 * `2020/04/07` github-issue抓取 [test/node-crawler](/test/node-crawler)
-
 * `2020/04/07` 新增[图片仓库](https://github.com/maginapp/static-website)，利用travis搭建网站，减小本项目仓库图片数量
-
 * `2020/04/14` 新增code区域代码复制功能
-
 * `2020/04/15` 新增`typescrit`测试文件
-
+* `2020/04/19` 基于`vssue`添加评论功能
