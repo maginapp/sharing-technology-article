@@ -13,3 +13,14 @@
 > node sample
 
 简版服务
+
+## 页面简介
+
+```
+# 项目布局
+```
+├── static
+│   ├── ts
+│       ├── index.html ts编译
+│   ├── images
+```
