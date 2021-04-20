@@ -38,7 +38,7 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
-        <Vssue :key="vssueKey" v-if="!hideVssuePages.includes($page.path)" />
+        <Vssue :key="vssueKey" v-if="shouldShowVssue" />
       </template>
     </Page>
   </div>
@@ -115,7 +115,13 @@ export default {
         },
         userPageClass
       ]
+    },
+
+    shouldShowVssue () {
+      const isDev = location.host && location.host.startsWith('localhost')
+      return !isDev && !this.hideVssuePages.includes(this.$route.path)
     }
+
   },
 
   mounted () {

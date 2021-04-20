@@ -177,7 +177,7 @@ B --> D{菱形}
 C --> D
 ```
 
-### [@maginappvuepress-plugin-flowchart](https://github.com/maginappvuepress/vuepress-plugin-flowchart)
+### [@maginapp/vuepress-plugin-flowchart](https://github.com/maginappvuepress/vuepress-plugin-flowchart)
 
 基于(ulivz/vuepress-plugin-flowchart)[https://github.com/ulivz/vuepress-plugin-flowchart
 ]做了改写，兼容了csdn博客的flowchart模板
@@ -194,7 +194,7 @@ cond(yes)->e
 cond(no)->op
 ```
 
-### vuepress-plugin-code-copy
+### znicholasbrown/vuepress-plugin-code-copy
 
 [znicholasbrown/vuepress-plugin-code-copy](https://github.com/znicholasbrown/vuepress-plugin-code-copy)试下代码复制功能
 

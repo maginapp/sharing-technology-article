@@ -4,10 +4,17 @@ const blogSidebar = [
     // collapsable: false,
     sidebarDepth: 2,
     children: [
-      '/blog/about-config/vuepress-github-website',
+      { 
+        title: 'Vuepress',   // 必要的
+        sidebarDepth: 2,
+        children: [
+          '/blog/about-config/vuepress-github-website',
+          '/blog/about-config/vuepress-plugin-introduce',
+          '/blog/about-config/vuepress-flowchart',
+        ]
+      },
       '/blog/about-config/vscode-multi-column',
       '/blog/standard/git-commit',
-      '/blog/about-config/vuepress-plugin-introduce',
       // { 
       //   title: '规范',   // 必要的
       //   path: '/blog/about-config/node-server', 
