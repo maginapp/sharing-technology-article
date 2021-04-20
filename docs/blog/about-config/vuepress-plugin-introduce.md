@@ -108,14 +108,16 @@ module.exports = {
 }
 ```
 
-## vussue不更新问题
+### vussue不更新问题
 
 > 切换页面时，vssue模块未自动更新，还是初始页面的问题与评论
 > 检查页面加载，发现切换页面时，会加载新页面js，直接更新网页链接，并不会跳转新页面
 
 为`vssue`组件添加*key*，在`.vuepress/enhanceApp.js`中监听路由变化，进入新页面更新key，触发组件重新初始化渲染
 
-### 示例
+#### **方法一**
+
+> 此方法添加了额外的全局变量，已废弃
 
 *layout.vue*: 添加全局变量`layoutPage`，用于获取issue的key值
 
@@ -162,6 +164,19 @@ export default (context) => {
 }
 ```
 
+#### 方法二
+
+*layout.vue*中监听`$route.path`改变键值
+
+```js
+watch: {
+  '$route.path'(to, from) {
+    if (to !== from) {
+      this.vssueKey++
+    }
+  }
+}
+```
 ## vuepress-plugin-code-copy
 
 [znicholasbrown/vuepress-plugin-code-copy](https://github.com/znicholasbrown/vuepress-plugin-code-copy)试下代码复制功能

@@ -38,11 +38,11 @@ export default (context) => {
 				}, true)
 			})
 		})
-		router.beforeEach((to, from, next) => {
-			if (to.name !== from.name && window.layoutPage) {
-				window.layoutPage.vssueKey++
-			}
-			next()
-		})
+		// router.beforeEach((to, from, next) => {
+		// 	if (to.name !== from.name && window.layoutPage) {
+		// 		window.layoutPage.vssueKey++
+		// 	}
+		// 	next()
+		// })
 	}
 }

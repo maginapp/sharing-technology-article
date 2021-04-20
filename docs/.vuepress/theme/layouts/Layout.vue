@@ -119,10 +119,18 @@ export default {
   },
 
   mounted () {
-    window.layoutPage = this
+    // window.layoutPage = this
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
+  },
+
+  watch: {
+    '$route.path'(to, from) {
+      if (to !== from) {
+				this.vssueKey++
+			}
+    }
   },
 
   methods: {
