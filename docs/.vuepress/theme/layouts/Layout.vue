@@ -118,7 +118,7 @@ export default {
     },
 
     shouldShowVssue () {
-      const isDev = location.host && location.host.startsWith('localhost')
+      const isDev = (typeof location !== 'undefined') && location.host && location.host.startsWith('localhost')
       return !isDev && !this.hideVssuePages.includes(this.$route.path)
     }
 
