@@ -8,6 +8,11 @@ meta:
 
 # flowchart绘图简要说明
 
+[官网](http://flowchart.js.org/)
+
+1. 创建元素 
+2. 创建连接关系
+3. 添加箭头样式等
 
 ## 常用元素
 
@@ -152,8 +157,6 @@ cond2@>op4({"stroke":"#ff0000"})@>op1({"stroke":"#f0f"})@>cond({"stroke":"orange
 
 
 ## flowchart-vuepress配置
-
-[官网](http://flowchart.js.org/)
 
 ```js
 ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}]
