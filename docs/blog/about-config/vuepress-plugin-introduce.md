@@ -108,9 +108,59 @@ module.exports = {
 }
 ```
 
-## 存在问题
+## vussue不更新问题
 
-> 本地dev环境访问时，vssue模块未自动更新，还是之前的问题与评论
+> 切换页面时，vssue模块未自动更新，还是初始页面的问题与评论
+> 检查页面加载，发现切换页面时，会加载新页面js，直接更新网页链接，并不会跳转新页面
+
+为`vssue`组件添加*key*，在`.vuepress/enhanceApp.js`中监听路由变化，进入新页面更新key，触发组件重新初始化渲染
+
+### 示例
+
+*layout.vue*: 添加全局变量`layoutPage`，用于获取issue的key值
+
+```vue
+<template>
+  <div>
+    <Page>
+      <Vssue :key="vssueKey" v-if="!hideVssuePages.includes($page.path)" />
+    </Page>
+  </div>
+</template>
+<script>
+
+export default {
+  name: 'Layout',ata () {
+    return {
+      hideVssuePages: [], // 不显示vssue的页面$route.path
+      vssueKey: 0
+    }
+  },
+  mounted () {
+    window.layoutPage = this // 添加全局变量，存储当前页面实例
+    this.$router.afterEach(() => {
+      this.isSidebarOpen = false
+    })
+  }
+}
+</script>
+```
+
+*enchanceApp.js*: 监听路由变量，进入新页面时，更新`vssueKey`
+
+```js
+export default (context) => {
+	const { router } = context
+	if(typeof process === 'undefined' || process.env.VUE_ENV !== 'server') {
+		router.beforeEach((to, from, next) => {
+			if (to.name !== from.name && window.layoutPage) {
+				window.layoutPage.vssueKey++
+			}
+			next()
+		})
+	}
+}
+```
 
 ## vuepress-plugin-code-copy
 

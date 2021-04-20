@@ -38,7 +38,7 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
-        <Vssue v-if="!hideVssuePages.includes($page.path)" />
+        <Vssue :key="vssueKey" v-if="!hideVssuePages.includes($page.path)" />
       </template>
     </Page>
   </div>
@@ -57,14 +57,15 @@ export default {
   components: {
     Home,
     Page,
-    Sidebar,
+    Sidebar,  
     Navbar
   },
 
   data () {
     return {
       isSidebarOpen: false,
-      hideVssuePages: []
+      hideVssuePages: [],
+      vssueKey: 0
     }
   },
 
@@ -118,10 +119,10 @@ export default {
   },
 
   mounted () {
+    window.layoutPage = this
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
-    console.log(window.layout = this)
   },
 
   methods: {

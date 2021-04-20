@@ -1,9 +1,9 @@
-export default ({ router }) => {
+export default (context) => {
+	const { router } = context
 	if(typeof process === 'undefined' || process.env.VUE_ENV !== 'server') {
 		router.onReady(() => {
 			const { app } = router;
 			app.$once("hook:mounted", () => {
-        console.log('hook:mounted')
 				setTimeout(() => {
 					const { hash } = document.location;
             if (hash.length > 1) {
@@ -37,6 +37,12 @@ export default ({ router }) => {
 					}
 				}, true)
 			})
+		})
+		router.beforeEach((to, from, next) => {
+			if (to.name !== from.name && window.layoutPage) {
+				window.layoutPage.vssueKey++
+			}
+			next()
 		})
 	}
 }
