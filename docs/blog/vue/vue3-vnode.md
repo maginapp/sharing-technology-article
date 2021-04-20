@@ -10,6 +10,8 @@ meta:
 
 > */packages/runtime-core/src/vnode.ts*
 
+vnode（虚拟dom）：标识DOM的js对象
+
 ## createNode
 
 ```ts
@@ -24,11 +26,10 @@ function _createVNode(
   if (!type || type === NULL_DYNAMIC_COMPONENT) type = Comment
 
   if (isVNode(type)) {
-    // createVNode receiving an existing vnode. This happens in cases like
-    // <component :is="vnode"/>
-    // #2078 make sure to merge refs during the clone instead of overwriting it
+    // createVNode receiving an existing vnode. This happens in cases like <component :is="vnode"/>
+    // vnode类型直接clone
     const cloned = cloneVNode(type, props, true /* mergeRef: true */)
-    if (children) {
+    if (children) { // 处理children???
       normalizeChildren(cloned, children)
     }
     return cloned
@@ -39,7 +40,8 @@ function _createVNode(
     type = type.__vccOpts
   }
 
-  // class & style normalization.
+  // class & style normalization. 
+  // 格式化 props/style/class
   if (props) {
     // for reactive or proxy objects, we need to clone it to enable mutation.
     if (isProxy(props) || InternalObjectKey in props) {
@@ -72,25 +74,13 @@ function _createVNode(
             ? ShapeFlags.FUNCTIONAL_COMPONENT
             : 0
 
-  if (__DEV__ && shapeFlag & ShapeFlags.STATEFUL_COMPONENT && isProxy(type)) {
-    type = toRaw(type)
-    warn(
-      `Vue received a Component which was made a reactive object. This can ` +
-        `lead to unnecessary performance overhead, and should be avoided by ` +
-        `marking the component with \`markRaw\` or using \`shallowRef\` ` +
-        `instead of \`ref\`.`,
-      `\nComponent that was made reactive: `,
-      type
-    )
-  }
-
   const vnode: VNode = {
     __v_isVNode: true,
     [ReactiveFlags.SKIP]: true,
     type,
     props,
-    key: props && normalizeKey(props),
-    ref: props && normalizeRef(props),
+    key: props && normalizeKey(props), // 获取props.key
+    ref: props && normalizeRef(props), // 获取props.ref
     scopeId: currentScopeId,
     slotScopeIds: null,
     children: null,
@@ -110,11 +100,6 @@ function _createVNode(
     dynamicProps,
     dynamicChildren: null,
     appContext: null
-  }
-
-  // validate key
-  if (__DEV__ && vnode.key !== vnode.key) {
-    warn(`VNode created with invalid key (NaN). VNode type:`, vnode.type)
   }
 
   normalizeChildren(vnode, children)
