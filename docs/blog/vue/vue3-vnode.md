@@ -8,5 +8,143 @@ meta:
 
 # vue3-vnode简析
 
-待完成
+> */packages/runtime-core/src/vnode.ts*
+
+## createNode
+
+```ts
+function _createVNode(
+  type: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT,
+  props: (Data & VNodeProps) | null = null,
+  children: unknown = null,
+  patchFlag: number = 0,
+  dynamicProps: string[] | null = null,
+  isBlockNode = false
+): VNode {
+  if (!type || type === NULL_DYNAMIC_COMPONENT) type = Comment
+
+  if (isVNode(type)) {
+    // createVNode receiving an existing vnode. This happens in cases like
+    // <component :is="vnode"/>
+    // #2078 make sure to merge refs during the clone instead of overwriting it
+    const cloned = cloneVNode(type, props, true /* mergeRef: true */)
+    if (children) {
+      normalizeChildren(cloned, children)
+    }
+    return cloned
+  }
+
+  // class component normalization.
+  if (isClassComponent(type)) {
+    type = type.__vccOpts
+  }
+
+  // class & style normalization.
+  if (props) {
+    // for reactive or proxy objects, we need to clone it to enable mutation.
+    if (isProxy(props) || InternalObjectKey in props) {
+      props = extend({}, props)
+    }
+    let { class: klass, style } = props
+    if (klass && !isString(klass)) {
+      props.class = normalizeClass(klass)
+    }
+    if (isObject(style)) {
+      // reactive state objects need to be cloned since they are likely to be
+      // mutated
+      if (isProxy(style) && !isArray(style)) {
+        style = extend({}, style)
+      }
+      props.style = normalizeStyle(style)
+    }
+  }
+
+  // encode the vnode type information into a bitmap
+  const shapeFlag = isString(type)
+    ? ShapeFlags.ELEMENT
+    : __FEATURE_SUSPENSE__ && isSuspense(type)
+      ? ShapeFlags.SUSPENSE
+      : isTeleport(type)
+        ? ShapeFlags.TELEPORT
+        : isObject(type)
+          ? ShapeFlags.STATEFUL_COMPONENT
+          : isFunction(type)
+            ? ShapeFlags.FUNCTIONAL_COMPONENT
+            : 0
+
+  if (__DEV__ && shapeFlag & ShapeFlags.STATEFUL_COMPONENT && isProxy(type)) {
+    type = toRaw(type)
+    warn(
+      `Vue received a Component which was made a reactive object. This can ` +
+        `lead to unnecessary performance overhead, and should be avoided by ` +
+        `marking the component with \`markRaw\` or using \`shallowRef\` ` +
+        `instead of \`ref\`.`,
+      `\nComponent that was made reactive: `,
+      type
+    )
+  }
+
+  const vnode: VNode = {
+    __v_isVNode: true,
+    [ReactiveFlags.SKIP]: true,
+    type,
+    props,
+    key: props && normalizeKey(props),
+    ref: props && normalizeRef(props),
+    scopeId: currentScopeId,
+    slotScopeIds: null,
+    children: null,
+    component: null,
+    suspense: null,
+    ssContent: null,
+    ssFallback: null,
+    dirs: null,
+    transition: null,
+    el: null,
+    anchor: null,
+    target: null,
+    targetAnchor: null,
+    staticCount: 0,
+    shapeFlag,
+    patchFlag,
+    dynamicProps,
+    dynamicChildren: null,
+    appContext: null
+  }
+
+  // validate key
+  if (__DEV__ && vnode.key !== vnode.key) {
+    warn(`VNode created with invalid key (NaN). VNode type:`, vnode.type)
+  }
+
+  normalizeChildren(vnode, children)
+
+  // normalize suspense children
+  if (__FEATURE_SUSPENSE__ && shapeFlag & ShapeFlags.SUSPENSE) {
+    const { content, fallback } = normalizeSuspenseChildren(vnode)
+    vnode.ssContent = content
+    vnode.ssFallback = fallback
+  }
+
+  if (
+    shouldTrack > 0 &&
+    // avoid a block node from tracking itself
+    !isBlockNode &&
+    // has current parent block
+    currentBlock &&
+    // presence of a patch flag indicates this node needs patching on updates.
+    // component nodes also should always be patched, because even if the
+    // component doesn't need to update, it needs to persist the instance on to
+    // the next vnode so that it can be properly unmounted later.
+    (patchFlag > 0 || shapeFlag & ShapeFlags.COMPONENT) &&
+    // the EVENTS flag is only for hydration and if it is the only flag, the
+    // vnode should not be considered dynamic due to handler caching.
+    patchFlag !== PatchFlags.HYDRATE_EVENTS
+  ) {
+    currentBlock.push(vnode)
+  }
+
+  return vnode
+}
+```
 

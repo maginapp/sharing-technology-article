@@ -1,3 +1,11 @@
+---
+meta:
+  - name: keywords
+    content: Sharing articles,常用软件
+  - name: description
+    content: Sharing articles,常用软件,software
+---
+
 # 常用软件
 
 ## 

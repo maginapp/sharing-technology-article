@@ -1,3 +1,11 @@
+---
+meta:
+  - name: keywords
+    content: js,ECMA,es6
+  - name: description
+    content: ES6,es7,es8,es9,es10,es11,es12新特性
+---
+
 # ES6-12新特性
 
 ## 简介
