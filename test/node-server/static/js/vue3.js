@@ -4295,7 +4295,7 @@ var Vue = (function (exports) {
               },
               mount(rootContainer, isHydrate, isSVG) {
                   if (!isMounted) {
-                      // console.log('render-node rootComponent', rootComponent)
+                      // console.log('render-node rootComponent', rootComponent, Object.keys(rootComponent))
                       const vnode = createVNode(rootComponent, rootProps);
                       // console.log('render-node vnode', vnode)
                       // store app context on the root VNode.
@@ -9489,6 +9489,7 @@ var Vue = (function (exports) {
           // clear content before mounting
           container.innerHTML = '';
           // console.log('render-node app.mount', container, component)
+          // console.log('render-node app.mount', Object.keys(args[0]))
           const proxy = mount(container, false, container instanceof SVGElement);
           // console.log('render-node app.mount - end')
           if (container instanceof Element) {

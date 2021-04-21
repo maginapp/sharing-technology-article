@@ -47,12 +47,14 @@ export const createApp = ((...args) => {
 })
 ```
 
-### 执行`mount`，挂载实例
+### 执行`mount`，获取模板，挂载实例
 
 ```ts
 app.mount = (containerOrSelector) => {
+  // ... 
+  component.template = container.innerHTML // 添加template模板
   // ...
-  const proxy = mount(container, false, container instanceof SVGElement);
+  const proxy = mount(container, false, container instanceof SVGElement); // 执行挂载
   // ...
 }
 ```
