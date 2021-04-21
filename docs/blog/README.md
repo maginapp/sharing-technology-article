@@ -11,9 +11,8 @@
 
 ## Link
 
+* [blog](./../blog/)
 * [sharing](./../interview/)
-
 * [interview](./../sharing/)
-
 * [issues/bugs提交](https://github.com/maginapp/sharing-technology-article/issues)
 

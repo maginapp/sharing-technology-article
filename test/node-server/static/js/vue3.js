@@ -4311,7 +4311,9 @@ var Vue = (function (exports) {
                           hydrate(vnode, rootContainer);
                       }
                       else {
+                          // console.log('render-node render')
                           render(vnode, rootContainer, isSVG);
+                          // console.log('render-node end')
                       }
                       isMounted = true;
                       app._container = rootContainer;
@@ -6063,6 +6065,7 @@ var Vue = (function (exports) {
           return hostNextSibling((vnode.anchor || vnode.el));
       };
       const render = (vnode, container, isSVG) => {
+          // console.log('render-node render start')
           if (vnode == null) {
               if (container._vnode) {
                   unmount(container._vnode, null, null, true);
@@ -6070,8 +6073,10 @@ var Vue = (function (exports) {
           }
           else {
               patch(container._vnode || null, vnode, container, null, null, null, isSVG);
+              console.log('render-node patch end')
           }
           flushPostFlushCbs();
+          console.log('render-node flushPostFlushCbs end')
           container._vnode = vnode;
       };
       const internals = {

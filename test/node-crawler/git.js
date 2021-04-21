@@ -110,11 +110,21 @@ const writeInterview = async(interviews, baseUrl, file = './interview-count.md')
           list.push(`* [${item.title}](https://github.com${item.link})`)
         })
       }
-      list.push(`* [More](${baseUrl}${item.label})`)
+      list.push('')
+      list.push(`[查看更多issues: ${item.name}](${baseUrl}${item.label})`)
     })
 
     console.log('list  ===== >')
     console.log(list)
+
+    // 添加liNk
+    list.push('## Link')
+    list.push('')
+    list.push('* [blog](./../blog/)')
+    list.push('* [sharing](./../interview/)')
+    list.push('* [interview](./../sharing/)')
+    list.push('* [issues/bugs提交](https://github.com/maginapp/sharing-technology-article/issues)')
+    list.push('')
 
     list.forEach(item => {
       fWrite.write(item + os.EOL);

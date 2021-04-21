@@ -12,6 +12,10 @@ meta:
 
 ## 执行流程简要说明
 
+```js
+createApp({}).mount()
+```
+
 1. 执行`createApp`，创建实例
 2. 执行`mount`方法
     1. 执行`createVNode`，创建虚拟DOM
@@ -25,7 +29,7 @@ meta:
 
 ```ts
 const renderer = {
-  render,
+  render, // 渲染时使用
   hydrate,
   createApp: createAppAPI(render, hydrate)
 }
@@ -51,13 +55,59 @@ export const createApp = ((...args) => {
 
 ```ts
 app.mount = (containerOrSelector) => {
-  // ... 
-  component.template = container.innerHTML // 添加template模板
-  // ...
-  const proxy = mount(container, false, container instanceof SVGElement); // 执行挂载
+  // ...  添加template模板
+  component.template = container.innerHTML 
+  // ... 执行挂载 => 执行createApp内mount
+  const proxy = mount(container, false, container instanceof SVGElement);
   // ...
 }
 ```
+
+### 执行createApp内mount
+
+1. 创建vnode
+2. 执行`render`渲染
+
+```ts
+context.app = {
+  mount(...): any {
+    if (!isMounted) {
+      // ... 创建vnode
+      const vnode = createVNode(rootComponent as ConcreteComponent,rootProps)
+      // ... 执行渲染  其中render是调用createAppAPI时，传入的参数
+      render(vnode, rootContainer, isSVG)
+    }
+  }
+}
+```
+
+### render渲染
+
+1. 执行`patch`方法，内部会依次触发`setup`,`beforeCreate`,`created`, `beforeMount` 这些钩子
+2. 执行`flushPostFlushCbs`渲染页面
+
+渲染完成后触发 `mounted`钩子
+
+```ts
+const render: RootRenderFunction = (vnode, container, isSVG) => {
+  if (vnode == null) {
+    if (container._vnode) {
+      unmount(container._vnode, null, null, true)
+    }
+  } else {
+    patch(container._vnode || null, vnode, container, null, null, null, isSVG)
+  }
+  flushPostFlushCbs()
+  container._vnode = vnode
+}
+```
+
+<hr />
+
+>
+> 以下为部分源码
+>
+
 ## createApp
 
 *packages/runtime-dom/src/index.ts*:
@@ -123,7 +173,7 @@ export function createRenderer<
 
 ## baseCreateRenderer
 
-*packages/runtime-core/src/renderer.ts*: 调用`createAppAPI`生成 `createApp`、`hydrate`、`render`的方法
+*packages/runtime-core/src/renderer.ts*: 调用`createAppAPI`生成 `createApp`、`hydrate`、`render`方法
 
 > 为方面阅读，已去除`baseCreateRenderer`内部的私有方法
 

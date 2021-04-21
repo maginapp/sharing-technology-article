@@ -48,13 +48,21 @@ const blogSidebar = [
     children: [
       '/blog/vue/promote-of-vue',
       '/blog/vue/vue3-introduce',
-      '/blog/vue/vue3-reactive',
-      '/blog/vue/vue3-effect-api',
-      '/blog/vue/vue3-scheduler',
-      '/blog/vue/vue3-render',
-      '/blog/vue/vue3-vnode',
-      // '/blog/vue/vue3-diff', 
-      // '/blog/vue/vue3-lifecycle'
+      { 
+        title: 'Vue3解析',   // 必要的
+        sidebarDepth: 2,
+        path: '/blog/vue/vue3-parse-doc',
+        children: [
+          '/blog/vue/vue3-reactive',
+          '/blog/vue/vue3-effect-api',
+          '/blog/vue/vue3-scheduler',
+          '/blog/vue/vue3-render',
+          '/blog/vue/vue3-vnode',
+          '/blog/vue/vue3-diff', 
+          // '/blog/vue/vue3-lifecycle'
+        ]
+      }
+      
     ]
   },
   {
