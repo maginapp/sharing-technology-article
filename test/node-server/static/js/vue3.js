@@ -4207,7 +4207,9 @@ var Vue = (function (exports) {
   }
   let uid$1 = 0;
   function createAppAPI(render, hydrate) {
+    // console.log('render-node createAppAPI')
       return function createApp(rootComponent, rootProps = null) {
+          // console.log('render-node createApp', rootComponent)
           if (rootProps != null && !isObject(rootProps)) {
               warn(`root props passed to app.mount() must be an object.`);
               rootProps = null;
@@ -4293,7 +4295,9 @@ var Vue = (function (exports) {
               },
               mount(rootContainer, isHydrate, isSVG) {
                   if (!isMounted) {
+                      // console.log('render-node rootComponent', rootComponent)
                       const vnode = createVNode(rootComponent, rootProps);
+                      // console.log('render-node vnode', vnode)
                       // store app context on the root VNode.
                       // this will be set on the root instance on initial mount.
                       vnode.appContext = context;
@@ -9466,7 +9470,9 @@ var Vue = (function (exports) {
       ensureHydrationRenderer().hydrate(...args);
   });
   const createApp = ((...args) => {
+      // console.log('render-node init App', args[0], Object.keys(args[0]))
       const app = ensureRenderer().createApp(...args);
+      // console.log('render-node init App end', Object.keys(app), app.template)
       {
           injectNativeTagCheck(app);
           injectCustomElementCheck(app);
@@ -9482,7 +9488,9 @@ var Vue = (function (exports) {
           }
           // clear content before mounting
           container.innerHTML = '';
+          // console.log('render-node app.mount', container, component)
           const proxy = mount(container, false, container instanceof SVGElement);
+          // console.log('render-node app.mount - end')
           if (container instanceof Element) {
               container.removeAttribute('v-cloak');
               container.setAttribute('data-v-app', '');

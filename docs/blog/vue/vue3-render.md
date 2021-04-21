@@ -10,6 +10,8 @@ meta:
 
 基于createApp了解vue3的DOM渲染主流程：
 
+## 执行流程简要说明
+
 1. 执行`createApp`，创建实例
 2. 执行`mount`方法
     1. 执行`createVNode`，创建虚拟DOM
@@ -17,6 +19,43 @@ meta:
         1. `patch`更新内容，执行过程中会创建`effect`，执行渲染时会进行依赖收集
         2. `flushPostFlushCbs`执行任务
 
+### `createRenderer`创建`renderer` 
+
+> renderer = createRenderer(rendererOptions)
+
+```ts
+const renderer = {
+  render,
+  hydrate,
+  createApp: createAppAPI(render, hydrate)
+}
+function createAppAPI( render: RootRenderFunction, hydrate?: RootHydrateFunction) {
+  return function createApp(rootComponent, rootProps = null) {}
+}
+```
+
+### `Vue.createApp`创建实例
+
+`renderer.createApp` 创建实例*app*，重写`app.mount`方法
+
+```ts
+export const createApp = ((...args) => {
+  const app = ensureRenderer().createApp(...args)
+  const { mount } = app
+  app.mount = (containerOrSelector: Element | ShadowRoot | string): any => {...}
+  return app
+})
+```
+
+### 执行`mount`，挂载实例
+
+```ts
+app.mount = (containerOrSelector) => {
+  // ...
+  const proxy = mount(container, false, container instanceof SVGElement);
+  // ...
+}
+```
 ## createApp
 
 *packages/runtime-dom/src/index.ts*:
