@@ -17,5 +17,5 @@ meta:
 
 待完成~
 
-* [vue3-diff解析](./vue3-diff)
+* [vue3-diff算法解析](./vue3-diff)
 * [vue3-lifecycle生命周期简析](./vue3-lifecycle)

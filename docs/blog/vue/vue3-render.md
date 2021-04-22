@@ -65,7 +65,7 @@ app.mount = (containerOrSelector) => {
 
 ### 执行createApp内mount
 
-1. 创建vnode
+1. `createVNode`创建vnode
 2. 执行`render`渲染
 
 ```ts
@@ -83,10 +83,13 @@ context.app = {
 
 ### render渲染
 
+
 1. 执行`patch`方法，内部会依次触发`setup`,`beforeCreate`,`created`, `beforeMount` 这些钩子
 2. 执行`flushPostFlushCbs`渲染页面
 
 渲染完成后触发 `mounted`钩子
+
+> [vue3-diff算法解析](./vue3-diff)
 
 ```ts
 const render: RootRenderFunction = (vnode, container, isSVG) => {

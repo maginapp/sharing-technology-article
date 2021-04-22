@@ -1790,9 +1790,11 @@ var Vue = (function (exports) {
   }
 
   function setDevtoolsHook(hook) {
+      // console.log('setDevtoolsHook')
       exports.devtools = hook;
   }
   function devtoolsInitApp(app, version) {
+      // console.log('devtoolsInitApp')
       // TODO queue if devtools is undefined
       if (!exports.devtools)
           return;
@@ -6073,10 +6075,10 @@ var Vue = (function (exports) {
           }
           else {
               patch(container._vnode || null, vnode, container, null, null, null, isSVG);
-              console.log('render-node patch end')
+              // console.log('render-node patch end')
           }
           flushPostFlushCbs();
-          console.log('render-node flushPostFlushCbs end')
+          // console.log('render-node flushPostFlushCbs end')
           container._vnode = vnode;
       };
       const internals = {
@@ -7946,6 +7948,7 @@ var Vue = (function (exports) {
 
   // Actual implementation
   function h(type, propsOrChildren, children) {
+      // console.log(1)
       const l = arguments.length;
       if (l === 2) {
           if (isObject(propsOrChildren) && !isArray(propsOrChildren)) {
