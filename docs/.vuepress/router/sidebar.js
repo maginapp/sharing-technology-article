@@ -3,7 +3,6 @@ const blogSidebar = [
     title: '配置构建与规范',
     // collapsable: false,
     sidebarDepth: 2,
-    initialOpenGroupIndex: 0,
     children: [
       { 
         title: 'Vuepress',   // 必要的
@@ -23,11 +22,8 @@ const blogSidebar = [
   {
     title: '前端笔记',
     sidebarDepth: 2,
-    initialOpenGroupIndex: 3,
+    // initialOpenGroupIndex: 1,
     children: [
-      '/blog/frontend-records/image-sharp',
-      '/blog/frontend-records/image-gif',
-      '/blog/frontend-records/ecmascript',
       { 
         title: 'CSS',   // 必要的
         sidebarDepth: 2,
@@ -36,16 +32,27 @@ const blogSidebar = [
           '/blog/frontend-records/special-css',
           '/blog/frontend-records/css/sticky',
         ]
-      }
+      },
+      // { 
+      //   title: 'Vue3解析',   // 必要的
+      //   sidebarDepth: 2,
+      //   // collapsable: false, // 始终打开
+      //   path: '/blog/vue/vue3-parse-doc',
+      //   children: [
+      //     '/blog/vue/vue3-introduce',
+      //     '/blog/vue/vue3-reactive',
+      //   ]
+      // },
+      '/blog/frontend-records/image-sharp',
+      '/blog/frontend-records/image-gif',
+      '/blog/frontend-records/ecmascript'
     ]
   },
   {
     title: 'Vue',
     sidebarDepth: 2,
     // collapsable: false, // 始终打开
-    initialOpenGroupIndex: 2,
     children: [
-      '/blog/vue/promote-of-vue',
       { 
         title: 'Vue3解析',   // 必要的
         sidebarDepth: 2,
@@ -61,7 +68,8 @@ const blogSidebar = [
           '/blog/vue/vue3-diff', 
           // '/blog/vue/vue3-lifecycle'
         ]
-      }
+      },
+      '/blog/vue/promote-of-vue'
     ]
   },
   {
@@ -71,7 +79,7 @@ const blogSidebar = [
       { 
         title: 'Koa入门',   // 必要的
         sidebarDepth: 2,
-        collapsable: false, // 打开
+        // collapsable: false, // 打开
         path: '/blog/node-server/koa-toc',
         children: [
           '/blog/node-server/koa-server-init',
@@ -84,16 +92,16 @@ const blogSidebar = [
       '/blog/node-server/node-crawler'
     ]
   },
-  {
-    title: '测试',   // 必要的
-    // collapsable: false, // 可选的, 默认值是 true,
-    sidebarDepth: 2,    // 可选的, 默认值是 1
-    path: '/blog/html-test/summary-test',
-    children: [
-      '/blog/html-test/hash-test',
-      '/blog/html-test/just-test',
-    ]
-  }
+  // {
+  //   title: '测试',   // 必要的
+  //   // collapsable: false, // 可选的, 默认值是 true,
+  //   sidebarDepth: 2,    // 可选的, 默认值是 1
+  //   path: '/blog/html-test/summary-test',
+  //   children: [
+  //     '/blog/html-test/hash-test',
+  //     '/blog/html-test/just-test',
+  //   ]
+  // }
 ]
 
 const interview = [{
