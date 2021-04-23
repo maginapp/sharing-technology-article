@@ -23,7 +23,7 @@ createApp({}).mount()
         1. `patch`更新内容，执行过程中会创建`effect`，执行渲染时会进行依赖收集
         2. `flushPostFlushCbs`执行任务
 
-### `createRenderer`创建`renderer` 
+### 1. `createRenderer`创建`renderer` 
 
 > renderer = createRenderer(rendererOptions)
 
@@ -38,7 +38,7 @@ function createAppAPI( render: RootRenderFunction, hydrate?: RootHydrateFunction
 }
 ```
 
-### `Vue.createApp`创建实例
+### 2. `Vue.createApp`创建实例
 
 `renderer.createApp` 创建实例*app*，重写`app.mount`方法
 
@@ -51,7 +51,7 @@ export const createApp = ((...args) => {
 })
 ```
 
-### 执行`mount`，获取模板，挂载实例
+### 3. 执行`mount`，获取模板，挂载实例
 
 ```ts
 app.mount = (containerOrSelector) => {
@@ -63,7 +63,7 @@ app.mount = (containerOrSelector) => {
 }
 ```
 
-### 执行createApp内mount
+### 4. 执行createApp内mount
 
 1. `createVNode`创建vnode
 2. 执行`render`渲染
@@ -81,7 +81,7 @@ context.app = {
 }
 ```
 
-### render渲染
+### 5. render渲染
 
 
 1. 执行`patch`方法，内部会依次触发`setup`,`beforeCreate`,`created`, `beforeMount` 这些钩子
