@@ -166,6 +166,51 @@ app.listen(3000, () => {
 
 ## 常用中间件
 
-* koa-router
-* koa-static
-* koa-bodyparser
+* [koa-router](#koa-router)
+* [koa-static](#koa-static)
+* [koa-bodyparser](#koa-bodyparser)
+* [koa-body](#koa-body)
+
+### koa-static
+
+静态资源处理
+
+```js
+const app = new Koa()
+const koaStatic = require('koa-static')
+app.use(koaStatic(
+  path.join(__dirname, staticPath)
+))
+```
+
+### koa-bodyparser
+
+读取请求体数据，`ctx.request.body`
+
+```js
+const koaBodyParser = require('koa-bodyparser')
+// 设置ctx.request.body
+app.use(koaBodyParser())
+```
+
+### koa-body
+
+请求中文件资源处理，`ctx.request.files`
+
+```js
+const koaBody = require('koa-body')
+app.use(koaBody({ multipart: true }))
+```
+
+### koa-router
+
+路由处理
+
+```js
+const router = require('koa-router')()
+router.get('/', cb)
+router.use(`/person`, person.routes(), person.allowedMethods())
+app.use(router.routes())
+```
+
+

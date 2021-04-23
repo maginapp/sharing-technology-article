@@ -1,12 +1,13 @@
 const blogSidebar = [
   {
     title: '配置构建与规范',
-    // collapsable: false,
+    collapsable: false,
     sidebarDepth: 2,
     children: [
       { 
         title: 'Vuepress',   // 必要的
         sidebarDepth: 2,
+        collapsable: false, // 打开
         children: [
           '/blog/about-config/vuepress-github-website',
           '/blog/about-config/vuepress-plugin-introduce',
@@ -16,13 +17,6 @@ const blogSidebar = [
       '/blog/about-config/vscode-multi-column',
       '/blog/standard/git-commit',
       '/blog/standard/css-BEM',
-      // { 
-      //   title: '规范',   // 必要的
-      //   path: '/blog/about-config/node-server', 
-      //   children: [
-      //     '/blog/standard/git-commit'
-      //   ]
-      // }
     ]
   },
   {
@@ -35,6 +29,7 @@ const blogSidebar = [
       { 
         title: 'CSS',   // 必要的
         sidebarDepth: 2,
+        collapsable: false, // 打开
         children: [
           '/blog/frontend-records/special-css',
           '/blog/frontend-records/css/sticky',
@@ -45,13 +40,14 @@ const blogSidebar = [
   {
     title: 'Vue',
     sidebarDepth: 2,
-    collapsable: true,
+    collapsable: false, // 打开
     children: [
       '/blog/vue/promote-of-vue',
       '/blog/vue/vue3-introduce',
       { 
         title: 'Vue3解析',   // 必要的
         sidebarDepth: 2,
+        collapsable: false, // 打开
         path: '/blog/vue/vue3-parse-doc',
         children: [
           '/blog/vue/vue3-reactive',
@@ -69,10 +65,10 @@ const blogSidebar = [
     title: 'node',
     sidebarDepth: 2,
     children: [
-      ,
       { 
         title: 'Koa入门',   // 必要的
         sidebarDepth: 2,
+        collapsable: false, // 打开
         path: '/blog/node-server/koa-toc',
         children: [
           '/blog/node-server/koa-server-init',
@@ -90,19 +86,10 @@ const blogSidebar = [
     // collapsable: false, // 可选的, 默认值是 true,
     sidebarDepth: 2,    // 可选的, 默认值是 1
     path: '/blog/html-test/summary-test',
-    // children: [
-    //   { title: '测试汇总', path:'/test-func/'},
-    //   { title: '锚点功能测试', path:'/test-func/锚点功能测试/'}
-    // ]
     children: [
       '/blog/html-test/hash-test',
       '/blog/html-test/just-test',
-    ],
-    // children: [
-    //   '/',
-    //   '/blog/',
-    //   '/interview/'
-    // ]
+    ]
   }
 ]
 
@@ -123,8 +110,7 @@ const interview = [{
   // ]
 }]
 
-
-
+// 处理空数据问题
 const sharingSidebar = [{
   collapsable: true,
   title: 'sharing', 
@@ -137,11 +123,28 @@ const sharingSidebar = [{
   ]
 }]
 
-module.exports = {
+const formatData = (arr) => {
+  return arr.filter(item => {
+    if (typeof item === 'string') return item
+    else {
+      if (item.children) item.children = formatData(item.children)
+      return item
+    } 
+  })
+}
+
+const formatSideBar = (obj) => {
+  for (let k in obj) {
+    obj[k] = formatData(obj[k] )
+  }
+  return obj
+}
+
+module.exports = formatSideBar({
   '/blog/': blogSidebar,
   '/sharing/': sharingSidebar,
   '/interview/':  interview
-}
+})
 
 // const interview = [{
 //   title: '分类',

@@ -146,60 +146,6 @@ Node表现出众的典型示例包括：
 * 系统性能考虑——JavaScript引擎Google V8，加之原生异步IO模型，使得Node.js在性能的表现非常出色，处理数以千计的并发请求非常轻松
 * 专业公司的支持——使用开源技术的最大问题是，原作者不承诺对其产品进行技术支持或者质量保证。现在Node.js已经得到Joyent公司的赞助，这就保证了未来Node.js的发展是可持续性的
 
-## 常用koa插件
-
-### koa-static
-
-静态资源处理
-
-```js
-const app = new Koa()
-const koaStatic = require('koa-static')
-app.use(koaStatic(
-  path.join(__dirname, staticPath)
-))
-```
-
-### koa-bodyparser
-
-读取请求体数据，`ctx.request.body`
-
-```js
-const koaBodyParser = require('koa-bodyparser')
-// 设置ctx.request.body
-app.use(koaBodyParser())
-```
-
-### koa-body
-
-请求中文件资源处理，`ctx.request.files`
-
-```js
-const koaBody = require('koa-body')
-app.use(koaBody({ multipart: true }))
-```
-
-### koa-router
-
-路由处理
-
-```js
-const router = require('koa-router')()
-router.get('/', cb)
-router.use(`/person`, person.routes(), person.allowedMethods())
-app.use(router.routes())
-```
-
-> koa-body 
-> app.use(koaBody({ multipart: true }))
-> 
-> koa-bodyparser
->
-> koa-router 路由
->
-> koa-static 静态资源
->
-
 
 ## 引用
 
