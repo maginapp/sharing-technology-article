@@ -1,13 +1,14 @@
 const blogSidebar = [
   {
     title: '配置构建与规范',
-    collapsable: false,
+    // collapsable: false,
     sidebarDepth: 2,
+    initialOpenGroupIndex: 0,
     children: [
       { 
         title: 'Vuepress',   // 必要的
         sidebarDepth: 2,
-        collapsable: false, // 打开
+        // collapsable: false, // 打开
         children: [
           '/blog/about-config/vuepress-github-website',
           '/blog/about-config/vuepress-plugin-introduce',
@@ -22,6 +23,7 @@ const blogSidebar = [
   {
     title: '前端笔记',
     sidebarDepth: 2,
+    initialOpenGroupIndex: 3,
     children: [
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
@@ -29,7 +31,7 @@ const blogSidebar = [
       { 
         title: 'CSS',   // 必要的
         sidebarDepth: 2,
-        collapsable: false, // 打开
+        // collapsable: false, // 始终打开
         children: [
           '/blog/frontend-records/special-css',
           '/blog/frontend-records/css/sticky',
@@ -40,16 +42,17 @@ const blogSidebar = [
   {
     title: 'Vue',
     sidebarDepth: 2,
-    collapsable: false, // 打开
+    // collapsable: false, // 始终打开
+    initialOpenGroupIndex: 2,
     children: [
       '/blog/vue/promote-of-vue',
-      '/blog/vue/vue3-introduce',
       { 
         title: 'Vue3解析',   // 必要的
         sidebarDepth: 2,
-        collapsable: false, // 打开
+        // collapsable: false, // 始终打开
         path: '/blog/vue/vue3-parse-doc',
         children: [
+          '/blog/vue/vue3-introduce',
           '/blog/vue/vue3-reactive',
           '/blog/vue/vue3-effect-api',
           '/blog/vue/vue3-scheduler',
