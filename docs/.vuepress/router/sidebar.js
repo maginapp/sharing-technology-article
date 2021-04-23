@@ -22,7 +22,7 @@ const blogSidebar = [
   {
     title: '前端笔记',
     sidebarDepth: 2,
-    // initialOpenGroupIndex: 1,
+    // initialOpenGroupIndex: 1, // 无效的，已经测试
     children: [
       { 
         title: 'CSS',   // 必要的
