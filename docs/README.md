@@ -25,7 +25,7 @@ meta:
 
 * [vue3简介](/blog/vue/vue3-introduce.html) | [vue3解析](/blog/vue/vue3-parse-doc.html)
 * [BEM-css规范](/blog/vue/vue3-introduce.html)
-* [ES6-ES12新特性](/blog//frontend-records/ecmascript.html)
+* [ES6-ES12新特性](/blog/frontend-records/ecmascript.html)
 * [koa-server-init](/blog/node-server/koa-server-init.html) | [koa入门](/blog/node-server/koa-toc.html)
 * [vuepress搭建网站踩坑](/blog/about-config/vuepress-github-website.html) | [vuepress相关](/blog/about-config/vuepress-toc)
 

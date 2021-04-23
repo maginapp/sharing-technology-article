@@ -17,6 +17,8 @@
       <RouterLink to="/interview" class="dis-block">
         Take me interview.
       </RouterLink>
+      <a href="javascript: void(0);" @click="backPage" class="dis-block">Back</a>
+
     </div>
   </div>
 </template>
@@ -26,6 +28,7 @@ const msgs = [
   `There's nothing here.`,
   `How did we get here?`,
   `That's a Four-Oh-Four.`,
+  `That's a 404.`,
   `Looks like we've got some broken links.`
 ]
 
@@ -33,6 +36,9 @@ export default {
   methods: {
     getMsg () {
       return msgs[Math.floor(Math.random() * msgs.length)]
+    },
+    backPage() {
+      this.$router.back()
     }
   }
 }
@@ -41,5 +47,6 @@ export default {
 <style scoped>
 .dis-block {
   display: block;
+  line-height: 30px; 
 }
 </style>

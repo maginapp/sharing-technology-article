@@ -354,6 +354,8 @@ function doWatch(
 
 组件更新时，会触发`updateComponent`，其内部会调用`intance.update`
 
+> 组件更新时，会对新老vnode数据进行[diff](./vue3-diff)
+
 ```ts
 const mountComponent: MountComponentFn = (initialVNode,container,anchor, parentComponent,parentSuspense, isSVG,optimized) => {
   // 创建实例
