@@ -2,6 +2,8 @@
 meta:
   - name: keywords
     content: 前端,git,git commit,规范
+  - name: description
+    content: git提交注释规范
 ---
 
 # git提交注释规范

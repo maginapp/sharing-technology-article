@@ -1,7 +1,9 @@
 ---
 meta:
   - name: keywords
-    content: 前端,git,git commit,规范
+    content: internet,协议
+  - name: description
+    content: Internet协议初探
 ---
 
 # Internet协议初探

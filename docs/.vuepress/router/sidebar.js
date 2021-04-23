@@ -15,6 +15,7 @@ const blogSidebar = [
       },
       '/blog/about-config/vscode-multi-column',
       '/blog/standard/git-commit',
+      '/blog/standard/css-BEM',
       // { 
       //   title: '规范',   // 必要的
       //   path: '/blog/about-config/node-server', 

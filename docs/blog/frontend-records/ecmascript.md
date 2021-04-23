@@ -519,7 +519,8 @@ money === money1 // true
 
 ## 引用
 
-* 本文主要内容摘录自
+>本文主要内容摘录自
+>
 > 追星人小豪
-
+>
 > [JS语法 ES6、ES7、ES8、ES9、ES10、ES11、ES12新特性](https://segmentfault.com/a/1190000039272641)
