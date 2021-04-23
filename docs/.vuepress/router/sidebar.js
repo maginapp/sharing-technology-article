@@ -63,18 +63,25 @@ const blogSidebar = [
           // '/blog/vue/vue3-lifecycle'
         ]
       }
-      
     ]
   },
   {
     title: 'node',
     sidebarDepth: 2,
     children: [
-      '/blog/node-server/koa-server-init',
-      '/blog/node-server/koa-middleware',
-      '/blog/node-server/koa-router',
-      '/blog/node-server/koa-mysql',
-      '/blog/node-server/koa-bodyParser-myself',
+      ,
+      { 
+        title: 'Koa入门',   // 必要的
+        sidebarDepth: 2,
+        path: '/blog/node-server/koa-toc',
+        children: [
+          '/blog/node-server/koa-server-init',
+          '/blog/node-server/koa-middleware',
+          '/blog/node-server/koa-router',
+          '/blog/node-server/koa-mysql',
+          '/blog/node-server/koa-bodyParser-myself',
+        ]
+      },
       '/blog/node-server/node-crawler'
     ]
   },
