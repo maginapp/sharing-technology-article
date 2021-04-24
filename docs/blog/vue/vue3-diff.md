@@ -71,6 +71,7 @@ const patch: PatchFn = (
         // optimized 传递
         // processComponent => instabce.ctx.activate
         //                  => mountComponent => setupRenderEffect => updateComponentPreRender => updateProps
+        // 内部触发实例的upate方法
         processComponent(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized)
       } else if (shapeFlag & ShapeFlags.TELEPORT) {
         ;(type as typeof TeleportImpl).process(
@@ -97,27 +98,7 @@ const patch: PatchFn = (
 
 ### isSameVNodeType
 
-```ts
-export function isSameVNodeType(n1: VNode, n2: VNode): boolean {
-  return n1.type === n2.type && n1.key === n2.key
-}
-```
-
-### getNextHostNode
-
-```ts
-  const getNextHostNode: NextFn = vnode => {
-    if (vnode.shapeFlag & ShapeFlags.COMPONENT) {
-      return getNextHostNode(vnode.component!.subTree)
-    }
-    if (__FEATURE_SUSPENSE__ && vnode.shapeFlag & ShapeFlags.SUSPENSE) {
-      return vnode.suspense!.next()
-    }
-    return hostNextSibling((vnode.anchor || vnode.el)!)
-  }
-```
-
-
+> n1.type === n2.type && n1.key === n2.key
 
 ### PatchFlags
 
@@ -145,36 +126,20 @@ export const enum PatchFlags {
   DEV_ROOT_FRAGMENT = 1 << 11,
   HOISTED = -1, // static vnode.
   // 一个特殊的标志，标识diff算法应跳出优化模式。
-  // 例如，在renderSlot()创建的块片段上，遇到非编译器生成的插槽（即手写的render函数，应该始终fully diffed）
-  // 例如，手动关闭节点
+  // 例如，在renderSlot()创建的块片段上，遇到非编译器生成的插槽（即手写的render函数，应该始终fully diffed） 例如，手动关闭节点
   BAIL = -2
 ```
-
 
 ### ELEMENT-processElement
 
 核心*patchElement*
 
-```ts
-const processElement = (...res) => {
-  const [n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized] = res
-    isSVG = isSVG || (n2.type as string) === 'svg'
-    // 无就数据直接挂载
-    if (n1 == null) {
-      mountElement(...res)
-    } else {
-      patchElement(...res)
-    }
-  }
-```
+> if (n1 == null) {  mountElement(...res)  } else { patchElement(...res) }
 
 ### COMPONENT-processComponent
 
 触发实例的upate方法
 
-### setRef
-
-ref元素处理
 
 ## patchChildren
 
@@ -182,7 +147,6 @@ ref元素处理
 
 * processElement
 * processFragment
-* ~~processComponent~~
 
 
 ```mermaid
