@@ -37,6 +37,8 @@ vue3设计目标:
 * render api 修改
 * Remove keyCode support 
 * `Fragments`，不限制 `template` 只有一个根节点
+* `Suspense`组件，[suspense](https://v3.vuejs.org/guide/migration/suspense.html) | [component-dynamic-async](https://v3.vuejs.org/guide/component-dynamic-async.html#using-with-suspense)
+* [`Teleport`](https://v3.cn.vuejs.org/guide/teleport.html#teleport)
 
 <ImgWithBase src="/sharp/vue3-rfcs-1.webp" alt="vscode-multi-column" styleData="width:100%;max-width:1200px;"/>
 <ImgWithBase src="/sharp/vue3-rfcs-2.webp" alt="vscode-multi-column" styleData="width:100%;max-width:1200px;"/>

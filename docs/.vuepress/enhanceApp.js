@@ -27,15 +27,17 @@ export default (context) => {
 							if (local.pathname === url.pathname) {
 								const id = solveHansh(decodeURIComponent(url.hash.substring(1)))
 								const element = document.getElementById(id)
-								if (element) {
+								if (element && element.scrollIntoView) {
 									element.scrollIntoView({behavior: "smooth"})
-									e.stopPropagation()
-									e.preventDefault()
+									// 0.5s后触发路由更新，且跳转到指定位置，结束动效
 									setTimeout(() => {
 										context.router.app.$router.push({
 											hash: '#' + id
 										})
 									}, 500)
+									// 阻止默认行为
+									e.stopPropagation()
+									e.preventDefault()
 								}
 							}
 						}

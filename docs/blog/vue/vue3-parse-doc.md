@@ -19,3 +19,4 @@ meta:
 
 * [vue3-diff算法解析](./vue3-diff)
 * [vue3-lifecycle生命周期简析](./vue3-lifecycle)
+* [vue3-compiler](./vue3-compiler)

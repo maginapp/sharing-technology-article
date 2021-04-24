@@ -191,6 +191,8 @@ export function normalizeChildren(vnode: VNode, children: unknown) {
 
 ### ShapeFlags
 
+> *packages/shared/src/shapeFlags.ts*
+
 模拟9位二进制数据，标识vnode及其children包含的所有类型
 
 ```ts
@@ -207,7 +209,6 @@ export const enum ShapeFlags {
   COMPONENT_KEPT_ALIVE = 1 << 9,
   COMPONENT = ShapeFlags.STATEFUL_COMPONENT | ShapeFlags.FUNCTIONAL_COMPONENT
 }
-
 ```
 
 ## cloneVnode
@@ -294,3 +295,4 @@ function deepCloneVNode(vnode: VNode): VNode {
   return cloned
 }
 ```
+
