@@ -57,6 +57,7 @@ const patch: PatchFn = (
       }
       break
     case Fragment:
+      // 处理多节点组件
       processFragment(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized)
       break
     default:
@@ -64,6 +65,7 @@ const patch: PatchFn = (
         // optimized 传递
         // processElement => patchElement => patchProps
         //                => mountElement => mountChildren => patch
+        // 处理element
         processElement(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized)
       } else if (shapeFlag & ShapeFlags.COMPONENT) {
         // optimized 传递
@@ -86,7 +88,6 @@ const patch: PatchFn = (
         warn('Invalid VNode type:', type, `(${typeof type})`)
       }
   }
-
   // 设置ref
   if (ref != null && parentComponent) {
     setRef(ref, n1 && n1.ref, parentSuspense, n2)
@@ -122,9 +123,11 @@ export function isSameVNodeType(n1: VNode, n2: VNode): boolean {
 
 > *packages/shared/src/patchFlags.ts*
 
-`PatchFlags`是编译时生成的优化提示。
-
-当diff过程中遇到`dynamicChildren `时，算法进入“优化模式”。在这种模式下，我们知道vdom是由编译器生成的呈现函数生成的，因此算法只需要处理由`PatchFlags`显式标记的更新。
+> 翻译：
+>
+> `PatchFlags`是编译时生成的优化提示。
+>
+> 当diff过程中遇到`dynamicChildren `时，算法进入“优化模式”。在这种模式下，我们知道vdom是编译时的render函数生成的，因此算法只需要处理由`PatchFlags`显式标记的更新。
 
 ```ts
 export const enum PatchFlags {
@@ -147,7 +150,8 @@ export const enum PatchFlags {
   BAIL = -2
 ```
 
-## ELEMENT-processElement
+
+### ELEMENT-processElement
 
 核心*patchElement*
 
@@ -164,9 +168,41 @@ const processElement = (...res) => {
   }
 ```
 
-### patchElement
+### COMPONENT-processComponent
+
+触发实例的upate方法
+
+### setRef
+
+ref元素处理
+
+## patchChildren
+
+以下几个方法的核心就是`patchChildren`
+
+* processElement
+* processFragment
+* ~~processComponent~~
 
 
-## COMPONENT-processComponent
+```mermaid
+flowchat
+start=>start: 开始
+end=>end: 结束
+patch=>condition: Fragment/Element(yes)
+processElement=>subroutine: processElement
+processFragment=>subroutine: processFragment
+patchElement=>subroutine: patchElement
+patchChildren=>subroutine: patchChildren
+patchBlockChildren=>subroutine: patchBlockChildren
+dynamicChildren=>condition: dynamicChildren
 
-## setRef
+start->patch
+patch(yes)->processElement->processElement->dynamicChildren
+patch(no)->processFragment->dynamicChildren
+dynamicChildren(yes)->patchBlockChildren->patch
+dynamicChildren(no)->patchChildren->end
+```
+
+待补充源码
+
