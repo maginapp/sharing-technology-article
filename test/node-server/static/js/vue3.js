@@ -4313,9 +4313,9 @@ var Vue = (function (exports) {
                           hydrate(vnode, rootContainer);
                       }
                       else {
-                          // console.log('render-node render')
+                          console.log('render-node render')
                           render(vnode, rootContainer, isSVG);
-                          // console.log('render-node end')
+                          console.log('render-node end')
                       }
                       isMounted = true;
                       app._container = rootContainer;
@@ -6074,8 +6074,9 @@ var Vue = (function (exports) {
               }
           }
           else {
+              console.log('render-node patch start')
               patch(container._vnode || null, vnode, container, null, null, null, isSVG);
-              // console.log('render-node patch end')
+              console.log('render-node patch end')
           }
           flushPostFlushCbs();
           // console.log('render-node flushPostFlushCbs end')
@@ -6753,6 +6754,7 @@ var Vue = (function (exports) {
    * @private
    */
   function createStaticVNode(content, numberOfNodes) {
+      console.log('vue-render', content, numberOfNodes)
       // A static vnode can contain multiple stringified elements, and the number
       // of elements is necessary for hydration.
       const vnode = createVNode(Static, null, content);
@@ -9710,6 +9712,7 @@ var Vue = (function (exports) {
       [IS_REF]: `isRef`
   };
   function registerRuntimeHelpers(helpers) {
+    console.log('trigger helper-NameMap registerRuntimeHelpers')
       Object.getOwnPropertySymbols(helpers).forEach(s => {
           helperNameMap[s] = helpers[s];
       });
@@ -11009,6 +11012,7 @@ var Vue = (function (exports) {
               }
           },
           helperString(name) {
+              console.log('trigger helper-NameMap helperString')
               return `_${helperNameMap[context.helper(name)]}`;
           },
           replaceNode(node) {
@@ -11252,6 +11256,7 @@ var Vue = (function (exports) {
           pure: false,
           map: undefined,
           helper(key) {
+            console.log('trigger helper-NameMap helper', key)
               return `_${helperNameMap[key]}`;
           },
           push(code, node) {
@@ -11305,8 +11310,12 @@ var Vue = (function (exports) {
           // function mode const declarations should be inside with block
           // also they should be renamed to avoid collision with user properties
           if (hasHelpers) {
+            console.log('trigger helper-NameMap generate')
               push(`const { ${ast.helpers
-                .map(s => `${helperNameMap[s]}: _${helperNameMap[s]}`)
+                .map(s => {
+                    console.log('trigger helper-NameMap generate', s)
+                    return  `${helperNameMap[s]}: _${helperNameMap[s]}`
+                })
                 .join(', ')} } = _Vue`);
               push(`\n`);
               newline();
@@ -11362,7 +11371,11 @@ var Vue = (function (exports) {
   function genFunctionPreamble(ast, context) {
       const { ssr, prefixIdentifiers, push, newline, runtimeModuleName, runtimeGlobalName } = context;
       const VueBinding = runtimeGlobalName;
-      const aliasHelper = (s) => `${helperNameMap[s]}: _${helperNameMap[s]}`;
+      console.log('trigger helper-NameMap genFunctionPreamble')
+      const aliasHelper = (s) => {
+            console.log('trigger helper-NameMap genFunctionPreamble', s)
+          return `${helperNameMap[s]}: _${helperNameMap[s]}`
+      };
       // Generate const declaration for helpers
       // In prefix mode, we place the const declaration at top so it's done
       // only once; But if we not prefixing, we place the declaration inside the
@@ -11676,6 +11689,7 @@ var Vue = (function (exports) {
       const { push, indent, deindent, scopeId, mode } = context;
       const { params, returns, body, newline, isSlot } = node;
       if (isSlot) {
+        console.log('trigger helper-NameMap genFunctionExpression')
           // wrap slot functions with owner context
           push(`_${helperNameMap[WITH_CTX]}(`);
       }
