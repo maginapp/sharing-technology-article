@@ -14,6 +14,8 @@ meta:
 
 ## createNode
 
+type的类型: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT
+
 ```ts
 function _createVNode(
   type: VNodeTypes | ClassComponent | typeof NULL_DYNAMIC_COMPONENT,
@@ -213,7 +215,7 @@ export const enum ShapeFlags {
 
 ## cloneVnode
 
-vnode的类型的直接clone
+vnode的类型，直接clone
 
 ```ts
 export function cloneVNode<T, U>(
