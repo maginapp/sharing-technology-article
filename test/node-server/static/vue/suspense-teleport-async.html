@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>suspense-teleport-async</title>
+</head>
+<body>
+ <div id="app">
+   <button @click="addArr">addArr</button>
+   <ul>
+     <li v-for="(item, index) in arr">
+       {{item}}
+       <teleport to="body">
+        <p>{{index}}: body - item => {{item}}</p>
+       </teleport>
+       <teleport to="#list">
+        <p>{{index}}: #list - item => {{item}}</p>
+       </teleport>
+     </li>
+   </ul>
+   <hr />
+   <div>
+    <suspense>
+      <template #default>
+        <async-example-2></async-example-2>
+      </template>
+      <template #fallback>
+        <div>
+          Loading...
+        </div>
+      </template>
+    </suspense>
+    <suspense>
+      <template #default>
+        <async-example></async-example>
+      </template>
+      <template #fallback>
+        <div>
+          Loading...
+        </div>
+      </template>
+    </suspense>
+    <hr />
+    <suspense>
+      <template #default>
+        <div>
+          <async-example-2></async-example-2>
+          <async-example></async-example>
+        </div>
+      </template>
+      <template #fallback>
+        <div>
+          Loading...
+        </div>
+      </template>
+    </suspense>
+   </div>
+  <hr />
+ </div>
+ <div id="list"></div>
+<script src="../js/vue3.js"></script>
+<script>
+  const { createApp, ref, reactive, defineAsyncComponent  } = Vue
+
+  const app = createApp({
+    setup() {
+      const arr = reactive([1, 2, 3])
+      const addArr = () => {
+        arr.push(Math.floor(Math.random() * 10))
+      }
+
+      return {
+        arr,
+        addArr
+      }
+    },
+    components: {
+      // components: {
+      //   AsyncComponent: defineAsyncComponent(() =>
+      //     import('./components/AsyncComponent.vue')
+      //   )
+      // }
+      'async-example-2': defineAsyncComponent(
+        () =>
+          new Promise((resolve, reject) => {
+            resolve({
+              template: '<div>I am async example - 2!</div>'
+            })
+          })
+      )
+    }
+  })
+
+  const AsyncComp = defineAsyncComponent(
+  () =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          template: '<div>I am async!</div>'
+        })
+      }, 1000)
+    })
+  )
+
+  app.component('async-example', AsyncComp)
+
+  
+  app.mount('#app')
+</script>
+</body>
+</html>

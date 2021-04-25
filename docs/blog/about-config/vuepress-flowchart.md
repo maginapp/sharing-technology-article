@@ -14,6 +14,50 @@ meta:
 2. 创建连接关系
 3. 添加箭头样式等
 
+```md
+st=>start: Start|past:>http://www.google.com[blank]
+e=>end: End|future:>http://www.google.com
+op1=>operation: My Operation|past
+op2=>operation: Stuff|current
+sub1=>subroutine: My Subroutine|invalid
+cond=>condition: Yes
+or No?|approved:>http://www.google.com
+c2=>condition: Good idea|rejected
+io=>inputoutput: catch something...|future
+
+st->op1(right)->cond
+cond(yes@Y, right)->c2
+cond(no@N)->sub1(left)->op1
+c2(yes)->io->e
+c2(no)->op2->e
+```
+
+> 1. `|past` 高亮效果无效，插件为不同元素添加了配色
+>
+> 常见高亮配置：past | current | future | approved | rejected | invalid
+>
+>
+> 2. `@re` 修改判断结果标识无效
+
+```mermaid
+flowchat
+st=>start: Start|past:>http://www.google.com[blank]
+e=>end: End|future:>http://www.google.com
+op1=>operation: My Operation|past
+op2=>operation: Stuff|current
+sub1=>subroutine: My Subroutine|invalid
+cond=>condition: Yes
+or No?|approved:>http://www.google.com
+c2=>condition: Good idea|rejected
+io=>inputoutput: catch something...|future
+
+st->op1(right)->cond
+cond(yes, right)->c2
+cond(no)->sub1(left)->op1
+c2(yes)->io->e
+c2(no)->op2->e
+```
+
 ## 常用元素
 
 * start 开始
@@ -143,34 +187,9 @@ cond(yes, right)->cond2(yes, bottom)->inout->sub(right)->e
 st@>op1({"stroke":"Red"})@>cond({"stroke":"blue"})
 cond2@>op4({"stroke":"#ff0000"})@>op1({"stroke":"#f0f"})@>cond({"stroke":"orange"})
 ```
-
-## 模块高亮
-
-> vuepress自动为各模块添加了高亮效果，此处配置无效
-
-* past
-* current
-* future
-* approved
-* rejected
-* invalid
-
-
 ## flowchart-vuepress配置
 
 ```js
-['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}]
-```
-
-```mermaid
-flowchat
-st=>start: 启动
-e=>end: 结束
-op=>operation: 我的操作
-cond=>condition: 确认？
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
+['@maginapp/vuepress-plugin-flowchart', {}]
 ```
 
