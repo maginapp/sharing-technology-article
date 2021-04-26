@@ -36,8 +36,8 @@ render=>operation: render
 patch=>operation: patch
 processComponent=>operation: processComponent
 mountComponent=>operation: mountComponent
-setupComponent=>operation: setupComponent(setup|beforeCreate|created执行)
-setupRenderEffect=>operation: setupRenderEffect
+setupComponent=>operation: setupComponent，初始化数据(setup|beforeCreate|created执行)
+setupRenderEffect=>operation: setupRenderEffect，创建依赖
 instanceUpdate=>operation: instance.update创建与执行
 renderComponentRoot=>operation: 格式化实例instance.subTree = renderComponentRoot(instance)
 patch2=>operation: patch-subTree
@@ -47,7 +47,11 @@ end=>end: End (beforeMount等钩子执行)
 
 start->createApp(right)->mount(bottom)->createNode(left)->render(bottom)->patch(right)->processComponent(bottom)->mountComponent(right)->setupComponent(bottom)->setupRenderEffect(right)->instanceUpdate(bottom)->renderComponentRoot(left)->patch2(bottom)->processElement(right)->mountElement->end
 ```
-
+1. patch组件 => mountComponent
+2. 初始化数据，创建effect
+3. 内部effect执行
+    * 未挂载: 生成subtree 进行patch挂载
+    * 已挂载: 由数据变更触发，patch(prevTree, nextTree)
 ## mountElement
 
 ```ts
