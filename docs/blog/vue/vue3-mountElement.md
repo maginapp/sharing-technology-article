@@ -6,7 +6,49 @@ meta:
     content: vue3源码解析-mountElement
 ---
 
-# mountElement
+# vue3元素渲染流程简介
+
+## 简单渲染流程
+
+以下面这段代码渲染为例：
+
+```js
+<div id="app">
+  <div>{{a}}</div>
+</div>
+
+createApp({
+  setup() {
+    return {
+      a: ref(1)
+    }
+  }
+}).mount('#app')
+```
+
+```mermaid
+flowchat
+start=>start: Start|past:>http://www.google.com[blank]
+createApp=>operation: instance=createApp，instance.mount
+mount=>operation: instance.mount
+createNode=>operation: createNode
+render=>operation: render
+patch=>operation: patch
+processComponent=>operation: processComponent
+mountComponent=>operation: mountComponent
+setupComponent=>operation: setupComponent(setup|beforeCreate|created执行)
+setupRenderEffect=>operation: setupRenderEffect
+instanceUpdate=>operation: instance.update创建与执行
+renderComponentRoot=>operation: 格式化实例instance.subTree = renderComponentRoot(instance)
+patch2=>operation: patch-subTree
+processElement=>operation: processElement
+mountElement=>operation: mountElement
+end=>end: End (beforeMount等钩子执行)
+
+start->createApp(right)->mount(bottom)->createNode(left)->render(bottom)->patch(right)->processComponent(bottom)->mountComponent(right)->setupComponent(bottom)->setupRenderEffect(right)->instanceUpdate(bottom)->renderComponentRoot(left)->patch2(bottom)->processElement(right)->mountElement->end
+```
+
+## mountElement
 
 ```ts
   const mountElement = (
@@ -32,50 +74,34 @@ meta:
       // Only static vnodes can be reused, so its mounted DOM nodes should be
       // exactly the same, and we can simply do a clone here.
       // only do this in production since cloned trees cannot be HMR updated.
-      el = vnode.el = hostCloneNode(vnode.el)
+      el = vnode.el = hostCloneNode(vnode.el) // 克隆node节点 => el.cloneNode(deep)
     } else {
-      el = vnode.el = hostCreateElement(
-        vnode.type as string,
-        isSVG,
-        props && props.is,
-        props
-      )
+      el = vnode.el = hostCreateElement(vnode.type as string,isSVG,
+        props && props.is,props) // 创建node节点
 
       // mount children first, since some props may rely on child content
       // being already rendered, e.g. `<select value>`
+      // 子节点是 text 或者 children
       if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
         hostSetElementText(el, vnode.children as string)
       } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
-        mountChildren(
-          vnode.children as VNodeArrayChildren,
-          el,
-          null,
-          parentComponent,
-          parentSuspense,
-          isSVG && type !== 'foreignObject',
-          slotScopeIds,
-          optimized || !!vnode.dynamicChildren
-        )
+        mountChildren(...) // 子元素处理
       }
-
+      // 指令处理
       if (dirs) {
         invokeDirectiveHook(vnode, null, parentComponent, 'created')
       }
       // props
       if (props) {
         for (const key in props) {
-          if (!isReservedProp(key)) {
-            hostPatchProp(
-              el,
-              key,
-              null,
-              props[key],
-              isSVG,
-              vnode.children as VNode[],
-              parentComponent,
-              parentSuspense,
-              unmountChildren
-            )
+          // '"",key,ref,' +
+          // 'onVnodeBeforeMount,onVnodeMounted,' +
+          // 'onVnodeBeforeUpdate,onVnodeUpdated,' +
+          // 'onVnodeBeforeUnmount,onVnodeUnmounted'
+          if (!isReservedProp(key)) { 
+            // 处理属性
+            hostPatchProp(el, key, null, props[key], isSVG, vnode.children as VNode[],
+            parentComponent, parentSuspense, unmountChildren)
           }
         }
         if ((vnodeHook = props.onVnodeBeforeMount)) {
@@ -84,16 +110,6 @@ meta:
       }
       // scopeId
       setScopeId(el, vnode, vnode.scopeId, slotScopeIds, parentComponent)
-    }
-    if (__DEV__ || __FEATURE_PROD_DEVTOOLS__) {
-      Object.defineProperty(el, '__vnode', {
-        value: vnode,
-        enumerable: false
-      })
-      Object.defineProperty(el, '__vueParentComponent', {
-        value: parentComponent,
-        enumerable: false
-      })
     }
     if (dirs) {
       invokeDirectiveHook(vnode, null, parentComponent, 'beforeMount')
@@ -107,12 +123,14 @@ meta:
     if (needCallTransitionHooks) {
       transition!.beforeEnter(el)
     }
-    hostInsert(el, container, anchor)
+    // 插入到父节点中
+    hostInsert(el, container, anchor) // parent.insertBefore(child, anchor || null)
     if (
       (vnodeHook = props && props.onVnodeMounted) ||
       needCallTransitionHooks ||
       dirs
     ) {
+      // 添加到pendingPostFlushCbs队列???确保了元素是挂载成功的
       queuePostRenderEffect(() => {
         vnodeHook && invokeVNodeHook(vnodeHook, parentComponent, vnode)
         needCallTransitionHooks && transition!.enter(el)
@@ -121,3 +139,67 @@ meta:
     }
   }
 ```
+
+### invokeVNodeHook
+
+vnode的生命周期hooks的触发函数
+
+```ts
+export function invokeVNodeHook(
+  hook: VNodeHook, // function | array
+  instance: ComponentInternalInstance | null,
+  vnode: VNode,
+  prevVNode: VNode | null = null
+) {
+  callWithAsyncErrorHandling(hook, instance, ErrorCodes.VNODE_HOOK, [
+    vnode,
+    prevVNode
+  ])
+}
+```
+
+## mountComponent
+
+`mountComponent`会执行`setupRenderEffect`，创建依赖
+
+```ts
+const mountComponent: MountComponentFn = (
+    initialVNode,
+    container,
+    anchor,
+    parentComponent,
+    parentSuspense,
+    isSVG,
+    optimized
+  ) => {
+    // 创建组件实例
+    const instance: ComponentInternalInstance = (initialVNode.component = createComponentInstance(
+      initialVNode,
+      parentComponent,
+      parentSuspense
+    ))
+    ...
+    // 性能监控
+    startMeasure(instance, `init`)
+    // 执行setup
+    setupComponent(instance)
+    endMeasure(instance, `init`)
+    ...
+    // setup() is async. This component relies on async logic to be resolved
+    // before proceeding
+    if (__FEATURE_SUSPENSE__ && instance.asyncDep) {
+      parentSuspense && parentSuspense.registerDep(instance, setupRenderEffect)
+      ...
+      return
+    }
+
+    setupRenderEffect(instance, initialVNode,  container,
+      anchor, parentSuspense, isSVG, optimized )
+    ...
+  }
+```
+
+## setupRenderEffect设置effect
+
+内部会格式化的实例，调用响应式数据，渲染页面
+## renderComponentRoot格式化模板

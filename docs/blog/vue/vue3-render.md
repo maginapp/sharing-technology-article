@@ -187,11 +187,12 @@ export function createRenderer<
 
 创建时传入的参数[`options`](#options)
 
-1. patchProp，forcePatchProp： props处理
-
-2. node节点处理
-
 > const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps)
+
+1. patchProp，forcePatchProp： props处理
+2. node节点处理: *packages/runtime-dom/src/nodeOps.ts*
+
+
 
 ```ts
 function baseCreateRenderer(

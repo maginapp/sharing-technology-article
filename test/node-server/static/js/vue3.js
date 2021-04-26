@@ -4462,6 +4462,7 @@ var Vue = (function (exports) {
                       vnode.slotScopeIds = slotScopeIds;
                       const container = parentNode(node);
                       const hydrateComponent = () => {
+                          console.log('instance effect => hydrateComponent : mountComponent')
                           mountComponent(vnode, container, null, parentComponent, parentSuspense, isSVGContainer(container), optimized);
                       };
                       // async component
@@ -4959,6 +4960,7 @@ var Vue = (function (exports) {
       // style in order to prevent being inlined by minifiers.
       const patch = (n1, n2, container, anchor = null, parentComponent = null, parentSuspense = null, isSVG = false, slotScopeIds = null, optimized = false) => {
           // patching & not same type, unmount old tree
+          console.log('instance effect => patch')
           if (n1 && !isSameVNodeType(n1, n2)) {
               anchor = getNextHostNode(n1);
               unmount(n1, parentComponent, parentSuspense, true);
@@ -4989,6 +4991,7 @@ var Vue = (function (exports) {
                   break;
               default:
                   if (shapeFlag & 1 /* ELEMENT */) {
+                      console.log('instance effect => processElement')
                       processElement(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                   }
                   else if (shapeFlag & 6 /* COMPONENT */) {
@@ -5372,6 +5375,7 @@ var Vue = (function (exports) {
                   parentComponent.ctx.activate(n2, container, anchor, isSVG, optimized);
               }
               else {
+                  console.log('instance effect => processComponent : mountComponent')
                   mountComponent(n2, container, anchor, parentComponent, parentSuspense, isSVG, optimized);
               }
           }
@@ -5380,6 +5384,7 @@ var Vue = (function (exports) {
           }
       };
       const mountComponent = (initialVNode, container, anchor, parentComponent, parentSuspense, isSVG, optimized) => {
+          console.log('instance effect => mountComponent')
           const instance = (initialVNode.component = createComponentInstance(initialVNode, parentComponent, parentSuspense));
           if (instance.type.__hmrId) {
               registerHMR(instance);
@@ -5396,7 +5401,9 @@ var Vue = (function (exports) {
           {
               startMeasure(instance, `init`);
           }
+          console.log('instance effect => setupComponent')
           setupComponent(instance);
+          console.log('instance effect => setupComponent end')
           {
               endMeasure(instance, `init`);
           }
@@ -5412,6 +5419,7 @@ var Vue = (function (exports) {
               }
               return;
           }
+          console.log('instance effect => setupRenderEffect 执行')
           setupRenderEffect(instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized);
           {
               popWarningContext();
@@ -5453,7 +5461,9 @@ var Vue = (function (exports) {
       };
       const setupRenderEffect = (instance, initialVNode, container, anchor, parentSuspense, isSVG, optimized) => {
           // create reactive effect for rendering
+          console.log('instance effect =>', 'instance.update 创建')
           instance.update = effect(function componentEffect() {
+            console.log('instance effect =>', 'instance.update 执行', instance, instance.type, instance.container, instance._container, instance.components,  instance.component)
               if (!instance.isMounted) {
                   let vnodeHook;
                   const { el, props } = initialVNode;
