@@ -105,6 +105,11 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
 }
 ```
 
+### 6. mountElement
+
+`patch`过程中会执行DOM的创建与修改：`baseCreateRenderer`的私有方法[`mountElement`](./vue3-mountelement)就是用于DOM创建的
+
+
 <hr />
 
 >
@@ -180,6 +185,14 @@ export function createRenderer<
 
 > 为方面阅读，已去除`baseCreateRenderer`内部的私有方法
 
+创建时传入的参数[`options`](#options)
+
+1. patchProp，forcePatchProp： props处理
+
+2. node节点处理
+
+> const rendererOptions = extend({ patchProp, forcePatchProp }, nodeOps)
+
 ```ts
 function baseCreateRenderer(
   options: RendererOptions,
@@ -254,6 +267,7 @@ function baseCreateRenderer(
   }
 
 ```
+
 
 ### setupRenderEffect
 

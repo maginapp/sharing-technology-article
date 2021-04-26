@@ -14,9 +14,10 @@ meta:
 * [vue3-scheduler-nextTick](./vue3-scheduler)
 * [vue3-render](./vue3-render)
 * [vue3-vnode](./vue3-vnode)
+* [vue3-diff算法解析](./vue3-diff)
 
 待完成~
 
-* [vue3-diff算法解析](./vue3-diff)
+* [vue3-mountElement](./vue3-mountelement)
 * [vue3-lifecycle生命周期简析](./vue3-lifecycle)
-* [vue3-compiler](./vue3-compiler)
+* [vue3-compiler-ast](./vue3-compiler)

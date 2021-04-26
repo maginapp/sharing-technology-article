@@ -370,19 +370,27 @@ else { /* 5 */ }
 
 ### 5. unknown sequence
 
-1. 遍历c2剩余节点i-e2，如果新节点存在key，则使用`map`存储节点-索引({key: i})
+1. 遍历c2剩余节点[(i = s2), e2]，如果新节点存在key，使用`keyToNewIndexMap`存储`节点-索引`的映射关系({key: i})
 
-2. 生成新旧节点的索引对照数组：[ newIndex - s2] : [oldIndex + 1]
+2. patch匹配的节点，卸载多余旧节点，生成新旧节点的索引对照关系：[ newIndex - s2] : [oldIndex + 1]
+    1. 遍历旧节点[(i = s2), e2]
+    2. 新节点都已经匹配[patched >= toBePatched]，unmount多余旧节点
+    3. 查询当前旧节点对应的新节点索引`newIndex`
+        * 旧节点存在key，使用`keyToNewIndexMap`获取`newIndex`
+        * 旧节点无key，遍历新节点[(i = s2), e2]
+    3. 处理`newIndex`
+        * 旧节点未匹配到新节点，unmount
+        * 匹配成功
+            1. 比较`newIndex`与`maxNewIndexSoFar`，判断节点是否移动
+            2. patch已匹配的新旧节点，`patched++`
 
-    1. unmount多余旧节点
-    2. 旧节点为匹配到新节点，unmount
-    3. 根据索引大小，判断节点是否移动
-    4. 匹配的新旧节点patch
-
-3. move and mount，获取最大增长长度，对应的dom，不用变更
-    1. 倒序遍历c2
-    2. 未匹配到的节点，patch新增
-    3. 匹配到的节点，判断是否是最大增长长度对应的节点，不是改类型节点，直接移动
+3. move and mount，移动和挂载节点
+    1. 获取最大递增序列（这部分节点不移动），序列内的节点不用移动
+    2. 倒序遍历c2
+        * 未匹配到旧节点，使用patch新增新节点
+        * 匹配到旧节点，判断是否是最大递增序列中的节点
+            * 不是 => 直接移动
+            * 是 => 不移动
 
 ``` ts
 // 5. unknown sequence
@@ -463,7 +471,7 @@ else {
   }
 
   // 5.3 move and mount
-  // generate longest stable subsequence only when nodes have moved
+  // 有节点移动时，获取最大递增序列
   const increasingNewIndexSequence = moved ? getSequence(newIndexToOldIndexMap) : EMPTY_ARR
   j = increasingNewIndexSequence.length - 1
   // looping backwards so that we can use last patched node as anchor
@@ -492,54 +500,4 @@ else {
 
 ### getSequence
 
-???
-
-[最大增加序列](https://en.wikipedia.org/wiki/Longest_increasing_subsequence)
-
-```js
-function getSequence(arr: number[]): number[] {
-  const p = arr.slice()
-  const result = [0]
-  let i, j, u, v, c
-  const len = arr.length
-  for (i = 0; i < len; i++) {
-    const arrI = arr[i]
-    if (arrI !== 0) {
-      j = result[result.length - 1]
-      // arrJ < arrI
-      if (arr[j] < arrI) {
-        p[i] = j
-        result.push(i)
-        continue
-      }
-      u = 0
-      v = result.length - 1
-      while (u < v) {
-        c = ((u + v) / 2) | 0 // 取中间数
-        if (arr[result[c]] < arrI) {
-          u = c + 1
-        } else {
-          v = c
-        }
-      }
-      if (arrI < arr[result[u]]) {
-        if (u > 0) {
-          p[i] = result[u - 1]
-        }
-        result[u] = i
-      }
-    }
-  }
-  u = result.length
-  v = result[u - 1]
-  while (u-- > 0) {
-    result[u] = v
-    v = p[v]
-  }
-  return result
-}
-
-```
-
-待补充源码
-
+获取最大递增序列，详见[Magina | 最大增加序列](/blog/algorithm/demo/longest-increasing-subsequence)  |  [wikipedia | 最大增加序列](https://en.wikipedia.org/wiki/Longest_increasing_subsequence)
