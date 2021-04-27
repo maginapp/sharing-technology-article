@@ -57,7 +57,7 @@ const blogSidebar = [
         title: 'Vue3解析',   // 必要的
         sidebarDepth: 2,
         // collapsable: false, // 始终打开
-        path: '/blog/vue/vue3-parse-doc',
+        // path: '/blog/vue/vue3-parse-doc', // 去除避免切换时，自动调整
         children: [
           '/blog/vue/vue3-introduce',
           '/blog/vue/vue3-reactive',
@@ -81,7 +81,7 @@ const blogSidebar = [
         title: 'Koa入门',   // 必要的
         sidebarDepth: 2,
         // collapsable: false, // 打开
-        path: '/blog/node-server/koa-toc',
+        // path: '/blog/node-server/koa-toc',
         children: [
           '/blog/node-server/koa-server-init',
           '/blog/node-server/koa-middleware',

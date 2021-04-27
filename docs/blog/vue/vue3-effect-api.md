@@ -348,13 +348,143 @@ function doWatch(
 }
 ```
 
-## mountComponent
+## setupRenderEffect
 
-`renderer.ts`，mountComponent中会创建`effect`，收集依赖，并赋值到`intance.update`
+
+*renderer.ts*: `mountComponent`中会调用`setupRenderEffect`，创建`effect`，收集依赖，并赋值到`intance.update`
+
+```ts
+const setupRenderEffect: SetupRenderEffectFn = (instance, initialVNode,
+    container, anchor, parentSuspense, isSVG,  optimized ) => {
+    // create reactive effect for rendering
+    // 创建渲染effect
+    instance.update = effect(function componentEffect() {
+      // 组件未挂载处理
+      if (!instance.isMounted) {
+        let vnodeHook: VNodeHook | null | undefined
+        const { el, props } = initialVNode
+        const { bm, m, parent } = instance
+
+        // beforeMount hook
+        if (bm) {
+          invokeArrayFns(bm)
+        }
+        // onVnodeBeforeMount
+        if ((vnodeHook = props && props.onVnodeBeforeMount)) {
+          invokeVNodeHook(vnodeHook, parent, initialVNode)
+        }
+
+        // 生成 subtree
+        const subTree = (instance.subTree = renderComponentRoot(instance))
+        if (el && hydrateNode) {
+          // vnode has adopted host node - perform hydration instead of mount.
+          hydrateNode(initialVNode.el as Node,
+            subTree,instance,parentSuspense,null)
+        } else {
+          // patch挂载真实节点
+          patch(null, subTree, container, anchor, 
+            instance, parentSuspense, isSVG)
+          initialVNode.el = subTree.el
+        }
+        // mounted hook
+        if (m) {
+          queuePostRenderEffect(m, parentSuspense)
+        }
+        // onVnodeMounted
+        if ((vnodeHook = props && props.onVnodeMounted)) {
+          const scopedInitialVNode = initialVNode
+          queuePostRenderEffect(() => {
+            invokeVNodeHook(vnodeHook!, parent, scopedInitialVNode)
+          }, parentSuspense)
+        }
+        // activated hook for keep-alive roots.
+        // #1742 activated hook must be accessed after first render
+        // since the hook may be injected by a child keep-alive
+        const { a } = instance
+        if (
+          a &&
+          initialVNode.shapeFlag & ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE
+        ) {
+          queuePostRenderEffect(a, parentSuspense)
+        }
+        instance.isMounted = true
+
+        // #2458: deference mount-only object parameters to prevent memleaks
+        initialVNode = container = anchor = null as any
+      } else {
+        // 已挂载 => 组件更新
+        // updateComponent
+        // This is triggered by mutation of component's own state (next: null)
+        // OR parent calling processComponent (next: VNode)
+        let { next, bu, u, parent, vnode } = instance
+        let originNext = next
+        let vnodeHook: VNodeHook | null | undefined
+
+        if (next) {
+          next.el = vnode.el
+          updateComponentPreRender(instance, next, optimized)
+        } else {
+          next = vnode
+        }
+
+        // beforeUpdate hook
+        if (bu) {
+          invokeArrayFns(bu)
+        }
+        // onVnodeBeforeUpdate
+        if ((vnodeHook = next.props && next.props.onVnodeBeforeUpdate)) {
+          invokeVNodeHook(vnodeHook, parent, next, vnode)
+        }
+        // 生成新的nextTree
+        const nextTree = renderComponentRoot(instance)
+        const prevTree = instance.subTree
+        instance.subTree = nextTree
+
+        // patch  => prevTree | nextTree 更新DOM
+        patch(
+          prevTree,
+          nextTree,
+          // parent may have changed if it's in a teleport
+          hostParentNode(prevTree.el!)!,
+          // anchor may have changed if it's in a fragment
+          getNextHostNode(prevTree),
+          instance, parentSuspense, isSVG)
+          
+        next.el = nextTree.el
+        if (originNext === null) {
+          // self-triggered update. In case of HOC, update parent component
+          // vnode el. HOC is indicated by parent instance's subTree pointing
+          // to child component's vnode
+          updateHOCHostEl(instance, nextTree.el)
+        }
+        // updated hook
+        if (u) {
+          queuePostRenderEffect(u, parentSuspense)
+        }
+        // onVnodeUpdated
+        if ((vnodeHook = next.props && next.props.onVnodeUpdated)) {
+          queuePostRenderEffect(() => {
+            invokeVNodeHook(vnodeHook!, parent, next!, vnode)
+          }, parentSuspense)
+        }
+
+        
+      }
+    }, 
+    (prodEffectOptions  = {
+      scheduler: queueJob,
+      // #1801, #2043 component render effects should allow recursive updates
+      allowRecurse: true
+    }))
+  }
+```
+### mountComponent
 
 组件更新时，会触发`updateComponent`，其内部会调用`intance.update`
 
 > 组件更新时，会对新老vnode数据进行[diff](./vue3-diff)
+
+> [组件挂载流程](./vue3-mountelement)
 
 ```ts
 const mountComponent: MountComponentFn = (initialVNode,container,anchor, parentComponent,parentSuspense, isSVG,optimized) => {

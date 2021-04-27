@@ -14,11 +14,12 @@
   
 <script src="../js/vue3.js"></script>
 <div id="app">
+  <h1>juest - test </h1>
   <div>
-    <div>{{a}}</div>
-    <p>{{a}}</p>
+    <div @click="a++">div tag: {{a}}</div>
+    <p :class="[a]" @click="add">p tag: {{a}}</p>
   </div>
-  <p>{{a}}</p>
+  <li :id="a">{{a}}</li>
 </div>
 <script>
   // Vue.devtools = true
@@ -26,7 +27,13 @@
   window.app =createApp({
     setup() {
       return {
-        a: ref(1)
+        a: ref(1),
+        add: () => {}
+      }
+    },
+    data() {
+      return {
+        list: []
       }
     }
   }).mount('#app')
