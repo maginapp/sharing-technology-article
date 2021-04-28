@@ -15,7 +15,7 @@
 <script src="../js/vue3.js"></script>
 <div id="app">
   <h1>juest - test </h1>
-  <div>
+  <div class="test" style="color:red;">
     <div @click="a++">div tag: {{a}}</div>
     <p :class="[a]" @click="add">p tag: {{a}}</p>
   </div>
@@ -35,8 +35,18 @@
       return {
         list: []
       }
+    },
+    methods: {
+      setinput(a) {
+        this.a = a
+      }
     }
   }).mount('#app')
+  // setupComponent
+  // compile
+  // transform
+  // generate
+  // renderComponentRoot
 </script>
 </body>
 </html>

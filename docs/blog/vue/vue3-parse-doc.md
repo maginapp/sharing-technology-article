@@ -8,6 +8,8 @@ meta:
 
 # vue3解析
 
+源码阅读笔记，暂未做整体梳理
+
 * [vue3-简介](./vue3-introduce)
 * [vue3-reactivity响应式简析](./vue3-reactive)
 * [vue3-effect-api相关解析](./vue3-effect-api)

@@ -5402,7 +5402,9 @@ var Vue = (function (exports) {
               startMeasure(instance, `init`);
           }
           console.log('instance effect => setupComponent')
+          console.log('instance compile => setupComponent')
           setupComponent(instance);
+          console.log('instance compile => setupComponent end')
           console.log('instance effect => setupComponent end')
           {
               endMeasure(instance, `init`);
@@ -5480,7 +5482,9 @@ var Vue = (function (exports) {
                   {
                       startMeasure(instance, `render`);
                   }
+                  console.log('instance compile => renderComponentRoot start')
                   const subTree = (instance.subTree = renderComponentRoot(instance));
+                  console.log('instance compile => renderComponentRoot end')
                   {
                       endMeasure(instance, `render`);
                   }
@@ -7698,6 +7702,7 @@ var Vue = (function (exports) {
       return setupResult;
   }
   function setupStatefulComponent(instance, isSSR) {
+    console.log('instance compile => setupStatefulComponent start')
       const Component = instance.type;
       {
           if (Component.name) {
@@ -7797,6 +7802,7 @@ var Vue = (function (exports) {
       compile = _compile;
   }
   function finishComponentSetup(instance, isSSR) {
+    console.log('instance compile => finishComponentSetup start')
       const Component = instance.type;
       // template / render function normalization
       if (!instance.render) {
@@ -7805,10 +7811,12 @@ var Vue = (function (exports) {
               {
                   startMeasure(instance, `compile`);
               }
+              console.log('instance compile => compile start')
               Component.render = compile(Component.template, {
                   isCustomElement: instance.appContext.config.isCustomElement,
                   delimiters: Component.delimiters
               });
+              console.log('instance compile => compile end')
               {
                   endMeasure(instance, `compile`);
               }
@@ -13315,6 +13323,7 @@ var Vue = (function (exports) {
   // we name it `baseCompile` so that higher order compilers like
   // @vue/compiler-dom can export `compile` while re-exporting everything else.
   function baseCompile(template, options = {}) {
+    console.log('instance compile => baseCompile start')
       const onError = options.onError || defaultOnError;
       const isModuleMode = options.mode === 'module';
       /* istanbul ignore if */
@@ -13333,8 +13342,10 @@ var Vue = (function (exports) {
       if (options.scopeId && !isModuleMode) {
           onError(createCompilerError(48 /* X_SCOPE_ID_NOT_SUPPORTED */));
       }
+      console.log('instance compile => baseParse template ')
       const ast = isString(template) ? baseParse(template, options) : template;
       const [nodeTransforms, directiveTransforms] = getBaseTransformPreset();
+      console.log('instance compile => transform ast ')
       transform(ast, extend({}, options, {
           prefixIdentifiers,
           nodeTransforms: [
@@ -13344,6 +13355,7 @@ var Vue = (function (exports) {
           directiveTransforms: extend({}, directiveTransforms, options.directiveTransforms || {} // user transforms
           )
       }));
+      console.log('instance compile => generate astnode ')
       return generate(ast, extend({}, options, {
           prefixIdentifiers
       }));
@@ -13822,6 +13834,7 @@ var Vue = (function (exports) {
           // by the server, the template should not contain any user data.
           template = el ? el.innerHTML : ``;
       }
+      console.log('instance compile => compileToFunction compile$1 start')
       const { code } = compile$1(template, extend({
           hoistStatic: true,
           onError(err) {
