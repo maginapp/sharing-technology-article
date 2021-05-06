@@ -122,7 +122,6 @@ const interview = [{
   // ]
 }]
 
-// 处理空数据问题
 const sharingSidebar = [{
   collapsable: true,
   title: 'sharing', 
@@ -133,8 +132,16 @@ const sharingSidebar = [{
     '/sharing/sharing-blog',
     '/sharing/software',
   ]
+}, {
+  collapsable: true,
+  title: '配置与构建', 
+  sidebarDepth: 2,
+  children: [
+    '/sharing/config/webpack-base'
+  ]
 }]
 
+// 处理空数据问题
 const formatData = (arr) => {
   return arr.filter(item => {
     if (typeof item === 'string') return item

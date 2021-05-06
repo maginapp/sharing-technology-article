@@ -24,26 +24,34 @@ module.exports = {
   },
   // 配置搜索
   plugins: [
+    // vuepress 官方
     ['@vuepress/search', {
       searchMaxSuggestions: 10
     }],
     ['@vuepress/back-to-top', true],
     ['@vuepress/nprogress'],
-    ['@maginapp/vuepress-plugin-katex',
-    {
-      delimiters: 'dollars'
-    }],
+    // ['@vuepress/medium-zoom', {
+    //   // ==> .theme-default-content :not(a) > img
+    //   // selector: 'img.zoom-custom-imgs',
+    //   // // medium-zoom options here
+    //   // // See: https://github.com/francoischalifour/medium-zoom#options
+    //   // options: {
+    //   //   margin: 16
+    //   // }
+    // }],
     ['vuepress-plugin-code-copy', true],
-    ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}], // 测试传参与合并
-    'vuepress-plugin-mermaidjs',
-    [
-      '@vuepress/pwa', {
+    ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: {
         message: "New content is available.",
         buttonText: "Refresh"
       }
     }],
+    // maginapp
+    ['@maginapp/vuepress-plugin-katex', {delimiters: 'dollars'}],
+    ['@maginapp/vuepress-plugin-flowchart', {'???????????': 'test'}], // 测试传参与合并
+    // 第三方
+    'vuepress-plugin-mermaidjs',
     ['@vssue/vuepress-plugin-vssue', {
       platform: 'github', // v3 => github，v4 => github-v4
       // 其他的 Vssue 配置

@@ -253,3 +253,51 @@ export default ({ router }) => {
 }
 ```
 
+## 图片放大
+
+> vuepress官方插件
+>
+> https://vuepress.vuejs.org/plugin/official/plugin-medium-zoom.html#install
+
+### install
+
+```sh
+yarn add -D @vuepress/plugin-medium-zoom
+# OR npm install -D @vuepress/plugin-medium-zoom
+```
+
+### Usage
+
+```js
+module.exports = {
+  plugins: ['@vuepress/medium-zoom'],
+  // or
+  plugins: {
+    '@vuepress/medium-zoom': {
+      selector: 'img.zoom-custom-imgs',
+      // medium-zoom options here
+      // See: https://github.com/francoischalifour/medium-zoom#options
+      options: {
+        margin: 16
+      }
+    }
+  }
+}
+```
+
+### Options
+
+#### selector
+
+* Type: `string`
+* Default: `.theme-default-content :not(a) > img`
+
+需要在父组件上添加类名`theme-default-content`，本页面添加在theme`Page`组件上
+
+#### options
+
+* Type: `object`
+* Default: `undefined`
+
+[options](https://github.com/francoischalifour/medium-zoom#options) for [medium-zoom](https://github.com/francoischalifour/medium-zoom)
+

@@ -30,6 +30,7 @@
     <Home v-if="$page.frontmatter.home" />
 
     <Page
+      class="theme-default-content"
       v-else
       :sidebar-items="sidebarItems"
     >
