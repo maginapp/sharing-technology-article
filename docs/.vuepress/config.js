@@ -30,15 +30,16 @@ module.exports = {
     }],
     ['@vuepress/back-to-top', true],
     ['@vuepress/nprogress'],
-    // ['@vuepress/medium-zoom', {
-    //   // ==> .theme-default-content :not(a) > img
-    //   // selector: 'img.zoom-custom-imgs',
-    //   // // medium-zoom options here
-    //   // // See: https://github.com/francoischalifour/medium-zoom#options
-    //   // options: {
-    //   //   margin: 16
-    //   // }
-    // }],
+    ['@vuepress/medium-zoom', {
+      // ==> .theme-default-content :not(a) > img
+      // selector: 'img.zoom-custom-imgs',
+      selector: '.theme-zoom-content :not(a) > img',
+      // medium-zoom options here
+      // See: https://github.com/francoischalifour/medium-zoom#options
+      options: {
+        margin: 16
+      }
+    }],
     ['vuepress-plugin-code-copy', true],
     ['@vuepress/pwa', {
       serviceWorker: true,
