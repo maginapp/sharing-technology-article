@@ -77,3 +77,8 @@ https://segmentfault.com/a/1190000018220850
 ### 语法解析 预编译 执行 => 遇到函数执行 预编译 执行
 
 ### 错误处理
+
+
+## image
+
+[createImageBitmap](https://developer.mozilla.org/zh-CN/docs/Web/API/WindowOrWorkerGlobalScope/createImageBitmap)
