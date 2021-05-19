@@ -1,0 +1,20 @@
+const {a} = require('./a')
+console.log(a)
+
+var {b} = require('./b')
+console.log(b)
+require('./b')
+console.log(b)
+require('./b')
+console.log(b)
+const bM =  require('./b')
+console.log(bM.b)
+console.log(bM.fn())
+console.log('after', bM.b)
+var {b} = require('./b')
+console.log(b)
+
+
+console.log('before', bM.data.a)
+console.log(bM.addData())
+console.log('after', bM.data.a)

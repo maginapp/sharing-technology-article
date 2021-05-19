@@ -137,7 +137,15 @@ const sharingSidebar = [{
   title: '配置与构建', 
   sidebarDepth: 2,
   children: [
-    '/sharing/config/webpack-base'
+    // '/sharing/config/webpack-base',
+    // '/sharing/config/source-map-intrudoce'
+  ]
+}, {
+  collapsable: true,
+  title: '规范', 
+  sidebarDepth: 2,
+  children: [
+    // '/sharing/standard/common-esmodule'
   ]
 }]
 

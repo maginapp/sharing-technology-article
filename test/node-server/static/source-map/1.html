@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://unpkg.com/source-map@0.7.3/dist/source-map.js"></script>
+
+  <script>
+    var a = sourceMap.SourceMapConsumer.initialize({
+        "lib/mappings.wasm": "https://unpkg.com/source-map@0.7.3/lib/mappings.wasm"
+    });
+    console.log(a)
+
+    async function  ss () {
+      const rawSourceMap = {
+        version: 3,
+        file: "./a.js",
+        names: ["console", "log"],
+        sources: ["./index.js"],
+        sourceRoot: "",
+        mappings: 'AACAA,QAAQC,IADE'
+      };
+
+      const whatever = await sourceMap.SourceMapConsumer.with(rawSourceMap, null, consumer => {
+        console.log(consumer.sources);
+        // [ 'http://example.com/www/js/one.js',
+        //   'http://example.com/www/js/two.js' ]
+
+        console.log(
+          consumer.originalPositionFor({
+            line: 1,
+            column: 1
+          })
+        );
+        console.log(
+          consumer.originalPositionFor({
+            line: 1,
+            column: 6
+          })
+        );
+        console.log(
+          consumer.originalPositionFor({
+            line: 1,
+            column: 7
+          })
+        );
+        console.log(
+          consumer.originalPositionFor({
+            line: 1,
+            column: 8
+          })
+        );
+        console.log(
+          consumer.originalPositionFor({
+            line: 1,
+            column: 1
+          })
+        );
+        // { source: 'http://example.com/www/js/two.js',
+        //   line: 2,
+        //   column: 10,
+        //   name: 'n' }
+
+        console.log(
+          consumer.generatedPositionFor({
+            source: "./index.js",
+            line: 2,
+            column: 2
+          })
+        );
+        // { line: 2, column: 28 }
+
+        consumer.eachMapping(function(m) {
+          // ...
+        });
+
+        return computeWhatever();
+      });
+    }
+
+    console.log(ss())
+  </script>
+</body>
+</html>

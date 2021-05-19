@@ -30,7 +30,7 @@ VSCode打开多个文件时是在同一行滚动显示的，可以通过添加cs
 
 /* 设置最大高度 */
 .tabs-container {
-	max-height: 150px !important;
+	max-height: 100px !important;
 	overflow: auto !important;
 }
 
