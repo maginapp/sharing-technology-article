@@ -1,5 +1,7 @@
 # 博客与面试题分享
 
+[博客首页](https://maginapp.github.io/sharing-technology-article)
+
 ## 分类
 
 :point_right:[个人笔记](https://maginapp.github.io/sharing-technology-article/blog/) | :point_right:[文章分享](https://maginapp.github.io/sharing-technology-article/sharing/) | :point_right:[面试题](https://maginapp.github.io/sharing-technology-article/interview/)
