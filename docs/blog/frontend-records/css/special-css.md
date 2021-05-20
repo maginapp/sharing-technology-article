@@ -6,7 +6,7 @@ meta:
     content: 几个特殊的css属性
 ---
 
-# special-css
+# 几个特殊的css属性
 
 ## backdrop-filter
 
@@ -137,3 +137,71 @@ h1 {
 }
 </style>
 ```
+
+## 字体边框
+
+```css
+.stroke {
+  /* -webkit-margin-collapse: separate; */   /* 上下盒子margin不合并 未生效 */
+  color: transparent;
+  -webkit-text-stroke: 2px red; /* 2px字体更圆滑 */
+  font-size: 60px;
+}
+.stroke-1 {
+  font-size: 60px;
+}
+```
+
+```html
+  <div class="stroke">123asdada</div>
+  <div class="stroke-1">123asdada</div>
+```
+
+## -webkit-mask
+
+> 图片遮罩层
+
+1. `none`: 默认值，透明的黑色图像层，也就是没有遮罩层。
+2.  支持透明底`图片url`或者`渐变背景`
+
+[扩展阅读](https://developer.mozilla.org/zh-CN/docs/Web/CSS/mask-image)
+
+![](https://maginapp.github.io/static-website/images/font-records/css/webkitmask-demo.jpg)
+
+```css
+.mask {
+  width: 200px;
+  height: 200px;
+  background: url(https://maginapp.github.io/static-website/images/font-records/css/free_stock_photo.jpg) no-repeat center / cover;
+  -webkit-mask: url(https://maginapp.github.io/static-website/images/font-records/css/special-css-1-2-mask.png);
+  /* 非透明无效 */
+  -webkit-mask: url(https://maginapp.github.io/static-website/images/font-records/css/special-css-1-2-mask-2.png);
+  -webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
+```
+
+## -webkit-box-reflect
+
+> 倒影效果
+
+above、below、left和right四个关键词，支持mask属性
+
+> mask效果使用，可查看[-webkit-mask](#-webkit-mask)
+
+[扩展阅读](https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariCSSRef/Articles/StandardCSSProperties.html#//apple_ref/doc/uid/TP30001266-SW16)
+
+![](https://maginapp.github.io/static-website/images/font-records/css/webkitbox-reflect.jpg)
+
+```css
+.el {
+  -webkit-box-reflect: below 5px;
+}
+.el {
+  -webkit-box-reflect: right 0 url(mask.png);
+}
+```
+
+
+## 引用
+
+[CSS3那些不为人知的高级属性](https://www.cnblogs.com/cosiray/archive/2012/12/06/2804770.html)

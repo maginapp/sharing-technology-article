@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="mostly-customized-scrollbar">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
+  <title>Document</title>
+  
+  <style >
+    .stroke {
+      -webkit-margin-collapse: separate;
+      color: transparent;
+      -webkit-text-stroke: 2px red;
+      font-size: 60px;
+    }
+    .stroke-1 {
+      font-size: 60px;
+    }
+    .reflect {
+      width: 200px;
+      height: 100px;
+      margin: 10px 0 200px;
+      background: #f1f1f1;
+    }
+    .reflect-css {
+      -webkit-box-reflect: below 5px url(https://www.baidu.com/img/flexible/logo/pc/result.png);
+      -webkit-box-reflect: below 5px url(https://photo.16pic.com/00/92/45/16pic_9245924_b.jpg);
+    }
+    
+    .img {
+      width: 200px;
+      height: 200px;
+      background: url(https://maginapp.github.io/static-website/images/font-records/css/free_stock_photo.jpg) no-repeat center / cover;
+      -webkit-mask: url(https://maginapp.github.io/static-website/images/font-records/css/special-css-1-2-mask.png);
+      -webkit-mask: url(https://maginapp.github.io/static-website/images/font-records/css/special-css-1-2-mask-2.png);
+      -webkit-mask: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    }
+
+  </style>
+</head>
+<body>
+  <div class="img"></div>
+  <div class="stroke">
+    123asdada
+  </div>
+  <div class="stroke-1">
+    123asdada
+  </div>
+  <div class="reflect reflect-css">12345</div>
+  <div class="reflect">12345</div>
+
+</body>
+</html>

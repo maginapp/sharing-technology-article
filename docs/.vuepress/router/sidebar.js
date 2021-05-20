@@ -1,4 +1,5 @@
 const blogSidebar = [
+  // 配置与构建
   {
     title: '配置与构建',
     // collapsable: false,
@@ -17,6 +18,7 @@ const blogSidebar = [
       '/blog/about-config/vscode-multi-column'
     ]
   },
+  // 前端笔记
   {
     title: '前端笔记',
     sidebarDepth: 2,
@@ -27,26 +29,25 @@ const blogSidebar = [
         sidebarDepth: 2,
         // collapsable: false, // 始终打开
         children: [
-          '/blog/frontend-records/special-css',
+          '/blog/frontend-records/css/special-css',
           '/blog/frontend-records/css/sticky',
           '/blog/frontend-records/css/css-init',
         ]
       },
-      // { 
-      //   title: 'Vue3解析',   // 必要的
-      //   sidebarDepth: 2,
-      //   // collapsable: false, // 始终打开
-      //   path: '/blog/vue/vue3-parse-doc',
-      //   children: [
-      //     '/blog/vue/vue3-introduce',
-      //     '/blog/vue/vue3-reactive',
-      //   ]
-      // },
+      { 
+        title: '微服务架构',   // Microservice Architecture
+        sidebarDepth: 2,
+        // collapsable: false, // 始终打开
+        children: [
+          '/blog/frontend-records/microservice/service-degradation'
+        ]
+      },
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
       '/blog/frontend-records/ecmascript'
     ]
   },
+  // vue
   {
     title: 'Vue',
     sidebarDepth: 2,
@@ -72,6 +73,7 @@ const blogSidebar = [
       '/blog/vue/promote-of-vue'
     ]
   },
+  // node
   {
     title: 'node',
     sidebarDepth: 2,
@@ -92,7 +94,7 @@ const blogSidebar = [
       '/blog/node-server/node-crawler'
     ]
   },
-  
+  // 规范简介
   {
     title: '规范简介',
     // collapsable: false,
@@ -100,6 +102,21 @@ const blogSidebar = [
     children: [
       '/blog/standard/git-commit',
       '/blog/standard/css-BEM',
+    ]
+  },
+  // 算法入门
+  {
+    title: '算法入门',
+    // collapsable: false,
+    sidebarDepth: 2,
+    children: [
+      { 
+        title: 'QUESTION',   // 必要的
+        sidebarDepth: 2,
+        children: [
+          '/blog/algorithm/demo/longest-increasing-subsequence'
+        ]
+      },
     ]
   },
   // {
