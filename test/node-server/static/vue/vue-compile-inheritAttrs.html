@@ -19,6 +19,7 @@
 <div id="app">
   <h1>juest - test </h1>
   <li :id="a">{{a}}</li>
+  <model-input :label="a" v-model="a" ></model-input>
   <base-input :label="a" :value="a" @input="setinput" :ss="a"></base-input>
   <base-input-attrs :label="a" :value="a" @input="setinput" :ss="a"></base-input-attrs>
 </div>
@@ -43,6 +44,30 @@
       }
     },
     components: {
+      'model-input': {
+        model: {
+          prop: 'value',
+          event: 'change'
+        },
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        emits: ['input'],
+        template: `
+          <p>inheritAttrs: false, label don't has ss attr , input has ss attr</p>
+          <label>
+            {{ label }}
+            <input
+              v-bind="$attrs"
+              v-bind:value="value"
+              v-on:input="$emit('input', $event.target.value)"
+            >
+          </label>
+        `,
+        mounted() {
+          console.log(this.$attrs)
+        }
+      },
+
       'base-input': {
         inheritAttrs: false,
         props: ['label', 'value'],

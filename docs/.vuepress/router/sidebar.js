@@ -1,6 +1,6 @@
 const blogSidebar = [
   {
-    title: '配置构建与规范',
+    title: '配置与构建',
     // collapsable: false,
     sidebarDepth: 2,
     children: [
@@ -14,9 +14,7 @@ const blogSidebar = [
           '/blog/about-config/vuepress-flowchart',
         ]
       },
-      '/blog/about-config/vscode-multi-column',
-      '/blog/standard/git-commit',
-      '/blog/standard/css-BEM',
+      '/blog/about-config/vscode-multi-column'
     ]
   },
   {
@@ -31,6 +29,7 @@ const blogSidebar = [
         children: [
           '/blog/frontend-records/special-css',
           '/blog/frontend-records/css/sticky',
+          '/blog/frontend-records/css/css-init',
         ]
       },
       // { 
@@ -91,6 +90,16 @@ const blogSidebar = [
         ]
       },
       '/blog/node-server/node-crawler'
+    ]
+  },
+  
+  {
+    title: '规范简介',
+    // collapsable: false,
+    sidebarDepth: 2,
+    children: [
+      '/blog/standard/git-commit',
+      '/blog/standard/css-BEM',
     ]
   },
   // {
