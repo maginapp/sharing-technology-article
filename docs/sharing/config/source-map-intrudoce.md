@@ -3,7 +3,7 @@ meta:
   - name: keywords
     content: source map
   - name: description
-    content: 了，没想到一个 source map 居然涉及到那么多知识盲区
+    content: 绝了，没想到一个 source map 居然涉及到那么多知识盲区
 ---
 
 

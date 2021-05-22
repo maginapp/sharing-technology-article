@@ -32,6 +32,6 @@ meta:
 
 [ecma262](https://github.com/tc39/ecma262)
 
-## WAVE Web Accessibility Evaluation Tool
+## 其他
 
 [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org)： WAVE是网站评估工具，可以帮助开发者，使残障人士更容易访问其Web内容
