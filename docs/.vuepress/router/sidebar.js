@@ -151,7 +151,7 @@ const interview = [{
 
 const sharingSidebar = [{
   collapsable: true,
-  title: 'sharing', 
+  title: '资源共享', 
   sidebarDepth: 2,
   children: [
     '/sharing/',
@@ -164,15 +164,22 @@ const sharingSidebar = [{
   title: '配置与构建', 
   sidebarDepth: 2,
   children: [
-    // '/sharing/config/webpack-base',
-    // '/sharing/config/source-map-intrudoce'
+    '/sharing/config/webpack-base',
+    '/sharing/config/source-map-intrudoce'
   ]
 }, {
   collapsable: true,
   title: '规范', 
   sidebarDepth: 2,
   children: [
-    // '/sharing/standard/common-esmodule'
+    '/sharing/standard/common-esmodule'
+  ]
+}, {
+  collapsable: true,
+  title: '服务端', 
+  sidebarDepth: 2,
+  children: [
+    '/sharing/backup/concurrent-properties',
   ]
 }]
 
