@@ -212,7 +212,7 @@ html {
 }
 ```
 
-## 引用
+## 文献参考
 
 * [mozilla ::-webkit-scrollbar](https://developer.mozilla.org/zh-CN/docs/Web/CSS/::-webkit-scrollbar)
 

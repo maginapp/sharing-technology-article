@@ -1,13 +1,9 @@
-const { lock, unlock } = require('./lockFile')
+const http = require('http')
+const fork = require('child_process')
 
-lock('./1', (err) => {
-  console.log(err)
-})
+http.createServer(()=> {}).listen('8888')
 
-lock('./1', (err) => {
-  console.log(err)
-})
 
-lock('./1', (err) => {
-  console.log(err)
-})
+fork.fork('./file1.js')
+fork.fork('./file2.js')
+

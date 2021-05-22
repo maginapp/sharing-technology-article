@@ -42,6 +42,7 @@ function unlock(pageName, callback) {
 }
 
 function unlockSync(pageName, callback) {
+    console.log('unlock', process.pid)
     if (!lockMap.get(pageName)) return callback(null)
     let lockDir = `${pageName}.lock`
     try {

@@ -72,7 +72,7 @@ bug连接 http://bug.bug
 
 通常是备注信息，与上一版本不兼容/修复bug(关闭Issue)的连接
 
-## 引用
+## 文献参考
 
 * [Git代码提交规范](https://blog.csdn.net/weixin_34067049/article/details/91474127)
 

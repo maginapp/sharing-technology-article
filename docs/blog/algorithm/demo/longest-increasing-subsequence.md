@@ -66,6 +66,6 @@ function getSequence(arr) {
 }
 ```
 
-## 引用
+## 文献参考
 
 >  https://en.wikipedia.org/wiki/Longest_increasing_subsequence

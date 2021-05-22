@@ -105,7 +105,7 @@ ETIMEDOUT 192.30.255.113:443
 
 使用 `github api` 获取issue相关数据，暂未找到统计数据
 
-## 引用
+## 文献参考
 
 * [github api](https://api.github.com/)
 * [github reference issues 文档](https://docs.github.com/en/rest/reference/issues)

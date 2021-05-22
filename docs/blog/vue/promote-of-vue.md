@@ -489,7 +489,7 @@ this.items = Object.freeze(items)
 const [users, imgs] = await Promise.all([getUsers(), getImgs()])
 ```
 
-## 引用
+## 文献参考
 
 * [【vue】组件使用Deferred特性](https://www.cnblogs.com/wuxianqiang/p/10621396.html)
 * [动态组件 & 异步组件](https://cn.vuejs.org/v2/guide/components-dynamic-async.html)

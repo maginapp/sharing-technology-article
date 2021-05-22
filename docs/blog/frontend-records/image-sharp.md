@@ -59,6 +59,6 @@ sharp('./logo.png')
   .catch( err => ... )
 ```
 
-## 引用
+## 文献参考
 
 * [sharp](https://sharp.pixelplumbing.com/)

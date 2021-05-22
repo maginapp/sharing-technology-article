@@ -233,7 +233,7 @@ const Pet = sequelize.define('pet', {
 Executing (default): INSERT INTO `pets` (`id`,`name`,`gender`,`birth`,`createdAt`,`updatedAt`,`version`) VALUES ('g-1471961204219','Gaffey',false,'2007-07-07',1471961204219,1471961204219,0);
 ```
 
-## 引用
+## 文献参考
 
 [mysql](https://www.npmjs.com/package/mysql)
 

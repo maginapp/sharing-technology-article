@@ -103,7 +103,7 @@ meta:
 .layout .layout--primary{border:1px solid green;box-shadow:0 0 5px rgba(0,128,0,0.5)}
 ```
 
-## 引用
+## 文献参考
 
 [BEM官网](http://getbem.com/)
 

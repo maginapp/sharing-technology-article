@@ -136,7 +136,7 @@ VSCode打开多个文件时是在同一行滚动显示的，可以通过添加cs
 2. 需要点击收起/展开侧边栏，调整高度
 3. reload vscode
 
-## 引用
+## 文献参考
 
 * [VSCode的多行选项卡](https://qastack.cn/programming/42462777/multirow-tabs-for-vscode)
 * [VSCode打开多个文件时实现标签栏多行显示](https://blog.csdn.net/tangyang8941/article/details/107169763)

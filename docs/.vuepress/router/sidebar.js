@@ -82,16 +82,17 @@ const blogSidebar = [
         title: 'Koa入门',   // 必要的
         sidebarDepth: 2,
         // collapsable: false, // 打开
-        // path: '/blog/node-server/koa-toc',
+        // path: '/blog/node-server/koa/koa-toc',
         children: [
-          '/blog/node-server/koa-server-init',
-          '/blog/node-server/koa-middleware',
-          '/blog/node-server/koa-router',
-          '/blog/node-server/koa-mysql',
-          '/blog/node-server/koa-bodyParser-myself',
+          '/blog/node-server/koa/koa-server-init',
+          '/blog/node-server/koa/koa-middleware',
+          '/blog/node-server/koa/koa-router',
+          '/blog/node-server/koa/koa-mysql',
+          '/blog/node-server/koa/koa-bodyParser-myself',
         ]
       },
-      '/blog/node-server/node-crawler'
+      '/blog/node-server/file/node-crawler',
+      '/blog/node-server/file/file-lock'
     ]
   },
   // 规范简介

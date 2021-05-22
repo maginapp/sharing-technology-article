@@ -407,7 +407,7 @@ head: [
 这是一个详情块，在 IE / Edge 中不生效
 :::
 
-## 引用
+## 文献参考
 
 * [使用travis-ci自动部署github上的项目](https://www.cnblogs.com/morang/p/7228488.html)
 

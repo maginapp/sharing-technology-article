@@ -1,7 +1,7 @@
 # 服务降级
 
 
-## 引用
+## 文献参考
 
 [微服务架构—服务降级](https://blog.csdn.net/ityouknow/article/details/81230412)
 
