@@ -6,7 +6,7 @@ meta:
     content: Webpack配置
 ---
 
-# [万字总结]一文吃透Webpack核心原理
+# 一文吃透Webpack核心原理
 
 <quote-info title="[万字总结] 一文吃透 Webpack 核心原理" plat="掘金" author="ecvan" link="https://juejin.cn/post/6949040393165996040" />
 
