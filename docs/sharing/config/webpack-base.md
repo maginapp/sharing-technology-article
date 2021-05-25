@@ -6,7 +6,7 @@ meta:
     content: Webpack配置
 ---
 
-# [万字总结]一文吃透Webpack核心原理
+# 一文吃透Webpack核心原理
 
 <quote-info title="[万字总结] 一文吃透 Webpack 核心原理" plat="掘金" author="ecvan" link="https://juejin.cn/post/6949040393165996040" />
 
@@ -51,7 +51,7 @@ Webpack 特别难学！！！
 
 也就是将各种类型的资源，包括图片、css、js等，转译、组合、拼接、生成 JS 格式的 bundler 文件。[官网首页](https://webpack.js.org/)的动画很形象地表达了这一点：
 
-![webpack-banner](https://maginapp.github.io/static-website/images/sharing/config/webpack-banner.svg)
+![webpack-banner](https://maginapp.github.io/static-website/images/sharing/config/webpack-website-logo.png)
 
 这个过程核心完成了 **内容转换 + 资源合并** 两种功能，实现上包含三个阶段：
 

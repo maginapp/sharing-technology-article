@@ -11,3 +11,8 @@
 ## standard
 
 [CommonJS 和 ES6 Module 究竟有什么区别？](./standard/common-esmodule)
+
+
+## backup
+
+[CommonJS 和 ES6 Module 究竟有什么区别？](./backup/concurrent-properties)
