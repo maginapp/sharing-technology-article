@@ -61,7 +61,7 @@ module.exports = {
       repo: 'sharing-technology-article-comment', //github项目名称 => 存储 Issue 和评论
       clientId: '0f2080b3708c78f423fb', // Client ID
       clientSecret: 'b37efb67a2abe4e05f13b991922ebddc14d57b3e',// Client Secret 
-      autoCreateIssue: true // 自动创建评论，默认是false，避免首次进入页面的时候需要点击创建评论的按钮
+      autoCreateIssue: false // 自动创建评论，默认是false，避免首次进入页面的时候需要点击创建评论的按钮
     }]
     // 以下替换为magina系列插件
     // ['flowchart', {'???????????': 'test'}],
