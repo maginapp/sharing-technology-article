@@ -17,6 +17,7 @@
   "author": "magina.cheng",
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "canvas": "^2.7.0",
     "gifencoder": "^2.0.1",
     "koa": "^2.13.1",

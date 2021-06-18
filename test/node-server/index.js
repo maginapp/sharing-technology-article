@@ -4,9 +4,19 @@ const static = require('koa-static')
 const net = require('net')
 const bodyParser = require('koa-bodyparser')
 const koaBody = require('koa-body')
+const cors = require('@koa/cors');
 const router = require('koa-router')()
 
 const app = new Koa()
+
+/*
+
+app.use((ctx, next) => {
+	console.log(ctx.url)
+	next()
+	
+})
+*/
 
 // 静态资源目录对于相对入口文件index.js的路径
 const staticPath = './static'
@@ -30,12 +40,27 @@ app.use(static(
 
 app.use(koaBody({ multipart: true }))
 app.use(bodyParser())
+// app.use(cors())
 
 app.use(async (ctx, next) => {
   // the parsed body will store in ctx.request.body
   // if nothing was parsed, body will be an empty object （{}）
+  // console.log(ctx.url, ctx.request.body)
   ctx.body = ctx.request.body
-  await next()
+  // ctx.body = ctx.request.body + '????'
+  ctx.set("Access-Control-Allow-Origin", "*");
+  ctx.set("Access-Control-Allow-Methods", "OPTIONS, GET, PUT, POST, DELETE");
+  ctx.set("Access-Control-Allow-Headers", "x-requested-with, accept, origin, content-type");
+  ctx.set("Content-Type", "application/json;charset=utf-8");
+  ctx.set("Access-Control-Allow-Credentials", true);
+  ctx.set("Access-Control-Max-Age", 300);
+  ctx.set("Access-Control-Expose-Headers", "myData");
+  const allowHeaders = ctx.get('access-control-request-headers')
+  if (allowHeaders) {
+    ctx.set('Access-Control-Allow-Headers', allowHeaders)
+  }
+  // ctx.request.body = ''
+  next()
 })
 
 // router
