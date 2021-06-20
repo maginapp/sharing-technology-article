@@ -44,7 +44,8 @@ const blogSidebar = [
       },
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
-      '/blog/frontend-records/ecmascript'
+      '/blog/frontend-records/ecmascript',
+      '/blog/frontend-records/copy-text'
     ]
   },
   // vue
