@@ -5,3 +5,7 @@ setTimeout(() => {
   a++
   console.log('in m1 100', a)
 }, 100)
+
+export function addA () {
+  a++
+}

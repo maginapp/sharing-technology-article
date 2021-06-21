@@ -38,12 +38,14 @@
     console.log(m3.a)
   </script>
   <script type="module">
-    import  { a } from './m1.js'
+    import  { a, addA } from './m1.js'
     console.log('module-1', a)
   </script>
   <script type="module">
-    import  { a } from './m1.js'
+    import  { a, addA } from './m1.js'
     console.log('module-2', a)
+    addA()
+    console.log('module-2 after addA', a)
     setTimeout(() => {
       console.log('module-2-delay', a)
     }, 1000);

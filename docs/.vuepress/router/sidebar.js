@@ -42,11 +42,18 @@ const blogSidebar = [
           '/blog/frontend-records/microservice/service-degradation'
         ]
       },
-      '/blog/frontend-records/image-sharp',
-      '/blog/frontend-records/image-gif',
+      { 
+        title: '视频图片',
+        sidebarDepth: 2,
+        children: [
+          '/blog/frontend-records/views/image-sharp',
+          '/blog/frontend-records/views/image-gif',
+        ]
+      },
       '/blog/frontend-records/ecmascript',
       '/blog/frontend-records/copy-text',
       '/blog/frontend-records/npm-publish',
+      '/blog/frontend-records/ssr-introduce',
     ]
   },
   // vue
