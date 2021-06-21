@@ -177,27 +177,28 @@ watch: {
   }
 }
 ```
-## vuepress-plugin-code-copy
+## @maginapp/vuepress-plugin-code-copy
 
-[znicholasbrown/vuepress-plugin-code-copy](https://github.com/znicholasbrown/vuepress-plugin-code-copy)试下代码复制功能
+[@maginapp/vuepress-plugin-code-copy](https://github.com/maginapp/vuepress-plugin-copy-code)
 
 ### usage
 
 ```js
 module.exports = {
-    plugins: [['vuepress-plugin-code-copy', true]]
-}
-module.exports = {
+  plugins: [['vuepress-plugin-code-copy']]
+  // ...
   plugins: [
-    ["vuepress-plugin-code-copy", {
-        selector: String,
-        align: String,
-        color: String,
-        backgroundTransition: Boolean,
-        backgroundColor: String,
-        successText: String
-        }
-    ]
+    ["@maginapp/vuepress-plugin-code-copy", {
+      selector: String, // 代码选择器
+      color: String, // icon颜色
+      backgroundTransition: Boolean, // 背景动效
+      backgroundColor: String, // 背景动效颜色
+      successText: String, // 成功文案
+      duration: Number, // 成功提示时间
+      iconVisible: Boolean, // hover展示或者始终展示
+      showInMobile: Boolean, // 移动端显示
+      align: Object, // icon定位
+    }]
   ]
 }
 ```

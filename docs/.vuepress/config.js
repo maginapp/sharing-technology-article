@@ -40,7 +40,17 @@ module.exports = {
         margin: 16
       }
     }],
-    ['vuepress-plugin-code-copy', true],
+    // ['vuepress-plugin-code-copy', true],
+    // ['@mr-hope/vuepress-plugin-copy-code', true],
+    // ['vuepress-plugin-copy-code', true],
+    ['@maginapp/vuepress-plugin-copy-code', {
+      // duration: 20000,
+      // successText: 'hi',
+      // color: 'red',
+      // backgroundColor: '#303030',
+      // iconVisible: true
+    }],
+    // ['@maginapp/vuepress-plugin-code-copy', true],
     ['@vuepress/pwa', {
       serviceWorker: true,
       updatePopup: {

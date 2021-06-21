@@ -45,7 +45,8 @@ const blogSidebar = [
       '/blog/frontend-records/image-sharp',
       '/blog/frontend-records/image-gif',
       '/blog/frontend-records/ecmascript',
-      '/blog/frontend-records/copy-text'
+      '/blog/frontend-records/copy-text',
+      '/blog/frontend-records/npm-publish',
     ]
   },
   // vue
@@ -181,6 +182,13 @@ const sharingSidebar = [{
   sidebarDepth: 2,
   children: [
     '/sharing/backup/concurrent-properties',
+  ]
+}, {
+  collapsable: true,
+  title: '测试', 
+  sidebarDepth: 2,
+  children: [
+    '/sharing/test/sinon-introduce',
   ]
 }]
 

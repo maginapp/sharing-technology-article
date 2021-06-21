@@ -20,7 +20,7 @@ meta:
 
 [文件转换器](https://convertio.co/zh/)
 
-[MarkDown转换](https://sitdown.mdnice.com/Demo.html): HTML转MarkDown
+[MarkDown转换](https://sitdown.mdni ce.com/Demo.html): HTML转MarkDown
 
 ## 测试
 
@@ -30,11 +30,15 @@ meta:
 
 [cypress](https://www.cypress.io/)
 
-[nightwatchjs](https://nightwatchjs.org/)
-
 [Jest](https://jestjs.io/zh-Hans/)
 
+[nightwatchjs](https://nightwatchjs.org/)
+
 [egg.js](https://eggjs.org/zh-cn/)
+
+[ava](https://github.com/avajs/ava)
+
+[sinonjs](https://sinonjs.org/)
 
 ## 提案与规范
 

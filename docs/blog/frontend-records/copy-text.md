@@ -1,8 +1,9 @@
+---
 meta:
   - name: keywords
-    content: oncopy,Clipboard
+    content: execCommand,Clipboard,copy
   - name: description
-    content: 文本复制方法简介:oncopy,Clipboard,复制操作添加版权信息
+    content: 文本复制方法简介:execCommand,Clipboard,复制操作添加版权信息
 ---
 
 # 文本复制方法简介
@@ -83,7 +84,22 @@ function modifyRange () {
 }
 ```
 
-## 自定义点击复制功能
+## 自定义点击复制功能-1
+
+`navigator.clipboard`
+
+```js
+navigator.clipboard.writeText(text).then(
+  () => {
+    console.log('success')
+  },
+  () => {
+    console.log('fail')
+  }
+)
+```
+
+## 自定义点击复制功能-2
 
 > [vue-clipboard2](https://github.com/Inndy/vue-clipboard2)
 
@@ -147,6 +163,8 @@ document.execCommand('copy')
 [Range](https://developer.mozilla.org/en-US/docs/Web/API/Range)
 
 [ClipboardEvent](https://developer.mozilla.org/zh-CN/docs/Web/API/ClipboardEvent)
+
+[Navigator-clipboard](https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator/clipboard)
 
 [Clipboard](https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard)
 

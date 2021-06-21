@@ -30,8 +30,8 @@
     "websocket-extensions": ">=0.1.4"
   },
   "dependencies": {
+    "@maginapp/vuepress-plugin-copy-code": "^1.0.0",
     "@vssue/api-github-v3": "^1.4.7",
-    "@vssue/vuepress-plugin-vssue": "^1.4.7",
-    "vuepress-plugin-code-copy": "^1.0.6"
+    "@vssue/vuepress-plugin-vssue": "^1.4.7"
   }
 }
