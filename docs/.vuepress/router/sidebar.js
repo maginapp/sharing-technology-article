@@ -50,6 +50,13 @@ const blogSidebar = [
           '/blog/frontend-records/views/image-gif',
         ]
       },
+      { 
+        title: '前端安全',
+        sidebarDepth: 2,
+        children: [
+          '/blog/frontend-records/safe/web-attack',
+        ]
+      },
       '/blog/frontend-records/ecmascript',
       '/blog/frontend-records/copy-text',
       '/blog/frontend-records/npm-publish',
