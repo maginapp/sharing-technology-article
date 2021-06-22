@@ -57,8 +57,14 @@ const blogSidebar = [
           '/blog/frontend-records/safe/web-attack',
         ]
       },
+      { 
+        title: 'DOM-BOM',
+        sidebarDepth: 2,
+        children: [
+          '/blog/frontend-records/dom-bom/copy-text',
+        ]
+      },
       '/blog/frontend-records/ecmascript',
-      '/blog/frontend-records/copy-text',
       '/blog/frontend-records/npm-publish',
       '/blog/frontend-records/ssr-introduce',
     ]
