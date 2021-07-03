@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .place {
+      border: 1px solid #000;
+      margin: 10px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="place"></div>
+  <div id="id1">id1</div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div id="id2">id2</div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div class="place"></div>
+  <div id="id3">id3</div>
+  <div class="place"></div>
+</body>
+
+<script>
+  const id1 = document.getElementById('id1')
+  const id2 = document.getElementById('id2')
+  const ob1 = new IntersectionObserver((entries) => {
+    entries.forEach(item => {
+      if (item.isIntersecting) {
+        console.log(item.target, '显示')
+      } else {
+        console.log(item.target, 'else')
+      }
+    })
+  })
+  console.log(ob1)
+  ob1.observe(id1)
+  ob1.observe(id2)
+</script>
+</html>
