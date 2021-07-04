@@ -15,6 +15,13 @@ const blogSidebar = [
           '/blog/about-config/vuepress-flowchart',
         ]
       },
+      {
+          title: 'webpack',
+          sidebarDepth: 2,
+          children: [
+            '/blog/about-config/webpack/self-cli'
+          ]
+      },
       '/blog/about-config/vscode-multi-column'
     ]
   },
