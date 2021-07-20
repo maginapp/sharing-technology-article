@@ -5,6 +5,20 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+      #hovered-color {
+          width: 50px;
+          height: 80px;
+      }
+      img {
+          width: 400px;
+          border: 1px solid #000;
+          padding: 10px;
+      }
+      canvas {
+          margin-left: 100px;
+      }
+  </style>
 </head>
 <body>
    <p>一文读懂 YUV 的采样与格式 https://zhuanlan.zhihu.com/p/113122344</p>
@@ -13,10 +27,12 @@
    <p>二值化图像切割，让机器人视觉识别变得简单高效 https://mp.weixin.qq.com/s?__biz=MzI0MDEzODM0Ng==&mid=2247499840&idx=1&sn=596e223703927e66d14f0f3b880af1c2&source=41#wechat_redirect</p>
    <p>像素操作 https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas</p>
 
-  <script>
+   <div id="hovered-color"></div>
+<script>
+      
 
     
- // console.log('%c12', 'background-image: url("https://cdn-1.azazie.com/upimg/s360/88/c1/edb6cf72a7fd60387f61830dc05688c1.jpg.webp"); background-size: 100%; padding:267px 300px;')
+// console.log('%c12', 'background-image: url("https://cdn-1.azazie.com/upimg/s360/88/c1/edb6cf72a7fd60387f61830dc05688c1.jpg.webp"); background-size: 100%; padding:267px 300px;')
 //  console.log('%c12', 'background-image: url(/_nuxt/riven/img/4e842ef.svg); background-size: 100%; padding:267px 300px;')
 
 
@@ -30,12 +46,37 @@ var draw = () => {
     const ctx = canvas.getContext('2d')
     ctx.drawImage(img, 0, 0, img.width, img.height)
     // 获取像素数据
-    const imgData = ctx.getImageData(0, 0, img.width, img.height).data
-window.imgData = imgData
+    const imageData = ctx.getImageData(0, 0, img.width, img.height)
+    const imgData = imageData.data
+    window.imageData = imageData
     // 拼接字符
     console.log(imgData)
     console.log(imgData.__proto__)
-join(imgData)
+    join(imgData)
+
+    
+var hoveredColor = document.getElementById('hovered-color');
+    function pick(event, destination) {
+        var x = event.layerX;
+        var y = event.layerY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        var data = pixel.data;
+
+        const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+        destination.style.background = rgba;
+        destination.textContent = rgba;
+
+        return rgba;
+    }
+
+    canvas.addEventListener('mousemove', function(event) {
+        pick(event, hoveredColor);
+    });
+    canvas.addEventListener('click', function(event) {
+        pick(event, hoveredColor);
+        console.log(event)
+        console.log(event.layerX, event.layerY)
+    });
     // join(imgData)
 }
 var join = (data) => {
@@ -90,6 +131,11 @@ function getData() {
   }
 }
 
-  </script>
+
+document.body.addEventListener('click', function(event) {
+    console.log(event.layerX, event.layerY)
+})
+
+</script>
 </body>
 </html>
