@@ -1,4 +1,4 @@
-# 博客与面试题分享
+# 博客分享-MAGINA
 
 [博客首页](https://maginapp.github.io/sharing-technology-article)
 
