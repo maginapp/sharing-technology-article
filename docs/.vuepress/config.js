@@ -1,6 +1,6 @@
 const basePath = 'sharing-technology-article'
 
-const sidebar = require('./router/sidebar')
+const sidebar = require('./router/index')
 
 module.exports = {
   // meta
