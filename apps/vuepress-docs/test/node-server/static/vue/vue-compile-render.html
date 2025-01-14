@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-compile-inheritAttrs</title>
+</head>
+<body>
+
+  <h1>vue compile</h1>
+  <h2>inheritAttrs</h2>
+  <p>filters: instance effect =></p>
+  
+  <h2>compile</h2>
+  <p>filters: instance compile =></p>
+  
+<script src="../js/vue3.js"></script>
+<div id="app">
+  <h1>juest - test </h1>
+  <li :id="a" @click="add">add: {{ a }}</li>
+  <div>
+    <p>msg</p>
+    <base-input :label="a" :value="a" @input="setinput"></base-input>
+  </div>
+  
+</div>
+<script>
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  window.app =createApp({
+    setup() {
+      const a = ref(1)
+      return {
+        a,
+        add: () => a.value++
+      }
+    },
+    data() {
+      return {
+        list: []
+      }
+    },
+    methods: {
+      setinput(a) {
+        this.a = a
+      }
+    },
+    components: {
+      'base-input': {
+        inheritAttrs: false,
+        props: ['label', 'value'],
+        emits: ['input'],
+        template: `
+          <p>inheritAttrs: false, label don't has ss attr , input has ss attr</p>
+          <label>
+            {{ label }}
+            <input
+              v-bind="$attrs"
+              v-bind:value="value"
+              v-on:input="$emit('input', $event.target.value)"
+            >
+          </label>
+        `
+      }
+    }
+  }).mount('#app')
+  // setupComponent
+  // compile
+  // transform
+  // generate
+  // renderComponentRoot
+</script>
+</body>
+</html>

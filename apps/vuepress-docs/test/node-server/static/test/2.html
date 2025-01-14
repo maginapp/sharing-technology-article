@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script>
+function Ajax(params) {
+  params = params || {};
+  params.data = params.data || {};
+  var _json = jsonp(params); 
+  
+  function jsonp(params) {
+      var callbackName = params.jsonp; // 回调函数名
+      var head = document.getElementsByTagName('head')[0];
+      params.data['callback'] = callbackName;
+      var data = formatParams(params.data);
+      var script = document.createElement('script');
+      head.appendChild(script);
+      // 创建jsonp函数，成功后自动让success函数调用，在自动删除
+      window[callbackName] = function (json) { // 设置回调，获取后台数据后才执行
+          console.log(json)
+          head.removeChild(script);
+          clearTimeout(script.timer);
+          window[callbackName] = null;
+          params.success && params.success(json);
+      };
+      script.src = params.url + '?' + data; // 设置src的时候才开始向后台请求数据
+      if (params.time) { // 限定时间
+          script.timer = setTimeout(function () {
+              window[callbackName] = null;
+              head.removeChild(script);
+              params.error && params.error({
+                  message: '超时'
+              })
+          }, params.time)
+      }
+
+  }
+  function formatParams(data) {
+      // 使用 encodeURIComponent 对 URI的某部分编码
+      var arr = [];
+      for (var key in data) {
+          arr.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+      }
+      // 添加随机数，防止缓存
+      arr.push('v=' + random());
+      return arr.join('&');
+  }
+  function random() {
+      return Math.floor(Math.random() * 10000 + 500);
+  }
+  function setHeaders(xhr, headers) {
+      for (var key in headers) {
+          xhr.setRequestHeader(key, headers[key]);
+      }
+  }
+}
+
+Ajax({jsonp: 'test', data: {}, url: './d', success: function(data) {
+  try {
+				$('#jsonPre').html(parse2(JSON.stringify(data)));
+			} catch(e) {
+				$('#jsonPre').html(parse2(data));
+      }
+    }
+})
+</script>
+</body>
+</html>
+
+<script>
+  {
+    data() {
+      return {
+        initInputPrice: false,
+        inputPrice: 0
+      }
+    },
+    watch: {
+      lastPrice (nval) {
+        if (nval && !this.initInputPrice) {
+          this.inputPrice = nval
+          this.initInputPrice = true
+        }
+      }
+    }
+  }
+</script>

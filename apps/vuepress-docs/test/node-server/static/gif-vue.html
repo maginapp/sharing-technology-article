@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #app {
+      margin: 10px 15px;
+      font-size: 12px;
+    }
+    .gif_config {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    .gif_config input {
+      margin: 0 10px;
+    }
+    .file_list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .file_list > div {
+      width: 240px;
+      border: 1px solid #666;
+      margin: 5px;
+      padding: 5px;
+    }
+    .file_list > div > div {
+      padding: 5px 0;
+    }
+
+    .img_layout {
+      display: flex;
+      align-items: center;
+    }
+    .img_layout label {
+      font-size: 11px;
+      margin-left: 8px;
+    }
+    .img_layout label:first-child {
+      margin-left: 0;
+    }
+
+    .img_list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .img_list > div {
+      padding: 5px;
+      box-sizing: border-box;
+      width: 50%;
+    }
+    .img_list  img {
+      max-width: 100%;
+    }
+    .img_list  span {
+      display: flex;
+      font-size: 10px;
+    }
+  </style>
+</head>
+<body>
+  <script src="/js/vue3.js"></script>
+  <div id="app">
+    <div class="gif_config">
+      <label for="gif_width">gif宽度</label>
+      <input type="number" name="gif_width" v-model="w" />
+      <label for="gif_height">gif高度</label>
+      <input type="number" name="gif_height" v-model="h" />
+      <label for="gif_repeat">重复显示</label>
+      <input type="checkbox" name="gif_height" v-model="r" />
+      <label for="gif_bg">背景色: {{bg}}</label>
+      <input type="color" name="gif_bg" v-model="bg" />
+      <label for="gif_clear">清除上帧</label>
+      <input type="checkbox" name="gif_clear" v-model="clear" />
+    </div>
+    <button @click="addItem">添加新元素</button>
+    <div class="file_list">
+      <div v-for="(item, index) in items" :key="index">
+        <div>
+          <label for="image_uploads"> <strong>{{ index + 1}} </strong> <input type="file" name="image_uploads" accept=".png,.jpg,.jpeg" multiple @change="uploadImg($event, item, index)" /></label>
+        </div>
+        <div>
+          <label for="image_delay">延迟时间</label>
+          <input type="number" name="image_delay" v-model="item.delay" />
+        </div>
+        <div>
+          <label for="image_quatity">图片质量</label>
+          <input type="number" name="image_quatity" v-model="item.quatity" />
+        </div>
+        <div class="img_layout">
+          <label :for="'image_cover' + index">覆盖</label>
+          <input type="radio" :name="'image_cover' + index" v-model="item.layout" :value="0"/>
+          <label :for="'image_center' + index">居中</label>
+          <input type="radio" :name="'image_center' + index" v-model="item.layout" :value="1"/>
+          <label :for="'image_custom' + index ">自定义</label>
+          <input type="radio" :name="'image_custom' + index " v-model="item.layout" :value="2"/>
+        </div>
+        <div v-if="item.layout == 2">
+          <label for="image_cut">裁剪参数</label>
+          <input type="text" name="image_cut" v-model="item.cut" />
+        </div>
+        <div class="img_list">
+          <div v-for="(img, index) in item.file" :key="index">
+            <img :src="img.src" @load="imgLoad($event, img)" alt="" />
+            <span>{{index + 1}}. w:{{img.w}}-h:{{img.h}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button @click="submitImg">提交</button>
+    <div>
+      <img :src="gif" alt="">
+    </div>
+  </div>
+  <script>
+    const imagesData = {
+      delay: 1000,
+      layout: 0,
+      quatity: 80,
+      cut: '',
+      file: []
+    }
+    const app = Vue.createApp({
+      data() {
+        return {
+          w: 300,
+          h: 400,
+          r: true,
+          clear: true,
+          bg: '',
+          gif: ''
+        }
+      },
+      methods: {
+        async submitImg() {
+          const data = this.getFormData()
+          console.log(data)
+          const result = await this.postFormData(data.fm)
+          console.log(result)
+          this.gif = result.data.gif
+        },
+
+        postFormData(fm) {
+          return new Promise(resolve => {
+            var xhr = new XMLHttpRequest(); //创建对象
+            xhr.open("POST", "/gif/create-vue"); //链接改成你项目中的
+            // xhr.setRequestHeader('Content-Type', 'multipart/form-data')
+            xhr.send(fm); //发送时  Content-Type默认就是: multipart/form-data; 
+            xhr.onreadystatechange = function() {
+              console.log('state change', xhr.readyState);
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(xhr.responseText) //返回值
+                    console.log(obj)
+                    resolve(obj)
+                }
+            }
+          })
+          
+        },
+
+        getFormData() {
+          const fm = new FormData()
+          
+          fm.append('w', this.w)
+          fm.append('h', this.h)
+          fm.append('r', this.r ?  0 : -1)
+          fm.append('bg', this.bg)
+          fm.append('clear', this.clear ?  1 : 0)
+
+          const files = [],configs = [], 
+            delay = [],layout = [],quatity = [],cut = [],imgW = [], imgH = []
+
+          this.items.forEach(item => {
+            const baseConfig = { ...item }
+            delete baseConfig.file
+
+            item.file.forEach(file => {
+              files.push(file.file)
+              configs.push({ ...baseConfig, w: file.w, h: file.h })
+              
+              fm.append('img', file.file)
+
+              delay.push(item.delay)
+              layout.push(item.layout)
+              quatity.push(item.quatity)
+              cut.push(item.cut)
+              imgW.push(file.w)
+              imgH.push(file.h)
+
+              // fm.append('delay', item.delay)
+              // fm.append('layout', item.layout)
+              // fm.append('quatity', item.quatity)
+              // fm.append('cut', item.cut)
+              // fm.append('imgW', file.w)
+              // fm.append('imgH', file.h)
+            })
+          })
+
+          fm.append('delay', JSON.stringify(delay))
+          fm.append('layout', JSON.stringify(layout))
+          fm.append('quatity', JSON.stringify(quatity))
+          fm.append('cut', JSON.stringify(cut))
+          fm.append('imgW', JSON.stringify(imgW))
+          fm.append('imgH', JSON.stringify(imgH))
+
+          return {
+            fm,
+
+            files,
+            configs,
+            w: this.w,
+            h: this.h,
+            bg: this.bg,
+            r: this.r ?  0 : -1,
+            clear: this.clear ?  1 : 0
+          }
+        }
+
+      },
+      setup(props) {
+        const items = Vue.ref([{ ...imagesData }])
+        const addItem = () => {
+          items.value.push({ ...imagesData })
+        }
+
+        const uploadImg = (e, item, index) => {
+          item.file = []
+          ;([...e.target.files]).forEach(file => {
+            // 
+            item.file.push({
+              w: 0,
+              h: 0,
+              src: URL.createObjectURL(file),
+              file: file
+            })
+          })
+        }
+
+        const imgLoad = (e, img) => {
+          img.w = e.target.width
+          img.h = e.target.height
+        }
+
+        return {
+          items,
+          addItem,
+          uploadImg,
+          imgLoad
+        }
+      },
+      components: {
+        'tv-a': {
+          render() {
+            return Vue.h('li', 'msg')
+          }
+        }
+      }
+    })
+
+    app.mount('#app')
+
+  </script>
+</body>
+</html>

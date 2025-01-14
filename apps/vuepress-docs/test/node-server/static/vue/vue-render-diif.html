@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-render</title>
+</head>
+<body>
+<script src="../js/vue3.js"></script>
+<div id="app">
+  {{ arr }}
+  <div><button @click="addArr">add</button></div>
+  <p>id</p>
+  <h2>list:</h2>
+  <test-key2 v-for="(item, index) in arr" :key="item.a" :msg="item.a"></test-key2>
+  <hr>
+</div>
+<script>
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  
+  createApp({
+    setup() {
+      let arr = reactive([{a: 1,}, {a: 2}])
+
+      const count = ref(2)
+      const addArr = () => {
+        arr.push({a: ++count.value})
+      }
+
+      return {
+        arr,
+        addArr
+      }
+    },
+    components: {
+      testKey2: {
+        props: ['msg'],
+        template: '<div><h3>test:</h3><p>msg: {{msg}}</p></div>',
+        created() {
+          console.log('created - 2', this.msg)
+        },
+        updated() {
+          console.log('updated - 2', this.msg)
+        }
+      }
+    }
+  }).mount('#app')
+
+</script>  
+</body>
+</html>

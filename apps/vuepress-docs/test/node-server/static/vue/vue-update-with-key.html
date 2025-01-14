@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="../js/vue3.js"></script>
+  <div id="app">
+    a: {{a}}   key:{{key}}
+    <test-static :key="key"></test-static>
+    <button @click="addKey">add</button>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+    createApp({
+      data() {
+        return {
+          a: 1,
+          key: 1
+        }
+      },
+      methods: {
+        addKey() {
+          this.key++
+        }  
+      },
+      components: {
+        testStatic: {
+          template: '<h2>2</h2>',
+          mounted() {
+            console.log('mounted testStatic')
+          }
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-compile-inheritAttrs</title>
+</head>
+<body>
+
+  <h1>vue compile</h1>
+  <h2>inheritAttrs</h2>
+  <p>filters: instance effect =></p>
+  
+  <h2>compile</h2>
+  <p>filters: instance compile =></p>
+  
+<script src="../js/vue3.js"></script>
+<div id="app"></div>
+<script>
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  window.app =createApp({
+    setup() {
+      const a = ref(1)
+      return {
+        a,
+        add: () => a.value++
+      }
+    },
+    render(context) {
+      console.log(context)
+      return h('div', { onClick: context.add } , context.a)
+    }
+  }).mount('#app')
+  // setupComponent
+  // compile
+  // transform
+  // generate
+  // renderComponentRoot
+</script>
+</body>
+</html>
