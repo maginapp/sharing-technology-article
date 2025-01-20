@@ -12,6 +12,9 @@
     "vitepress": "^1.5.0"
   },
   "dependencies": {
-    "markdown-it-mathjax3": "^4.3.2"
+    "markdown-it-mathjax3": "^4.3.2",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-textual-uml": "^0.17.1",
+    "mermaid": "^11.4.1"
   }
 }

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
-import mathjax3 from 'markdown-it-mathjax3'
+import taskLists from 'markdown-it-task-lists'
+import markdownItTextualUml from 'markdown-it-textual-uml';
 
 
 // https://vitepress.dev/reference/site-config
@@ -31,7 +32,11 @@ export default defineConfig({
   },
   markdown: {
     config: (md) => {
-      md.use(mathjax3)
-    }
+      md.use(taskLists)
+      // md.use(mermaid)
+      // md.use(plantuml)
+      md.use(markdownItTextualUml)
+    },
+    math: true,
   }
 })
