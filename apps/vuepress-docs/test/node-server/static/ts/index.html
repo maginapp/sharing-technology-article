@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ts 编译</title>
+  <style>
+    body {
+      display: flex;
+    }
+    .input-box {
+      min-width: 400px;
+      min-height: 200px;
+    }
+    .input-box textarea {
+      min-width: 100%;
+      min-height: 100%;
+    }
+    .handle-box {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .handle-box input {
+      width: 100%;
+      padding: 0;
+      outline: none;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="input-box">
+    <textarea name="" id="origin" cols="30" rows="10"></textarea>
+  </div>
+  <div class="handle-box">
+    <button id="btn">Send to Compile</button>
+    <label for="es">es版本：<input type="text" id="es" name="es" placeholder="es6,es7..." value="es6"></label>
+  </div>
+  <div class="input-box">
+    <textarea name="" id="compiled" cols="30" rows="10"></textarea>
+  </div>
+  <!-- <script src="/js/ajax.js"></script> -->
+  <script type="module">
+    import { sendPostText } from '/modules/ajax.js'
+    const origin = document.querySelector('#origin')
+    const btn = document.querySelector('#btn') 
+    const compiled = document.querySelector('#compiled') 
+    const es = document.querySelector('#es') 
+    btn.onclick = function (e) {
+      const target = es.value.trim()
+      let url = '/api/ts/compile'
+      if (target) url += '?target=' + target
+      compiled.value = ''
+      sendPostText(url, origin.value, (res) => {
+        console.log(res)
+        compiled.value = res
+      }) 
+    }
+    // sendPostJson('/api/ts/compile')
+  </script>
+</body>
+</html>
+
+<!-- https://blog.csdn.net/cindy647/article/details/108830841 js执行shell命令的几种方式（Node） -->

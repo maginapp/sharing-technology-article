@@ -1,0 +1,17 @@
+{
+  "name": "@magina/vite-docs",
+  "version": "Magina Sharing Portal",
+  "scripts": {
+    "docs:dev": "vitepress dev .",
+    "docs:build": "vitepress build .",
+    "docs:preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vite-plugin-mdx": "^3.6.1",
+    "vite-plugin-react": "^4.0.1",
+    "vitepress": "^1.5.0"
+  },
+  "dependencies": {
+    "markdown-it-mathjax3": "^4.3.2"
+  }
+}

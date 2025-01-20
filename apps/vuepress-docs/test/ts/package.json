@@ -1,0 +1,12 @@
+{
+  "name": "ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "build": "tsc --allowJs --outDir tsc"
+  },
+  "author": "",
+  "license": "ISC"
+}

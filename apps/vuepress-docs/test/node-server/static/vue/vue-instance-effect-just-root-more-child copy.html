@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>instance effec just root</title>
+</head>
+<body>
+
+  <h1>instance effect</h1>
+  <h2>instance.update执行时间</h2>
+  <p>filters: instance effect =></p>
+  
+<script src="../js/vue3.js"></script>
+<div id="app">
+  <h1>juest - test </h1>
+  <div class="test" style="color:red;">
+    <div @click="a++">div tag: {{a}}</div>
+    <p :class="[a]" @click="add">p tag: {{a}}</p>
+  </div>
+  <li :id="a">{{a}}</li>
+</div>
+<script>
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  window.app =createApp({
+    setup() {
+      return {
+        a: ref(1),
+        add: () => {}
+      }
+    },
+    data() {
+      return {
+        list: []
+      }
+    },
+    methods: {
+      setinput(a) {
+        this.a = a
+      }
+    }
+  }).mount('#app')
+  // setupComponent
+  // compile
+  // transform
+  // generate
+  // renderComponentRoot
+</script>
+</body>
+</html>

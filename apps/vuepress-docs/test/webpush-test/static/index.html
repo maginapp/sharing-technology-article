@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <body>
+    <h1>Hello world</h1>
+</body>
+<script>
+if ('serviceWorker' in navigator && 'PushManager' in window) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register("./serverwork.js").then(function(reg){
+            console.log("Yes, it did register service worker.");
+            reg.pushManager.getSubscription().then(subscription => {
+                console.log(subscription);
+                console.log(JSON.stringify(subscription));
+                // 如果用户没有订阅
+                if (!subscription) {
+                    subscribeUser(reg);
+                } else {
+                    sendPost("/subscribe", subscription)
+                    console.log("You have subscribed our notification");
+                }
+            });
+        }).catch(function(err) {
+            console.log("No it didn't. This happened: ", err)
+        });
+    });
+}
+
+function subscribeUser(swRegistration) {
+    // const applicationServerPublicKey = "AIzaSyConykxCn9mWGL8vO21QSaGJQDkoZHQL9w";
+    const applicationServerPublicKey = "BILsf1-DzhEoMkBA8HrWH1ziIXX7-XdYaN2ycBdQ24mk5tOHaefHtMmIgzQzJqzMamZ1CJO3iDmJaG0uADRIhO4 ";
+    const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+    swRegistration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+    })
+    // 用户同意
+    .then(function(subscription) {
+        sendPost("/subscribe", subscription)
+        console.log('User is subscribed:', JSON.stringify(subscription));
+    })
+    // 用户不同意或者生成失败
+    .catch(function(err) {
+        console.log('Failed to subscribe the user: ', err);
+    });
+}
+
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+function sendPost (url, data) {
+    var xhr = new XMLHttpRequest(); //创建对象
+    xhr.open("POST", url); //链接改成你项目中的
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.send(JSON.stringify(data)); //发送时  Content-Type默认就是: multipart/form-data; 
+      xhr.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+              var obj = JSON.parse(xhr.responseText); //返回值
+              console.log(obj);
+          }
+      }
+}
+
+</script>
+</body>
+</html>

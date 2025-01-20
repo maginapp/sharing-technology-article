@@ -1,0 +1,9 @@
+packages:
+  # apps/ 应用
+  - 'apps/*'
+  # packages/ 直接子目录中的所有包
+  - 'packages/*'
+  # components/ 子目录中的所有包
+  - 'components/*'
+  # 排除测试目录中的包
+  - '!**/test/**'

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue-compile-inheritAttrs</title>
+</head>
+<body>
+<script src="../js/vue3.js"></script>
+<div id="app">
+  <input type="text" v-model="value" @blur="blur">
+</div>
+<script>
+
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  window.app =createApp({
+    setup() {
+      const a = ref(1)
+      return {
+        value: a
+      }
+    },
+    data() {
+      return {
+      rules: [ { required: true, messge: 'required', trigger: 'blur', rule: '' }, {  messge: '[a-z]+', trigger: 'blur', rule: /[a-z]+/ }, {  messge: 'fn', trigger: 'blur', rule: (data) => {
+        console.log(data)
+      } }],
+        type: 'text'
+      }
+    },
+    methods: {
+      blur() {
+        console.log(this.checkRules())
+      },
+      checkRules() {
+        if (!this.rules) return false
+        let l = this.rules.length
+        if (!l) return false
+        let value = this.value
+        let type = this.type
+        if (this.type === 'text') value = (value + '').trim()
+        let options
+        for (let i = 0; i < l; i++) {
+          options = this.rules[i]
+          const result = this.checkRule(options, value)
+          if (result) return result
+        }
+        return false
+      },
+      checkRule(options, data) {
+        const { required, messge, trigger, rule } = options
+        if (required && data === '') return messge
+        if (rule instanceof RegExp) {
+          if (!rule.test(data)) return messge
+        } else if (typeof rule === 'function') {
+          if (!rule(data)) return messge
+        } else {
+          if (rule === data) return messge
+        }
+        return false
+      }
+    }
+  }).mount('#app')
+  // setupComponent
+  // compile
+  // transform
+  // generate
+  // renderComponentRoot
+</script>
+</body>
+</html>

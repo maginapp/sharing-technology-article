@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script src="../js/vue3.js"></script>
+<div id="app">
+  {{ arr }}
+  <hr>
+  {{ obj }}
+  <hr>
+  {{ o1 }}
+  <hr>
+  {{ o2 }}
+  <hr>
+  <button @click="addArr">addArr</button>
+  <button @click="upsetArr(arr)">upsetArr</button>
+  <button @click="resetArr">resetArr</button>
+  <p>index</p>
+  <test-key v-for="(item, index) in arr" :key="index" :msg="item.a"></test-key>
+  <p>id</p>
+  <test-key2 v-for="(item, index) in arr" :key="item.a" :msg="item.a"></test-key2>
+  <hr>
+</div>
+<script>
+  // Vue.devtools = true
+  const { createApp, reactive, toRefs, h, ref } = Vue  
+  
+  createApp({
+    setup() {
+      let arr = reactive([{a: 1,}, {a: 2}])
+      const obj = reactive({o1: 1, o2: 2})
+
+      const count = ref(2)
+
+      const addArr = () => {
+        arr.push({a: ++count.value})
+      }
+
+      const upsetArrIndex = (arr) => {
+        const l = arr.length
+        const i = Math.floor(Math.random() * l)
+        let temp = arr[i]
+        arr[i] = arr[0]
+        arr[0] = temp
+      }
+
+      const upsetArr = (arr) => {
+        let i = 0
+        while(i<3) {
+          upsetArrIndex(arr)
+          i++
+        }
+      }
+
+      const resetArr = () => {
+        const arrClone = JSON.parse(JSON.stringify(arr))
+        upsetArr(arrClone)
+        arr.length = 0
+        arr.push(...arrClone)
+      }
+
+      return {
+        arr,
+        obj,
+        ...toRefs(obj),
+        addArr,
+        upsetArr,
+        resetArr
+      }
+    },
+    components: {
+      testKey: {
+        props: ['msg'],
+        render(props) {
+          return h('div', `props.msg: ${props.msg}`)
+        },
+        created() {
+          console.log('created', this.msg)
+        },
+        updated() {
+          console.log('updated', this.msg)
+        }
+      },
+      testKey2: {
+        props: ['msg'],
+        render(props) {
+          return h('div', `props.msg: ${props.msg}`)
+        },
+        created() {
+          console.log('created - 2', this.msg)
+        },
+        updated() {
+          console.log('updated - 2', this.msg)
+        }
+      }
+    }
+  }).mount('#app')
+
+</script>  
+</body>
+</html>

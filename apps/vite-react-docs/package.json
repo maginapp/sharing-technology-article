@@ -1,0 +1,32 @@
+{
+  "name": "@maginapp/tech-docs",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite serve",
+    "build": "rimraf dist && vite build --outDir dist && serve -s dist",
+    "ssr": "rimraf dist && vite-pages ssr && serve dist"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "katex": "^0.16.20",
+    "markdown-it-katex": "^2.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3"
+  },
+  "devDependencies": {
+    "@mdx-js/react": "^3.0.0",
+    "@types/node": "^20.11.5",
+    "@types/react": "^18.2.48",
+    "@vitejs/plugin-react": "^4.2.1",
+    "rimraf": "^5.0.5",
+    "serve": "^14.2.1",
+    "vite": "^5.0.12",
+    "vite-pages-theme-doc": "^5.0.0",
+    "vite-plugin-react-pages": "^5.0.0"
+  }
+}

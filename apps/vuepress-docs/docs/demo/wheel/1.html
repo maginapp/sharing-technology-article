@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wheel {
+      width: 200px;
+      height: 200px;
+      background: red;
+      border-radius: 50%;
+      text-align: center;
+    }
+    .start {
+      animation: 
+      startRotate 2.2s 0s 1 cubic-bezier(0.42, 0.00, 1.00, 1.00);
+    }
+    @keyframes startRotate {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(720deg);
+      }
+    }
+    @keyframes linearRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(720deg);
+      }
+    }
+    .wait {
+      animation: linearRotate 2s 0s 1 cubic-bezier(1.00, 1.00, 0.00, 0.00);
+    }
+    .end {
+      transform: rotate(0);
+      transition: all 2.2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="wheel" class="wheel">1</div>
+  <button id="btn">start</button>
+  <script>
+    const req = () => {
+      const t = Math.random() * 4 + 4;
+      return new Promise((res) => {
+        console.log('wait', t);
+        setTimeout(() => {
+          console.log('return request', t);
+          res(t);
+        }, t * 1000)
+      })
+    }
+
+    const wheel = document.getElementById('wheel');
+    const btn = document.getElementById('btn');
+    let hasResult = false;
+    wheel.addEventListener('animationend', (e) => {
+      // console.log(e);
+      if (e.animationName === 'linearRotate') {
+        if (!hasResult) {
+          wheel.classList.remove('wait');
+          setTimeout(() => {
+            wheel.classList.add('wait');
+          })
+        } else {
+          wheel.classList.replace('wait', 'end');
+          setTimeout(() => {
+            const result = hasResult % 1 + 1;
+            console.log('??? result * 360', result * 360)
+            wheel.setAttribute('style', `transform: rotate(${result * 360}deg)`)
+          }, 0);
+        }
+        // wheel.classList.add('start');
+      } else if (e.animationName === 'startRotate' ){
+        wheel.classList.replace('start', 'wait');
+      }
+    });
+
+    btn.onclick = () => {
+      wheel.setAttribute('style', '')
+      wheel.classList.add('start');
+      hasResult = false
+      req().then(result => {
+        hasResult = result;
+      })
+    }
+
+  </script>
+</body>
+</html>

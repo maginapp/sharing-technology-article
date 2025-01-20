@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table,table tr th, table tr td { border:1px solid #0094ff; }
+    table { width: 200px; min-height: 25px; line-height: 25px; text-align: center; border-collapse: collapse;}   
+  </style>
+</head>
+<div>
+  <button id="btn">test</button>
+  <input id="count" value="100">
+  <table>
+    <tr>
+      <td>Count</td>
+      <td>Time</td>
+      <td>length</td>
+      <td>avare_l</td>
+      <td>avare_all</td>
+    </tr>
+  </table>
+</div>
+<body>
+  <script>
+    const fn1 = (cb, wait) => {
+      window.requestIdleCallback((deadline) => {
+        var timeRemaining = deadline.timeRemaining()
+        console.log('timeRemaining', timeRemaining)
+        let i = 0
+        while(deadline.timeRemaining() > 0) {
+            i++
+        }
+        cb({i, timeRemaining})
+        console.log(i)
+      }, {timeout: 5000})
+      // }, {timeout: 1000})
+      if (wait) {
+        var t = new Date()
+        console.log('wait 2000s start')
+        while(new Date() - t < 2000) {}
+        console.log('wait 2000s')
+        setTimeout(() => {
+            console.log('timeout')
+        }, 60)
+      }
+    }
+    
+    
+    const fn2 = (cb, wait) => {
+      window.requestIdleCallback((deadline) => {
+        var timeRemaining= deadline.timeRemaining()
+        console.log('timeRemaining', timeRemaining)
+        let i = 0
+        let t = new Date()
+        while(new Date() - t < timeRemaining) {
+            i++
+        }
+        cb({i, timeRemaining})
+        console.log(i)
+      }, {timeout: 5000})
+      // }, {timeout: 1000})
+      if (wait) {
+        var t = new Date()
+        console.log('wait 2000s start')
+        while(new Date() - t < 2000) {}
+        console.log('wait 2000s')
+        setTimeout(() => {
+            console.log('timeout')
+        }, 60)
+      }
+    }
+
+    
+    const fn3 = (cb, wait) => {
+      window.requestIdleCallback((deadline) => {
+        var timeRemaining= deadline.timeRemaining()
+        console.log('timeRemaining', timeRemaining)
+        let i = 0
+        let t = performance.now()
+        while(performance.now()- t < timeRemaining) {
+            i++
+        }
+        cb({i, timeRemaining})
+        console.log(i)
+      }, {timeout: 5000})
+      // }, {timeout: 1000})
+      if (wait) {
+        var t = new Date()
+        console.log('wait 2000s start')
+        while(new Date() - t < 2000) {}
+        console.log('wait 2000s')
+        setTimeout(() => {
+            console.log('timeout')
+        }, 60)
+      }
+    }
+
+    document.getElementById('btn').addEventListener('click', (e) => {
+      testAll(+document.getElementById('count').value.trim() || 100)
+        .then(result => {
+          return result.map(list => {
+            const analysis = {
+              count: 0,
+              timeRemaining: 0,
+              avare: [],
+              l: list.length
+            }
+            return list.reduce((prev, item) => {
+              prev.count += item.i
+              prev.timeRemaining += item.timeRemaining
+              prev.avare.push(item.i / item.timeRemaining)
+              return prev
+            }, analysis)
+          })
+          .map(({ count, timeRemaining, avare, l }) => {
+            const lCount = avare.reduce((prev, item) => prev + item, 0)
+            console.log(lCount)
+            return {
+              count,
+              timeRemaining,
+              l,
+              avare_l: lCount / l,
+              avare_all: count / timeRemaining
+            }
+          })
+        })
+        .then(data => {
+          console.log(data)
+          data.forEach(item => {
+            let str = ''
+            for (let k in item) {
+              str += '<td>' + item[k] + '</td>'
+            }
+            let tr = document.createElement('tr')
+            tr.innerHTML = str
+            document.querySelector('table').appendChild(tr)
+          })
+        })
+    })
+
+    const test = (count, fn, resolve, arr = []) => {
+      fn((data) => {
+        arr.push(data)
+        if (arr.length < count) {
+          test(count, fn, resolve, arr)
+        } else {
+          console.log('Promise end', arr)
+          resolve(arr)
+          // document.body.appendChild(div)
+        }
+      })
+    }
+
+    const testAll = (count) => {
+      // const res = [fn1, fn2, fn3].map(fn => {
+      //   return new Promise(resolve => {
+      //     test(count, fn, resolve)
+      //   })
+      // })
+      // const list = Promise.all(res)
+      // const list = Promise.all([test(count, fn1), test(count, fn2), test(count, fn3)])
+      // const list = Promise.all([test(count, fn1, resolve)])
+      return Promise.all([fn1, fn2, fn3].map(fn => {
+        return new Promise(resolve => {
+          test(count, fn, resolve)
+        })
+      }))
+    }
+
+
+
+  </script>
+</body>
+</html>

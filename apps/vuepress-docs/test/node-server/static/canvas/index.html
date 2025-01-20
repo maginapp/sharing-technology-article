@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+      #hovered-color {
+          width: 50px;
+          height: 80px;
+      }
+      img {
+          width: 400px;
+          border: 1px solid #000;
+          padding: 10px;
+      }
+      canvas {
+          margin-left: 100px;
+      }
+  </style>
+</head>
+<body>
+   <p>一文读懂 YUV 的采样与格式 https://zhuanlan.zhihu.com/p/113122344</p>
+   <p>用 console 画条龙? https://mp.weixin.qq.com/s/FiC3rSqTPUj6YNHbfCkong </p>
+   <p>图像格式RGB/HSV/YUV https://zhuanlan.zhihu.com/p/95952096</p>
+   <p>二值化图像切割，让机器人视觉识别变得简单高效 https://mp.weixin.qq.com/s?__biz=MzI0MDEzODM0Ng==&mid=2247499840&idx=1&sn=596e223703927e66d14f0f3b880af1c2&source=41#wechat_redirect</p>
+   <p>像素操作 https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas</p>
+
+   <div id="hovered-color"></div>
+<script>
+      
+
+    
+// console.log('%c12', 'background-image: url("https://cdn-1.azazie.com/upimg/s360/88/c1/edb6cf72a7fd60387f61830dc05688c1.jpg.webp"); background-size: 100%; padding:267px 300px;')
+//  console.log('%c12', 'background-image: url(/_nuxt/riven/img/4e842ef.svg); background-size: 100%; padding:267px 300px;')
+
+
+// 把图片绘制到canvas里
+var draw = () => {
+    console.dir(img)
+    const canvas = document.createElement('canvas')
+    document.body.appendChild(canvas)
+    canvas.width = img.width
+    canvas.height = img.height
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(img, 0, 0, img.width, img.height)
+    // 获取像素数据
+    const imageData = ctx.getImageData(0, 0, img.width, img.height)
+    const imgData = imageData.data
+    window.imageData = imageData
+    // 拼接字符
+    console.log(imgData)
+    console.log(imgData.__proto__)
+    join(imgData)
+
+    
+var hoveredColor = document.getElementById('hovered-color');
+    function pick(event, destination) {
+        var x = event.layerX;
+        var y = event.layerY;
+        var pixel = ctx.getImageData(x, y, 1, 1);
+        var data = pixel.data;
+
+        const rgba = `rgba(${data[0]}, ${data[1]}, ${data[2]}, ${data[3] / 255})`;
+        destination.style.background = rgba;
+        destination.textContent = rgba;
+
+        return rgba;
+    }
+
+    canvas.addEventListener('mousemove', function(event) {
+        pick(event, hoveredColor);
+    });
+    canvas.addEventListener('click', function(event) {
+        pick(event, hoveredColor);
+        console.log(event)
+        console.log(event.layerX, event.layerY)
+    });
+    // join(imgData)
+}
+var join = (data) => {
+    let gap = 10
+    let str = ''
+    for (let h = 0; h < img.height; h += gap) {
+        str += '\n'
+        for (let w = 0; w < img.width; w += gap) {
+            str += ' '// 因为字符的高度普遍都比其宽度大，所以额外添加一个空字符平衡一下，否则最终的图形会感觉被拉高了
+            let pos = (h * img.width + w) * 4
+            let r = data[pos]
+            let g = data[pos + 1]
+            let b = data[pos + 2]
+            // rgb转换成yuv格式，根据y（亮度）来判断显示什么字符
+            let y = r * 0.299 + g * 0.578 + b * 0.114
+            if (y >= 190) {
+                // 浅色
+                str += ' '
+            } else {
+                // 深色
+                str += '#'
+            }
+        }
+    }
+    console.log(str)
+}
+
+var img = new Image()
+// img.setAttribute('crossorigin', 'anonymous')
+// img.setAttribute('crossorigin', '')
+// img.setAttribute('crossorigin', 'use-credentials')
+// img.src = '../assets/images/ss.jpg'
+img.src = './ss.jpg'
+
+img.onload = () => {
+    draw()
+}
+
+document.body.append(img)
+
+function getData() {
+  var i = 0, map = {}
+
+  while ( i< imgData.byteLength) {
+
+      if (imgData[i]) {
+          map[i] = [imgData[i], imgData[i + 1], imgData[i+2], imgData[i+3]]
+      }
+
+      i +=  4 * 10  
+
+  }
+}
+
+
+document.body.addEventListener('click', function(event) {
+    console.log(event.layerX, event.layerY)
+})
+
+</script>
+</body>
+</html>
