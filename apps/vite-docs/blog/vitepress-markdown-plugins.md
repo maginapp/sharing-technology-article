@@ -1,6 +1,8 @@
 ---
-title: Plugins Test
+title: Plugins 
 ---
+
+# vitepress 插件使用介绍
 
 ## mathjax3
 > markdown-it-mathjax3
@@ -52,7 +54,7 @@ $$\begin{array}{c}
 
 [x] 111
 
-## plantuml
+## textual-uml
 
 > https://www.npmjs.com/package/markdown-it-textual-uml
 

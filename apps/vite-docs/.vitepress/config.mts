@@ -12,23 +12,53 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' },
-      { text: 'Test', link: '/sss' }
+      { text: 'Blog', link: '/blog/' },
+      { text: 'Test', link: '/dev-test/' },
     ],
 
-    sidebar: [
-      {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
+    sidebar: {
+      '/blog/': [
+        {
+          text: 'vite & vitepress',
+          collapsed: true,
+          items: [
+            { text: 'Vitepress Plugins', link: '/blog/vitepress-markdown-plugins' },
+          ]
+        },
+        {
+          text: 'React',
+          collapsed: true,
+          items: [
+            // { text: 'Vite Press Plugins', link: '/blog/plugins' },
+          ]
+        },
+        {
+          text: 'Vue',
+          collapsed: true,
+          items: [
+            // { text: 'Vite Press Plugins', link: '/blog/plugins' },
+          ]
+        },
+      ],
+      '/dev-test/': [
+        {
+          text: 'Dev Test',
+          collapsed: true,
+          items: [
+            { text: 'Introduce', link: '/dev-test/' },
+            { text: 'Markdown Examples', link: '/dev-test/markdown-examples' },
+            { text: 'Runtime API Examples', link: '/dev-test/api-examples' }
+          ]
+        },
+      ],
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
-    ]
+    ],
+    outline: {
+      level: [1,3]
+    }
   },
   markdown: {
     config: (md) => {
