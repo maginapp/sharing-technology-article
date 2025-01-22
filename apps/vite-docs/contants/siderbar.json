@@ -1,0 +1,36 @@
+{
+  "/blog/": [
+    {
+      "text": "Blog",
+      "items": [
+        {
+          "text": "Blog",
+          "link": "/blog/index"
+        },
+        {
+          "text": "Plugins",
+          "link": "/blog/vitepress-markdown-plugins"
+        }
+      ]
+    }
+  ],
+  "/dev-test/": [
+    {
+      "text": "dev 测试页面",
+      "items": [
+        {
+          "text": "Runtime API Examples",
+          "link": "/dev-test/api-examples"
+        },
+        {
+          "text": "dev 测试页面",
+          "link": "/dev-test/index"
+        },
+        {
+          "text": "Markdown Extension Examples",
+          "link": "/dev-test/markdown-examples"
+        }
+      ]
+    }
+  ]
+}
