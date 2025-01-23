@@ -5,10 +5,15 @@
     "start": "vitepress dev ./docs",
     "build": "vitepress build ./docs",
     "preview": "vitepress preview ./docs",
-    "prestart": "tsx ./scripts/createSider.ts"
+    "prestart": "tsx ./scripts/createSider.ts",
+    "serve": "tsx ./scripts/serve.ts"
   },
   "devDependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "vite": "^5.0.12",
     "vite-plugin-mdx": "^3.6.1",
+    "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-react": "^4.0.1",
     "vitepress": "^1.5.0"
   },

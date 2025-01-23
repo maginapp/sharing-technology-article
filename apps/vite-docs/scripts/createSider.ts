@@ -2,7 +2,6 @@ import fs from 'fs/promises';
 import path from 'path';
 import { DefaultTheme } from 'vitepress';
 import { path2title } from '../contants/scripts-config';
-import { text } from 'stream/consumers';
 
 /**
  * 从 Markdown 文件中提取标题
@@ -128,7 +127,7 @@ async function generateConfigObject(baseDir) {
 
   const topLevelDirs = await fs.readdir(baseDir, { withFileTypes: true });
   for (const dir of topLevelDirs) {
-    if (dir.isDirectory() && !dir.name.startsWith('_') && !dir.name.startsWith('.')) {
+    if (dir.isDirectory() && !dir.name.startsWith('_') && !dir.name.startsWith('.') && dir.name.indexOf('dist') === -1 && dir.name !== 'public') {
       const folderPath = path.join(baseDir, dir.name);
       const folderRelativePath = `/${dir.name}/`;
       const items = await traverseDirectory(folderPath, dir.name);

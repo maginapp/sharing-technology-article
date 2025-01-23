@@ -42,9 +42,21 @@ importers:
         specifier: ^11.4.1
         version: 11.4.1
     devDependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      express:
+        specifier: ^4.21.2
+        version: 4.21.2(supports-color@6.1.0)
+      vite:
+        specifier: ^5.0.12
+        version: 5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0)
       vite-plugin-mdx:
         specifier: ^3.6.1
         version: 3.6.1(@mdx-js/mdx@3.1.0(acorn@8.14.0))(vite@5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0))
+      vite-plugin-pwa:
+        specifier: ^0.21.1
+        version: 0.21.1(vite@5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0))(workbox-build@4.3.1)(workbox-window@4.3.1)
       vite-plugin-react:
         specifier: ^4.0.1
         version: 4.0.1(vite@5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0))
@@ -109,6 +121,9 @@ importers:
       '@vssue/vuepress-plugin-vssue':
         specifier: ^1.4.7
         version: 1.4.8(vuepress@1.9.10(@vue/compiler-sfc@3.5.13)(ejs@3.1.10)(hogan.js@3.0.2)(lodash@4.17.21)(prettier@3.4.2))
+      vue:
+        specifier: 2.7.16
+        version: 2.7.16
     devDependencies:
       '@maginapp/vuepress-plugin-flowchart':
         specifier: ^1.0.2
@@ -3821,6 +3836,10 @@ packages:
     resolution: {integrity: sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==}
     engines: {node: '>=8'}
 
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
+    engines: {node: '>=12'}
+
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
@@ -4358,6 +4377,14 @@ packages:
 
   fb-watchman@2.0.2:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
+
+  fdir@6.4.3:
+    resolution: {integrity: sha512-PMXmW2y1hDDfTSRc9gaXIuCCRpuoz3Kaz8cUelp3smouvfT632ozg2vrT6lJsHKKOF59YLbOGfAWGUcKEfRMQw==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
 
   figgy-pudding@3.5.2:
     resolution: {integrity: sha512-0btnI/H8f2pavGMN8w40mlSKOfTK2SVJmBfBeVIj3kNw0swwgzyRq0d5TJVOwodFmtvpPeWPN/MCcfuWF0Ezbw==}
@@ -6931,6 +6958,10 @@ packages:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
 
+  pretty-bytes@6.1.1:
+    resolution: {integrity: sha512-mQUvGU6aUFQ+rNvTIAcZuWGRT9a6f6Yrg9bHs4ImKF+HZCEK+plBvnAZYSIQztknZF2qnzNtr6F8s0+IuptdlQ==}
+    engines: {node: ^14.13.1 || >=16.0.0}
+
   pretty-error@2.1.2:
     resolution: {integrity: sha512-EY5oDzmsX5wvuynAByrmY0P0hcp+QpnAKbJng2A2MPjVKXCxrDSUkzghVJ4ZGPIv+JC4gX8fPUWscC0RtjsWGw==}
 
@@ -7907,6 +7938,10 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
+  tinyglobby@0.2.10:
+    resolution: {integrity: sha512-Zc+8eJlFMvgatPZTl6A9L/yht8QqdmUNtURHaKZLmKBE12hNPSrqNkUp2cs3M/UKmNVVAMFQYSjYIVHDjW5zew==}
+    engines: {node: '>=12.0.0'}
+
   tmpl@1.0.5:
     resolution: {integrity: sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==}
 
@@ -8281,6 +8316,18 @@ packages:
     peerDependencies:
       '@mdx-js/mdx': <2
       vite: <3
+
+  vite-plugin-pwa@0.21.1:
+    resolution: {integrity: sha512-rkTbKFbd232WdiRJ9R3u+hZmf5SfQljX1b45NF6oLA6DSktEKpYllgTo1l2lkiZWMWV78pABJtFjNXfBef3/3Q==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@vite-pwa/assets-generator': ^0.2.6
+      vite: ^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+      workbox-build: ^7.3.0
+      workbox-window: ^7.3.0
+    peerDependenciesMeta:
+      '@vite-pwa/assets-generator':
+        optional: true
 
   vite-plugin-react-pages@5.0.0:
     resolution: {integrity: sha512-nhEo9LciS9Kjg6XhzpsWeYbhBRk9qEIMWX8mXNMrTrnA0d4eF5eWnk8vA4owZhiLiEsYvaG7XtM8CkZa1d/a5Q==}
@@ -13205,6 +13252,8 @@ snapshots:
     dependencies:
       is-obj: 2.0.0
 
+  dotenv@16.4.7: {}
+
   dunder-proto@1.0.1:
     dependencies:
       call-bind-apply-helpers: 1.0.1
@@ -13881,6 +13930,10 @@ snapshots:
   fb-watchman@2.0.2:
     dependencies:
       bser: 2.1.1
+
+  fdir@6.4.3(picomatch@4.0.2):
+    optionalDependencies:
+      picomatch: 4.0.2
 
   figgy-pudding@3.5.2: {}
 
@@ -17244,6 +17297,8 @@ snapshots:
 
   pretty-bytes@5.6.0: {}
 
+  pretty-bytes@6.1.1: {}
+
   pretty-error@2.1.2:
     dependencies:
       lodash: 4.17.21
@@ -18475,6 +18530,11 @@ snapshots:
 
   tinyexec@0.3.2: {}
 
+  tinyglobby@0.2.10:
+    dependencies:
+      fdir: 6.4.3(picomatch@4.0.2)
+      picomatch: 4.0.2
+
   tmpl@1.0.5: {}
 
   to-arraybuffer@1.0.1: {}
@@ -18881,6 +18941,17 @@ snapshots:
       resolve: 1.22.10
       unified: 9.2.2
       vite: 5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0)
+
+  vite-plugin-pwa@0.21.1(vite@5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0))(workbox-build@4.3.1)(workbox-window@4.3.1):
+    dependencies:
+      debug: 4.4.0(supports-color@6.1.0)
+      pretty-bytes: 6.1.1
+      tinyglobby: 0.2.10
+      vite: 5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0)
+      workbox-build: 4.3.1
+      workbox-window: 4.3.1
+    transitivePeerDependencies:
+      - supports-color
 
   vite-plugin-react-pages@5.0.0(@types/react@18.3.18)(acorn@8.14.0)(react@18.3.1)(rollup@4.30.1)(vite@5.4.11(@types/node@20.17.12)(stylus@0.54.8)(terser@5.37.0)):
     dependencies:
