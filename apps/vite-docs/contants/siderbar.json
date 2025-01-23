@@ -1,36 +1,42 @@
 {
   "/blog/": [
     {
-      "text": "Blog",
+      "text": "My React",
+      "items": [],
+      "collapsed": true,
+      "link": "/blog/react/"
+    },
+    {
+      "text": "vite",
       "items": [
         {
-          "text": "Blog",
-          "link": "/blog/index"
-        },
-        {
           "text": "Plugins",
-          "link": "/blog/vitepress-markdown-plugins"
+          "link": "/blog/vite/vitepress-markdown-plugins"
         }
-      ]
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "Vue",
+      "items": [
+        {
+          "text": "Runtime API Examples",
+          "link": "/blog/vue/api-examples"
+        }
+      ],
+      "collapsed": true,
+      "link": "/blog/vue/"
     }
   ],
   "/dev-test/": [
     {
-      "text": "dev 测试页面",
-      "items": [
-        {
-          "text": "Runtime API Examples",
-          "link": "/dev-test/api-examples"
-        },
-        {
-          "text": "dev 测试页面",
-          "link": "/dev-test/index"
-        },
-        {
-          "text": "Markdown Extension Examples",
-          "link": "/dev-test/markdown-examples"
-        }
-      ]
+      "text": "Runtime API Examples",
+      "link": "/dev-test/api-examples"
+    },
+    {
+      "text": "Markdown Examples",
+      "link": "/dev-test/markdown-examples"
     }
   ]
 }

@@ -1,7 +1,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { DefaultTheme } from 'vitepress';
-import { path2title } from '../contants/scripts';
+import { path2title } from '../contants/scripts-config';
+import { text } from 'stream/consumers';
 
 /**
  * 从 Markdown 文件中提取标题
@@ -33,24 +34,35 @@ async function extractTitleFromMarkdown(filePath) {
 }
 
 /**
- * 获取文件夹或文件的标题
+ * 获取路径对应的标题
  * @param {string} relativePath - 相对路径
  * @param {string} folderPath - 文件夹路径
+ * @param {boolean} isFile - 是否为文件
  * @returns {Promise<string>} - 提取的标题
  */
-async function getTitle(relativePath, folderPath) {
+async function getTitle(relativePath, folderPath, isFile = false) {
   // 优先从 path2title 中读取
   if (path2title[relativePath]) {
     return path2title[relativePath];
   }
 
-  // 尝试从文件夹的 index.md 中提取标题
-  const indexPath = path.join(folderPath, 'index.md');
-  try {
-    const title = await extractTitleFromMarkdown(indexPath);
-    if (title) return title;
-  } catch {
-    // index.md 不存在或读取失败时继续
+  if (!isFile) {
+    // 尝试从文件夹的 index.md 中提取标题
+    const indexPath = path.join(folderPath, 'index.md');
+    try {
+      const title = await extractTitleFromMarkdown(indexPath);
+      if (title) return title;
+    } catch {
+      // index.md 不存在或读取失败时继续
+    }
+  } else {
+    // 尝试从当前文件中提取标题
+    try {
+      const title = await extractTitleFromMarkdown(folderPath);
+      if (title) return title;
+    } catch {
+      // 文件读取失败时继续
+    }
   }
 
   // 最后默认使用路径名
@@ -64,7 +76,7 @@ async function getTitle(relativePath, folderPath) {
  * @returns {Promise<Array>} - 生成的 items 数组
  */
 async function traverseDirectory(currentPath, relativePath) {
-  const items: DefaultTheme.Sidebar = [];
+  const items: DefaultTheme.SidebarItem[] = [];
   const entries = await fs.readdir(currentPath, { withFileTypes: true });
 
   for (const entry of entries) {
@@ -76,19 +88,30 @@ async function traverseDirectory(currentPath, relativePath) {
       continue;
     }
 
-    if (entry.isDirectory()) {
-      // 获取文件夹标题
-      const folderTitle = await getTitle(`/${entryRelativePath}/`, entryPath);
+    if (entry.isFile() && entry.name === 'index.md') {
+      continue;
+    } else if (entry.isDirectory()) {
+      // 获取文件夹标题并递归
+      let folderTitle = await getTitle(`/${entryRelativePath}/`, entryPath);
       const nestedItems = await traverseDirectory(entryPath, entryRelativePath);
+      const folderIndexPath = path.join(entryPath, 'index.md');
+      let folderLink = '';
+      if (await fs.access(folderIndexPath).then(() => true).catch(() => false)) {
+        // 如果 index.md 存在，从中提取标题
+        folderLink = `/${entryRelativePath.replace(/\\/g, '/')}/`;
+      }
       items.push({
-        text: folderTitle || entry.name.charAt(0).toUpperCase() + entry.name.slice(1),
+        text: folderTitle,
         items: nestedItems,
+        collapsed: true,
+        link: folderLink,
       });
     } else if (entry.isFile() && entry.name.endsWith('.md')) {
-      // 获取文件标题
-      const title = await extractTitleFromMarkdown(entryPath) || entry.name.replace('.md', '');
-      const link = `/${relativePath.replace(/\\/g, '/')}/${entry.name.replace('.md', '')}`;
-      items.push({ text: title, link });
+      // 处理其他 Markdown 文件
+      const fileRelativePath = `/${entryRelativePath.replace(/\\/g, '/').replace('.md', '')}`;
+      const fileTitle = await getTitle(fileRelativePath, entryPath, true);
+      const link = `/${entryRelativePath.replace(/\\/g, '/').replace('.md', '')}`;
+      items.push({ text: fileTitle, link });
     }
   }
 
@@ -107,16 +130,9 @@ async function generateConfigObject(baseDir) {
   for (const dir of topLevelDirs) {
     if (dir.isDirectory() && !dir.name.startsWith('_') && !dir.name.startsWith('.')) {
       const folderPath = path.join(baseDir, dir.name);
-      const folderTitle = await getTitle(`/${dir.name}/`, folderPath); // 文件夹标题
-      const folderItems = await traverseDirectory(folderPath, dir.name);
-      config[`/${dir.name}/`] = folderItems.length > 0
-        ? [
-            {
-              text: folderTitle || dir.name.charAt(0).toUpperCase() + dir.name.slice(1),
-              items: folderItems,
-            },
-          ]
-        : [];
+      const folderRelativePath = `/${dir.name}/`;
+      const items = await traverseDirectory(folderPath, dir.name);
+      config[folderRelativePath] = items
     }
   }
 
@@ -128,7 +144,6 @@ async function writeJsonToFile(filePath: string, jsonData: object): Promise<void
   await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), "utf-8");
   console.log(`JSON data has been written to ${filePath}`);
 };
-
 
 // 示例使用
 async function main() {

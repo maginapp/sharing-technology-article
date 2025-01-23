@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import taskLists from 'markdown-it-task-lists'
 import markdownItTextualUml from 'markdown-it-textual-uml';
+import siderJson from '../../contants/siderbar.json'
 
 
 // https://vitepress.dev/reference/site-config
@@ -16,42 +17,43 @@ export default defineConfig({
       { text: 'Test', link: '/dev-test/' },
     ],
 
-    sidebar: {
-      '/blog/': [
-        {
-          text: 'vite & vitepress',
-          collapsed: true,
-          items: [
-            { text: 'Vitepress Plugins', link: '/blog/vitepress-markdown-plugins' },
-          ]
-        },
-        {
-          text: 'React',
-          collapsed: true,
-          items: [
-            // { text: 'Vite Press Plugins', link: '/blog/plugins' },
-          ]
-        },
-        {
-          text: 'Vue',
-          collapsed: true,
-          items: [
-            // { text: 'Vite Press Plugins', link: '/blog/plugins' },
-          ]
-        },
-      ],
-      '/dev-test/': [
-        {
-          text: 'Dev Test',
-          collapsed: true,
-          items: [
-            { text: 'Introduce', link: '/dev-test/' },
-            { text: 'Markdown Examples', link: '/dev-test/markdown-examples' },
-            { text: 'Runtime API Examples', link: '/dev-test/api-examples' }
-          ]
-        },
-      ],
-    },
+    sidebar: siderJson,
+    // {
+    //   '/blog/': [
+    //     {
+    //       text: 'vite & vitepress',
+    //       // collapsed: true,
+    //       items: [
+    //         { text: 'Vitepress Plugins', link: '/blog/vitepress-markdown-plugins' },
+    //       ]
+    //     },
+    //     {
+    //       text: 'React',
+    //       collapsed: true,
+    //       items: [
+    //         // { text: 'Vite Press Plugins', link: '/blog/plugins' },
+    //       ]
+    //     },
+    //     {
+    //       text: 'Vue',
+    //       collapsed: true,
+    //       items: [
+    //         // { text: 'Vite Press Plugins', link: '/blog/plugins' },
+    //       ]
+    //     },
+    //   ],
+    //   '/dev-test/': [
+    //     {
+    //       text: 'Dev Test',
+    //       collapsed: true,
+    //       items: [
+    //         { text: 'Introduce', link: '/dev-test/' },
+    //         { text: 'Markdown Examples', link: '/dev-test/markdown-examples' },
+    //         { text: 'Runtime API Examples', link: '/dev-test/api-examples' }
+    //       ]
+    //     },
+    //   ],
+    // },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
