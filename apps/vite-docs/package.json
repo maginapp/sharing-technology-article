@@ -9,15 +9,20 @@
     "serve": "tsx ./scripts/serve.ts"
   },
   "devDependencies": {
+    "@vite-pwa/vitepress": "0.5.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "vite": "^5.0.12",
+    "vite": "^6.0.11",
     "vite-plugin-mdx": "^3.6.1",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-react": "^4.0.1",
     "vitepress": "^1.5.0"
   },
   "dependencies": {
+    "workbox-core": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
+    "workbox-routing": "^7.3.0",
+    "workbox-strategies": "^7.3.0",
     "markdown-it-mathjax3": "^4.3.2",
     "markdown-it-task-lists": "^2.1.1",
     "markdown-it-textual-uml": "^0.17.1",

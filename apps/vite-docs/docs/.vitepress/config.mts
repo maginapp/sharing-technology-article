@@ -2,12 +2,11 @@ import { defineConfig } from 'vitepress'
 import taskLists from 'markdown-it-task-lists'
 import markdownItTextualUml from 'markdown-it-textual-uml';
 import siderJson from '../../contants/siderbar.json'
-
-import { VitePWA } from 'vite-plugin-pwa';
-
+import { withPwa } from '@vite-pwa/vitepress'
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
+
+const configs= defineConfig({
   base: '/',
   title: "Magina Sharing Portal",
   description: "A personal sharing portal about tech,  daily news etc",
@@ -38,39 +37,78 @@ export default defineConfig({
     },
     math: true,
   },
-  vite: {
-    plugins: [
-      VitePWA({
-        registerType: 'autoUpdate', // 自动更新 Service Worker
-        includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'], // 包含的静态资源
-        manifest: {
-          name: '你的应用名称',
-          short_name: '应用简称',
-          description: '你的应用描述',
-          theme_color: '#ffffff',
-          icons: [
-            {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable',
-            },
-          ],
+  // @ts-ignore
+  pwa: {
+    mode: 'development',
+    registerType: 'autoUpdate',
+    strategies: 'injectManifest',
+    srcDir: '.vitepress/',
+    filename: 'sw.ts',
+    // injectRegister: 'inline',
+    includeAssets: ['favicon.svg'],
+    manifest: {
+      name: 'Sharing tech | Magina',
+      short_name: 'Magina Blog',
+      description: "Progressive Web App of sharing-technology-article",
+      icons: [
+        {
+          "src": "./icons/icon-32.png",
+          "sizes": "32x32",
+          "type": "image/png"
         },
-        workbox: {
-          globPatterns: ['**/*.{js,css,html,png,svg}'], // 缓存规则
+        {
+            "src": "./icons/icon-64.png",
+            "sizes": "64x64",
+            "type": "image/png"
         },
-      }),
-    ]
-  }
+        {
+            "src": "./icons/icon-96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/icon-128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/icon-168.png",
+            "sizes": "168x168",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "./icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+      ],
+      start_url: "./index.html",
+      display: "fullscreen",
+      theme_color: "#B12A34",
+      background_color: "#CCCCCC"
+    },
+    injectManifest: {
+      globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'],
+    },
+    devOptions: {
+      enabled: true,
+      suppressWarnings: true,
+      type: 'module',
+      navigateFallback: '/',
+    },
+  },
 })
+
+
+// @ts-ignore
+export default withPwa(configs);

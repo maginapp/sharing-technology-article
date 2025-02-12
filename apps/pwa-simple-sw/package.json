@@ -1,0 +1,26 @@
+{
+  "name": "pwa-simple-sw",
+  "type": "module",
+  "version": "0.0.0",
+  "private": "true",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "nr build && vitepress serve",
+    "https": "nr build && serve .vitepress/dist"
+  },
+  "devDependencies": {
+    "@vite-pwa/vitepress": "0.5.3",
+    "https-localhost": "^4.7.1",
+    "typescript": "^5.2.2",
+    "vite": "^6.0.11",
+    "vite-plugin-pwa": "^0.20.5",
+    "vitepress": "^1.1.4"
+  },
+  "dependencies": {
+    "workbox-core": "^7.3.0",
+    "workbox-precaching": "^7.3.0",
+    "workbox-routing": "^7.3.0",
+    "workbox-strategies": "^7.3.0"
+  }
+}
