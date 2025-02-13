@@ -18,4 +18,4 @@ deploy:
   github_token: $GITHUB_TOKEN # GitHub 令牌，需在 Travis 项目配置中设置
   keep_history: true
   on:
-    branch: feat/mono-doc
+    branch: master
