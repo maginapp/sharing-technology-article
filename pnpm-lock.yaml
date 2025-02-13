@@ -235,6 +235,15 @@ importers:
         specifier: '>=0.1.4'
         version: 0.1.4
 
+  packages/code-demo:
+    dependencies:
+      immer:
+        specifier: ^10.1.1
+        version: 10.1.1
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
+
 packages:
 
   '@algolia/autocomplete-core@1.17.7':
@@ -6418,6 +6427,9 @@ packages:
 
   immediate@3.3.0:
     resolution: {integrity: sha512-HR7EVodfFUdQCTIeySw+WDRFJlPcLOJbXfwwZ7Oom6tjsvZ3bOkCDJHehQC3nxJrv7+f9XecwazynjU8e4Vw3Q==}
+
+  immer@10.1.1:
+    resolution: {integrity: sha512-s2MPrmjovJcoMaHtx6K11Ra7oD05NT97w1IC5zpMkT6Atjr7H8LjaDd81iIxUYpMKSRRNMJE703M1Fhr/TctHw==}
 
   import-cwd@2.1.0:
     resolution: {integrity: sha512-Ew5AZzJQFqrOV5BTW3EIoHAnoie1LojZLXKcCQ/yTRyVZosBhK1x1ViYjHGf5pAFOq8ZyChZp6m/fSN7pJyZtg==}
@@ -18462,6 +18474,8 @@ snapshots:
   ignore@5.3.1: {}
 
   immediate@3.3.0: {}
+
+  immer@10.1.1: {}
 
   import-cwd@2.1.0:
     dependencies:

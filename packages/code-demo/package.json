@@ -1,0 +1,16 @@
+{
+  "name": "code-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "immer": "^10.1.1",
+    "tsx": "^4.19.2"
+  }
+}
