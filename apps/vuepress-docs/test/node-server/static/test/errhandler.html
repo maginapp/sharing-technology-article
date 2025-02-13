@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      min-width: 50px;
+      min-height: 50px;
+      max-width: 400px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div>
+      img:
+      <img src="/dsadsad.png" alt="">
+      <img src="https://cdn-1.azazie.com/upimg/userfiles/images/aa/cb/7074b9dc41446fd7a397f8d38348aacb.jpg.webp" alt="">
+      <img src="https://cdn-1.azazie.com/upimg/userfiles/imagess/9f/bf/ecf875c42efef63a53b4bde7a6549fbf.png.webp" alt="">
+    </div>
+    <div class="controls">
+      <button id="script-error" type="button">Generate script error</button>
+      <img class="bad-img" />
+    </div>
+    <img src="https://www.azazie.com/all/" alt="">
+  </div>
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      // js报错 含异步
+      console.log('window.onerror 捕获到异常：', { message, source, lineno, colno, error })
+      // return true // 若该函数返回true，则阻止执行默认事件处理函数。
+      return true
+    }
+    window.addEventListener('error', function (e) {
+      // 资源加载失败时
+      console.log('window.addEventListener 捕获到异常：', e)
+    }, true)
+    window.addEventListener('unhandledrejection', function (e) {
+      // 未catch的 promise reject错误
+      console.log('window.unhandledrejection 捕获到异常：', e)
+      return true
+    }, true)
+  </script>
+  <script>
+    // 事件报错
+    const scriptError = document.querySelector('#script-error')
+    scriptError.addEventListener('click', () => {
+        const badCode = Math.random() > .5 ? 'const s;' : 'const s = "ss'
+        eval(badCode)
+    })
+    // 桶步
+    try {
+      d = a + dd
+    } catch(e) {
+      console.log('try catch 捕获到同步异常：', e)
+    }
+    // 异步
+    try {
+      setTimeout(() => {
+        var a 
+        a.map(v => v);
+      }, 1000)
+    } catch(e) {
+      // 异步无法捕获
+      console.log('try catch 捕获到异步异常：', e)
+    }
+    // Promise catch
+    Promise.reject('promise error catch').then(res => {
+        console.log(res)
+    }).catch(err => {
+        console.log('Promise catch 捕获到异步异常：',err)
+    })
+    // Promise reject
+    Promise.reject('promise error reject')
+  </script>
+  <script>
+    a = 1
+    b = a + c
+    console.log('js-end')
+  </script>
+  <script>
+    try {
+      d = a + 'da
+    } catch(e) {
+      console.log('try catch 捕获到同步异常：', e)
+    }
+  </script>
+
+  <script>
+    try {
+      setTimeout(() => {
+        Promise.reject('promise error')
+        new Promise((res,rej) => {
+          rej(1)
+        })
+        new Promise((res) => {
+          adsada = dasdsa
+        })
+      }, 1000)
+    } catch {}
+  </script>
+  
+
+  <iframe src="http://www.baidu.com/iframe.html" frameborder="0"></iframe>
+  <iframe src="./errhandler-frame.html" frameborder="0"></iframe>
+  <script>
+    window.frames[0].onerror = function (message, source, lineno, colno, error) {
+      console.log('捕获到 iframe onerror 异常：',{message, source, lineno, colno, error})
+      return true
+    }
+    window.frames[0].addEventListener('error', function (message, source, lineno, colno, error) {
+      console.log('捕获到 iframe addEventListener 异常：',{message, source, lineno, colno, error})
+      return true
+    })
+  </script>
+  
+</body>
+</html>

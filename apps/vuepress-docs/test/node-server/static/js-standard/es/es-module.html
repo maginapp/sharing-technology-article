@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+
+  </div>
+  <script type="module">
+    import {addTextToBody} from './utils.js';
+    import  { a } from './m1.js'
+    import  m3 from './m3.js'
+    import  m2 from './m2.js'
+    console.log(m3.a)
+    console.log(a)
+    console.log(m3)
+    console.log(m2)
+    m2.m3.a++
+    console.log(m3.a)
+    
+    console.log('a===>', a)
+    setTimeout(() => {
+      console.log('in html 500', a)
+    }, 500)
+  
+    addTextToBody('Modules are pretty cool.');
+  </script>
+  <script type="module">
+    import  m3 from './m3.js'
+    import  m2 from './m2.js'
+    console.log(m3)
+    console.log(m3.a)
+    m2.m3.a++
+    console.log(m3.a)
+  </script>
+  <script type="module">
+    import  { a, addA } from './m1.js'
+    console.log('module-1', a)
+  </script>
+  <script type="module">
+    import  { a, addA } from './m1.js'
+    console.log('module-2', a)
+    addA()
+    console.log('module-2 after addA', a)
+    setTimeout(() => {
+      console.log('module-2-delay', a)
+    }, 1000);
+  </script>
+</body>
+</html>

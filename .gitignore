@@ -13,3 +13,8 @@
 
 /test/node-server/static/gif
 
+
+/**/dist/
+/**/dev-dist/
+
+/**/.vitepress/cache/**

@@ -1,0 +1,15 @@
+/node_modules
+/docs/.vuepress/dist/
+.git/
+/**/node_modules
+/docs/.vuepress/public-wait-webp
+/docs/.vuepress/public-wait-min
+
+
+/test/node-server/static/images-base-min
+/test/node-server/static/images-base-to-webp
+/test/node-server/static/images-base-static-website
+/test/node-server/static/images-base-static-website-webp
+
+/test/node-server/static/gif
+

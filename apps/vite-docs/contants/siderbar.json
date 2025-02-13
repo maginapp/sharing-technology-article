@@ -1,0 +1,446 @@
+{
+  "/blog/": [
+    {
+      "text": "My React",
+      "items": [],
+      "collapsed": true,
+      "link": "/blog/react/"
+    },
+    {
+      "text": "vite",
+      "items": [
+        {
+          "text": "Plugins",
+          "link": "/blog/vite/vitepress-markdown-plugins"
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "Vue",
+      "items": [
+        {
+          "text": "Runtime API Examples",
+          "link": "/blog/vue/api-examples"
+        }
+      ],
+      "collapsed": true,
+      "link": "/blog/vue/"
+    }
+  ],
+  "/dev-test/": [
+    {
+      "text": "Runtime API Examples",
+      "link": "/dev-test/api-examples"
+    },
+    {
+      "text": "Markdown Examples",
+      "link": "/dev-test/markdown-examples"
+    }
+  ],
+  "/migrate/": [
+    {
+      "text": "about-config",
+      "items": [
+        {
+          "text": "Sequence Diagram",
+          "link": "/migrate/about-config/md-Sequence-Diagram"
+        },
+        {
+          "text": "VSCode配置多行标签栏",
+          "link": "/migrate/about-config/vscode-multi-column"
+        },
+        {
+          "text": "flowchart绘图简要说明",
+          "link": "/migrate/about-config/vuepress-flowchart"
+        },
+        {
+          "text": "vuepress搭建网站踩坑",
+          "link": "/migrate/about-config/vuepress-github-website"
+        },
+        {
+          "text": "vuepress实用功能及插件简介",
+          "link": "/migrate/about-config/vuepress-plugin-introduce"
+        },
+        {
+          "text": "vuepress相关",
+          "link": "/migrate/about-config/vuepress-toc"
+        },
+        {
+          "text": "webpack",
+          "items": [
+            {
+              "text": "构建自己的CLI工具",
+              "link": "/migrate/about-config/webpack/self-cli"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "algorithm",
+      "items": [
+        {
+          "text": "算法相关",
+          "link": "/migrate/algorithm/README"
+        },
+        {
+          "text": "demo",
+          "items": [
+            {
+              "text": "最大递增序列",
+              "link": "/migrate/algorithm/demo/longest-increasing-subsequence"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "dvide_and_conquer",
+          "items": [
+            {
+              "text": "分治法",
+              "link": "/migrate/algorithm/dvide_and_conquer/README"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "dynamic-programming",
+          "items": [
+            {
+              "text": "动态规划",
+              "link": "/migrate/algorithm/dynamic-programming/README"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "engineering",
+      "items": [],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "frontend-records",
+      "items": [
+        {
+          "text": "browser-render",
+          "items": [],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "css",
+          "items": [
+            {
+              "text": "css常用初始化样式",
+              "link": "/migrate/frontend-records/css/css-init"
+            },
+            {
+              "text": "几个特殊的css属性",
+              "link": "/migrate/frontend-records/css/special-css"
+            },
+            {
+              "text": "sticky",
+              "link": "/migrate/frontend-records/css/sticky"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "dom-bom",
+          "items": [
+            {
+              "text": "文本复制方法简介",
+              "link": "/migrate/frontend-records/dom-bom/copy-text"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "ES6-12新特性",
+          "link": "/migrate/frontend-records/ecmascript"
+        },
+        {
+          "text": "js",
+          "items": [],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "microservice",
+          "items": [
+            {
+              "text": "服务降级",
+              "link": "/migrate/frontend-records/microservice/service-degradation"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "network",
+          "items": [],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "发布自己的npm包",
+          "link": "/migrate/frontend-records/npm-publish"
+        },
+        {
+          "text": "performance",
+          "items": [
+            {
+              "text": "Performance Timing API简介",
+              "link": "/migrate/frontend-records/performance/performance-api"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "pwa",
+          "items": [
+            {
+              "text": "webpsuh",
+              "link": "/migrate/frontend-records/pwa/pwa-webpush"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "safe",
+          "items": [
+            {
+              "text": "前端攻击简介",
+              "link": "/migrate/frontend-records/safe/web-attack"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "服务端渲染优缺点",
+          "link": "/migrate/frontend-records/ssr-introduce"
+        },
+        {
+          "text": "views",
+          "items": [
+            {
+              "text": "gif图片生成",
+              "link": "/migrate/frontend-records/views/image-gif"
+            },
+            {
+              "text": "sharp图片转化",
+              "link": "/migrate/frontend-records/views/image-sharp"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "html-test",
+      "items": [
+        {
+          "text": "锚点功能测试",
+          "link": "/migrate/html-test/hash-test"
+        },
+        {
+          "text": "just-test",
+          "link": "/migrate/html-test/just-test"
+        },
+        {
+          "text": "测试页面汇总",
+          "link": "/migrate/html-test/summary-test"
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "node-server",
+      "items": [
+        {
+          "text": "file",
+          "items": [
+            {
+              "text": "nodejs文件锁",
+              "link": "/migrate/node-server/file/file-lock"
+            },
+            {
+              "text": "node-crawler爬虫",
+              "link": "/migrate/node-server/file/node-crawler"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "koa",
+          "items": [
+            {
+              "text": "koa-自定义koa-bodyParser",
+              "link": "/migrate/node-server/koa/koa-bodyParser-myself"
+            },
+            {
+              "text": "koa2服务端-中间件",
+              "link": "/migrate/node-server/koa/koa-middleware"
+            },
+            {
+              "text": "koa-mysql",
+              "link": "/migrate/node-server/koa/koa-mysql"
+            },
+            {
+              "text": "koa-router",
+              "link": "/migrate/node-server/koa/koa-router"
+            },
+            {
+              "text": "node-server入门搭建",
+              "link": "/migrate/node-server/koa/koa-server-init"
+            },
+            {
+              "text": "koa-toc",
+              "link": "/migrate/node-server/koa/koa-toc"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "standard",
+      "items": [
+        {
+          "text": "BEM-css类名规范",
+          "link": "/migrate/standard/css-BEM"
+        },
+        {
+          "text": "git提交注释规范",
+          "link": "/migrate/standard/git-commit"
+        },
+        {
+          "text": "Internet协议初探",
+          "link": "/migrate/standard/internet"
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "store",
+      "items": [
+        {
+          "text": "Goal",
+          "link": "/migrate/store/Goal"
+        },
+        {
+          "text": "mobx",
+          "items": [],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "redux",
+          "items": [
+            {
+              "text": "goal",
+              "link": "/migrate/store/redux/goal"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "vuex",
+          "items": [],
+          "collapsed": true,
+          "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "vue",
+      "items": [
+        {
+          "text": "Vue的常用优化点",
+          "link": "/migrate/vue/promote-of-vue"
+        },
+        {
+          "text": "vue3-compiler",
+          "link": "/migrate/vue/vue3-compiler"
+        },
+        {
+          "text": "vue3-diff算法解析",
+          "link": "/migrate/vue/vue3-diff"
+        },
+        {
+          "text": "vue3-effect-api相关解析",
+          "link": "/migrate/vue/vue3-effect-api"
+        },
+        {
+          "text": "vue3简介",
+          "link": "/migrate/vue/vue3-introduce"
+        },
+        {
+          "text": "vue3-lifecycle生命周期简析",
+          "link": "/migrate/vue/vue3-lifecycle"
+        },
+        {
+          "text": "vue3元素渲染流程简介",
+          "link": "/migrate/vue/vue3-mountElement"
+        },
+        {
+          "text": "vue3解析",
+          "link": "/migrate/vue/vue3-parse-doc"
+        },
+        {
+          "text": "vue3-reactivity响应式简析",
+          "link": "/migrate/vue/vue3-reactive"
+        },
+        {
+          "text": "vue3-render简析",
+          "link": "/migrate/vue/vue3-render"
+        },
+        {
+          "text": "vue3-renderComponentRoot",
+          "link": "/migrate/vue/vue3-renderComponentRoot"
+        },
+        {
+          "text": "vue3-scheduler-nextTick",
+          "link": "/migrate/vue/vue3-scheduler"
+        },
+        {
+          "text": "vue3-vnode简析",
+          "link": "/migrate/vue/vue3-vnode"
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    }
+  ]
+}

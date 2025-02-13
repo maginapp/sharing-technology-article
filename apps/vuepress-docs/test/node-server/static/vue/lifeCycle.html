@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<script src="../js/vue3.js"></script>
+<div id="app">
+  <hr>
+  num: {{num}}
+  <hr />
+  <button @click="onBtnClick">click</button>
+  <button onclick="app.unmount()">unmount</button>
+</div>
+<script>
+  const { ref, computed, reactive, watch, watchEffect, nextTick } = Vue
+  const app = Vue.createApp({
+    beforeCreate() {
+      console.log('beforeCreate')
+    },
+    setup() {
+      console.log('setup')
+      const fn = async  () => {
+        console.log(1)
+        await nextTick()
+        console.log(3)
+        nextTick(() => {
+          console.log(4)
+        })
+      }
+      fn()
+      console.log(2)
+      
+      const num = ref(1)
+      num.value++ 
+
+      const onBtnClick= () => {
+        num.value += 1
+      }
+
+      watchEffect(() => {
+          console.log('watchEffect', num)
+      })
+
+      watch(() => num.value, (val, preVal) => {
+          console.log('watch cb => ref', val, preVal) //  3 2
+      })
+      
+      return {
+        num,
+        onBtnClick
+      }
+    },
+    created() {
+      console.log('created')
+    },
+    beforeMount() {
+      console.log('beforeMount')
+    },
+    mounted() {
+      console.log('mounted')
+    },
+    beforeUpdate() {
+      console.log('beforeUpdate')
+    },
+    updated() {
+      console.log('updated')
+    },
+    beforeUnmount() {
+      console.log('beforeUnmount')
+    },
+    unmounted() {
+      console.log('mounted')
+    },
+  })
+  app.mount('#app')
+  console.log(app)
+</script>
+</body>
+</html>

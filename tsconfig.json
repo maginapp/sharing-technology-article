@@ -1,0 +1,36 @@
+
+{
+    "compilerOptions": {
+      /* 基础设置 */
+      "target": "ESNext",                   // 编译的 JavaScript 版本（ESNext 提供最新的语言特性）
+      "module": "ESNext",                   // 使用 ES Modules 模块系统
+      "moduleResolution": "Node",           // Node.js 风格的模块解析
+      "strict": true,                       // 启用严格模式
+      "esModuleInterop": true,              // 兼容 CommonJS 和 ES Module 导入
+      "skipLibCheck": true,                 // 跳过库类型检查，加快编译速度
+      "forceConsistentCasingInFileNames": true, // 强制文件名区分大小写
+  
+      /* 输出设置 */
+      "outDir": "./dist",                   // 输出文件夹
+      "rootDir": "./",                      // 输入文件夹的根目录
+  
+      /* 类型支持 */
+      "resolveJsonModule": true,            // 支持导入 JSON 文件
+      "typeRoots": ["./node_modules/@types"], // 定义全局类型声明的位置
+      "allowSyntheticDefaultImports": true, // 允许默认导入非 ES 模块
+  
+      /* Node.js 和运行时支持 */
+      "lib": ["ESNext", "DOM"],             // 包括最新的 ES 和 DOM 类型
+      "allowJs": true,                      // 允许编译 JS 文件
+      "noEmit": false,                      // 允许生成编译结果（控制是否生成 `.js` 文件）
+  
+      /* 其他设置 */
+      "baseUrl": ".",                       // 项目根目录
+      "paths": {
+        "@/*": ["src/*"]                    // 支持路径别名，例如 "@/utils" -> "src/utils"
+      }
+    },
+    "include": ["./scripts/**/*.ts"],        // 包含的文件范围
+    "exclude": ["node_modules", "./dist"]   // 排除的文件夹
+  }
+  

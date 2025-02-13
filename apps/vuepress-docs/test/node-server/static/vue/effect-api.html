@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+<!-- <script src="https://unpkg.com/vue@next"></script> -->
+<script src="../js/vue3.js"></script>
+<div id="app">
+  <hr>
+  {{num}} : {{numAdd}}
+  count: {{count}} msg: {{msg}}
+  a: {{a}}
+  <hr><button @click="onBtnClick">click</button>
+  <hr><button @click="onBtnDeepClick">onBtnDeepClick</button>
+</div>
+<script>
+  const { ref, computed, reactive, watch, watchEffect, nextTick } = Vue
+  const app = Vue.createApp({
+    setup() {
+      const fn = async  () => {
+        console.log(1)
+        await nextTick()
+        console.log(3)
+        nextTick(() => {
+          console.log(4)
+        })
+      }
+      fn()
+      console.log(2)
+      // ref
+      const num = ref(1)
+      const numAdd = computed(() => num.value + 1) // numAdd 2
+      num.value++ // num 2 => numAdd 3
+
+      // setter getter
+      const count = ref(1)
+      let msg = computed({
+        set(value) {
+          count.value = value + 3
+        },
+        get() {
+          return 'count is ' + count.value
+        }
+      })
+      count.value = 5 // count is 5
+      msg._setter(6) /// count is 9
+
+      const data = reactive({a: 1, deep: {data: 2}})
+      const a = computed(() => data.a + 1) // 2
+
+
+      const onBtnClick= () => {
+        num.value += 1
+        data.a += 1
+      }
+
+      const onBtnDeepClick= () => {
+        data.deep.data += 1
+      }
+
+      watchEffect(() => {
+          console.log('watchEffect', data.a) // 1
+      })
+
+      watch(() => num.value, (val, preVal) => {
+          console.log('watch cb => ref', val, preVal) //  3 2
+      })
+      watch(num, (val, preVal) => {
+          console.log('watch ref', val, preVal) // 3 2
+      })
+      watch(() => data.a, (val, preVal) => {
+          console.log('watch cb => reactive', val == preVal, val, preVal) // false  2 1
+      })
+      watch(data, (val, preVal) => {
+          console.log('watch reactive', val == preVal, val, preVal) // true Proxy {a: 2} Proxy {a: 2}
+      })
+      
+      watch([num, () => data.a], ([num, a], [numOld, aOld]) => {
+          console.log('watch array', num, a, numOld, aOld) // 3 2 2 1
+      })
+      
+      return {
+        num,
+        numAdd,
+        msg,
+        count,
+        a,
+        onBtnClick,
+        onBtnDeepClick
+      }
+    }
+  })
+  app.mount('#app')
+</script>
+</body>
+</html>

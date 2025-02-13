@@ -1,0 +1,35 @@
+{
+  "name": "node-server-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js",
+    "img:minT": "cross-env imgType=minT node imageMin.js",
+    "img:webpT": "cross-env imgType=webpT  node imageMin.js",
+    "img:min": "cross-env imgType=min  node imageMin.js",
+    "img:webp": "cross-env imgType=webp  node imageMin.js",
+    "img:website": "cross-env imgType=website  node imageMin.js",
+    "img": "cross-env imgType=  node imageMin.js",
+    "img:test": "npm run img:minT && npm run img:webpT",
+    "img:docs": "npm run img:min && npm run img:webp"
+  },
+  "author": "magina.cheng",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "canvas": "^2.7.0",
+    "gifencoder": "^2.0.1",
+    "koa": "^2.13.1",
+    "koa-body": "^4.2.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "log4js": "^6.3.0",
+    "nodemon": "^2.0.7",
+    "sharp": "^0.27.2"
+  }
+}
