@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "docs:build": "pnpm --filter @magina/vite-docs build",
     "dev": "vuepress dev docs",
     "build": "vuepress build docs",
     "node:test": "nodemon node-server-test.js"

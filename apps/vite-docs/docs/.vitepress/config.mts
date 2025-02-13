@@ -17,6 +17,7 @@ const configs= defineConfig({
       { text: 'Home', link: '/' },
       { text: 'Blog', link: '/blog/' },
       { text: 'Test', link: '/dev-test/' },
+      { text: 'Migrate', link: '/migrate/' },
     ],
 
     sidebar: siderJson,

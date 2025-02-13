@@ -1,15 +1,21 @@
 language: node_js
 node_js:
   - lts/*
+
 install:
-  - npm ci
+  - corepack enable # 确保支持 pnpm
+  - corepack prepare pnpm@latest --activate # 更新到最新 pnpm
+  - pnpm --version # 检查 pnpm 版本
+  - pnpm install # 使用 pnpm 安装依赖
+
 script:
-  - npm run build
+  - pnpm run build # 使用 pnpm 执行构建
+
 deploy:
   provider: pages
   skip_cleanup: true
-  local_dir: docs/.vuepress/dist
-  github_token: $GITHUB_TOKEN # 在 GitHub 中生成，用于允许 Travis 向你的仓库推送代码。在 Travis 的项目设置页面进行配置，设置为 secure variable
+  local_dir: apps/vite-docs/docs/.vitepress/dist
+  github_token: $GITHUB_TOKEN # GitHub 令牌，需在 Travis 项目配置中设置
   keep_history: true
   on:
-    branch: master
+    branch: feat/mono-doc
