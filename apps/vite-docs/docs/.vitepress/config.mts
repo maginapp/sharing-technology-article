@@ -26,7 +26,7 @@ const configs= defineConfig({
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ],
     outline: {
-      level: [1,3]
+      level: [1, 7]
     }
   },
   markdown: {
