@@ -36,6 +36,32 @@
       .number-list > li:nth-child(12) {
         margin-right: 5px;
       }
+
+      h1 {
+        word-break: break-all;
+      }
+
+
+
+      table.intro  {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .intro th, .intro td {
+        border: 1px solid #aaa;
+        padding: 10px;
+        text-align: center;
+      }
+      .intro th {
+        background-color: #f2f2f2;
+      }
+      .intro code {
+        font-size: 0.95em;
+        background-color: #f9f9f9;
+        padding: 2px 4px;
+        border-radius: 3px;
+      }
     </style>
   </head>
   <body>
@@ -87,16 +113,19 @@
       function handleInput(numStr) {
         let arr = numStr.split('.');
         let isPositive = numStr[0] !== '-';
-        let intStr = isPositive ? arr[0] : arr[0].slice(1);
 
         const intStrByte = handleInt(arr[0]);
 
         const isOnlyDecimal = intStrByte === '0';
 
         const { decimalByte, coe } = handleDecimal(arr[1], isOnlyDecimal ? 53 : 52 - (intStrByte.length - 1));
-
+        console.log(coe, decimalByte);
         if (isOnlyDecimal) {
-          return getNum(isPositive, 1023 - coe, decimalByte.slice(1));
+          if (coe > 1022) {
+            return ('0' + '0'.repeat(11) + ('0'.repeat(coe - 1023) + decimalByte)).slice(0, 64);
+          } else {
+            return getNum(isPositive, 1023 - coe, decimalByte.slice(1));
+          }
         } else {
           let trail = intStrByte + decimalByte;
           return getNum(isPositive, 1023 + (intStrByte.length - 1), trail.slice(1).slice(0, 52));
@@ -223,10 +252,10 @@
           key: 'value',
         },
         {
-          name: 'Number.MIN_VALUE 存疑',
-          //   value: Number.MIN_VALUE,
-          value:
-            '0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014',
+          name: 'Number.MIN_VALUE',
+            value: Number.MIN_VALUE,
+          // value:
+            // '0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014',
           //   //   value:
           //     '0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005',
           key: 'value',
@@ -250,6 +279,9 @@
         if (strategyMap[value]) {
           return strategyMap[value];
         }
+        // if (value === Number.MIN_VALUE) {
+        //   return '0'.repeat(63) + '1';
+        // }
         // 超大数处理
         return handleInput(initNum(value));
       }
@@ -325,5 +357,66 @@
 
       render(html`<${App} />`, document.body);
     </script>
+
+    <h1>IEEE 754 特殊数字表示（64位 双精度）</h1>
+
+    <table class="intro">
+      <thead>
+        <tr>
+          <th>数值</th>
+          <th>符号位</th>
+          <th>指数（11 位）</th>
+          <th>尾数（52 位）</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>+0</td>
+          <td>0</td>
+          <td>00000000000</td>
+          <td>000...000（全为0）</td>
+          <td>正零</td>
+        </tr>
+        <tr>
+          <td>-0</td>
+          <td>1</td>
+          <td>00000000000</td>
+          <td>000...000（全为0）</td>
+          <td>负零</td>
+        </tr>
+        <tr>
+          <td>+∞</td>
+          <td>0</td>
+          <td>11111111111</td>
+          <td>000...000（全为0）</td>
+          <td>正无穷</td>
+        </tr>
+        <tr>
+          <td>-∞</td>
+          <td>1</td>
+          <td>11111111111</td>
+          <td>000...000（全为0）</td>
+          <td>负无穷</td>
+        </tr>
+        <tr>
+          <td>NaN</td>
+          <td>任意</td>
+          <td>11111111111</td>
+          <td>非全为0（如：100...000）</td>
+          <td>非数字</td>
+        </tr>
+        <tr>
+          <td>非规格化数</td>
+          <td>0 或 1</td>
+          <td>00000000000</td>
+          <td>非全为0</td>
+          <td>用于表示非常接近 0 的小数</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>注：非规格化数（Subnormal）用于解决“渐进下溢”问题，避免浮点数在接近 0 时直接变为 0。</p>
+
   </body>
 </html>
