@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IEEE 754 64位</title>
+    <style>
+      .number-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+      }
+      .number-list > li {
+        list-style: none;
+        width: 14px;
+        height: 14px;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .number-list > li:nth-child(1) {
+        background: #dcd0d0;
+      }
+      .number-list > li:nth-child(n + 2):nth-child(-n + 12) {
+        background: #aad5d4;
+      }
+      .number-list > li:nth-child(n + 13) {
+        background: #cedabb;
+      }
+
+      .number-list > li:nth-child(1),
+      .number-list > li:nth-child(12) {
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      function getNum(isPositive, baseE, mStr) {
+        let str = '';
+        const S = isPositive ? '0' : '1';
+        let E = baseE.toString(2);
+        if (E.length < 11) {
+          E = '0'.repeat(11 - E.length) + E;
+        }
+        let M = mStr;
+        if (M.length < 52) {
+          M = M + '0'.repeat(52 - M.length);
+        }
+        return S + E + M;
+      }
+
+      function initNum(value) {
+        let valueStr = value.toString();
+        let arr = valueStr.split('e');
+        if (arr.length === 1) {
+          return valueStr;
+        }
+        let str = arr[0];
+        let dog = str.indexOf('.');
+        const eLen = parseInt(arr[1]);
+        if (!eLen) {
+          return str;
+        }
+        let numLen = arr[0].length;
+        if (dog !== -1) {
+          numLen -= 1;
+        }
+        if (dog === -1) {
+          dog = numLen;
+        }
+        str = dog === str.len ? str : str.slice(0, dog) + str.slice(dog + 1);
+        if (eLen + dog >= numLen) {
+          str = str + '0'.repeat(eLen + dog - numLen);
+        } else if (eLen + dog <= 0) {
+          str = '0.' + '0'.repeat(Math.abs(dog + eLen)) + str;
+        } else {
+          str = str.slice(0, dog + eLen) + '.' + str.slice(dog + eLen);
+        }
+        return str;
+      }
+
+      function handleInput(numStr) {
+        let arr = numStr.split('.');
+        let isPositive = numStr[0] !== '-';
+        let intStr = isPositive ? arr[0] : arr[0].slice(1);
+
+        const intStrByte = handleInt(arr[0]);
+
+        const isOnlyDecimal = intStrByte === '0';
+
+        const { decimalByte, coe } = handleDecimal(arr[1], isOnlyDecimal ? 53 : 52 - (intStrByte.length - 1));
+
+        if (isOnlyDecimal) {
+          return getNum(isPositive, 1023 - coe, decimalByte.slice(1));
+        } else {
+          let trail = intStrByte + decimalByte;
+          return getNum(isPositive, 1023 + (intStrByte.length - 1), trail.slice(1).slice(0, 52));
+        }
+      }
+
+      // 处理小数部分，以1开始
+      function handleDecimal(numStr, limit) {
+        if (limit === 0 || !numStr) {
+          return {
+            coe: 0,
+            decimalByte: '',
+          };
+        }
+        // limit !== 53 立即统计计算剩余小数数据
+        let startCount = limit !== 53;
+        // 指数位 -> 纯小数需要 limit == 53 -> 获取到第一个carry后（1），才开始计算
+        let coe = 0;
+
+        let numStrByte = '';
+        while (numStr) {
+          if (!startCount) {
+            coe++;
+          }
+          let { carry, str } = doubleDecimal(numStr);
+          numStr = str;
+          if (carry === 1) {
+            startCount = true;
+          }
+          if (startCount) {
+            numStrByte += carry;
+          }
+          if (numStrByte.length === limit) {
+            break;
+          }
+        }
+        return {
+          decimalByte: numStrByte,
+          coe,
+        };
+      }
+
+      function doubleDecimal(numStr) {
+        let len = numStr.length;
+        let cur = 0;
+        let carry = 0;
+        let str = '';
+
+        for (let i = len - 1; i >= 0; i--) {
+          let cur = parseInt(numStr[i]) * 2 + carry;
+          carry = cur >= 10 ? 1 : 0;
+          cur = cur % 10;
+          str = cur + str;
+        }
+
+        while (str[str.length - 1] === '0') {
+          str = str.slice(0, str.length - 1);
+        }
+
+        return {
+          carry,
+          str,
+        };
+      }
+
+      function divideBy2(numStr) {
+        let carry = 0;
+        let nextNum = '';
+        for (let i = 0; i < numStr.length; i++) {
+          let digit = parseInt(numStr[i]);
+          let cur = digit + carry * 10;
+          carry = cur % 2;
+          nextNum += Math.floor(cur / 2);
+        }
+
+        return {
+          nextNum: nextNum[0] === '0' ? nextNum.slice(1) : nextNum,
+          carry,
+        };
+      }
+
+      function handleInt(numStr) {
+        let carry = 0;
+        let strByte = '';
+        while (numStr.length > 0) {
+          const { nextNum, carry } = divideBy2(numStr);
+          strByte = carry + strByte;
+          numStr = nextNum;
+        }
+        return strByte;
+      }
+    </script>
+
+    <script>
+      const demoList = [
+        {
+          name: '+0',
+          value: +0,
+          key: 'name',
+        },
+        {
+          name: '-0',
+          value: -0,
+          key: 'name',
+        },
+        {
+          name: '-Infinity',
+          value: -Infinity,
+          key: 'name',
+        },
+        {
+          name: 'Infinity',
+          value: Infinity,
+          key: 'name',
+        },
+        {
+          name: 'NaN',
+          value: NaN,
+          key: 'name',
+        },
+        {
+          name: 'Number.MAX_VALUE',
+          value: BigInt(Number.MAX_VALUE),
+          key: 'value',
+        },
+        {
+          name: 'Number.MIN_VALUE 存疑',
+          //   value: Number.MIN_VALUE,
+          value:
+            '0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014',
+          //   //   value:
+          //     '0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005',
+          key: 'value',
+        },
+      ];
+    </script>
+
+    <script>
+      const strategyMap = {
+        ['NaN']: getNum(false, 2 ** 11 - 1, '1'), // 全1
+        ['Infinity']: getNum(true, 2 ** 11 - 1, '0'.repeat(52)), // 指数全1，尾数全0
+        ['-Infinity']: getNum(false, 2 ** 11 - 1, '0'.repeat(52)), // 指数全1，尾数全0
+        ['+0']: getNum(true, 0, '0'.repeat(52)), // 指数全0，尾数全0
+        ['0']: getNum(true, 0, '0'.repeat(52)), // 指数全0，尾数全0
+        ['-0']: getNum(false, 0, '0'.repeat(52)), // 指数全0，尾数全0
+      };
+    </script>
+
+    <script>
+      function handleNum(value) {
+        if (strategyMap[value]) {
+          return strategyMap[value];
+        }
+        // 超大数处理
+        return handleInput(initNum(value));
+      }
+    </script>
+
+    <script type="module">
+      import { h, Component, render } from 'https://esm.sh/preact';
+      import { useState } from 'https://esm.sh/preact/hooks';
+      import htm from 'https://esm.sh/htm';
+
+      // 为 Preact 初始化 htm
+      const html = htm.bind(h);
+
+      function NumberList(props) {
+        const number = props.num;
+
+        const result = handleNum(number);
+
+        return html`<ul class="number-list">
+          ${[...(result || [])].map((number) => html`<li>${number}</li>`)}
+        </ul>`;
+      }
+
+      function Intro(props) {
+        return html`<table class="min-w-full" data-start="129" data-end="294">
+            <thead data-start="129" data-end="168">
+              <tr data-start="129" data-end="168">
+                <th data-start="129" data-end="139">符号位（1位）</th>
+                <th data-start="139" data-end="150">指数位（11位）</th>
+                <th data-start="150" data-end="168">尾数 / 小数部分（52位）</th>
+              </tr>
+            </thead>
+            <tbody data-start="232" data-end="294">
+              <tr data-start="232" data-end="294">
+                <td class="max-w-[calc(var(--thread-content-max-width)*2/3)]" data-start="232" data-end="248">S</td>
+                <td class="max-w-[calc(var(--thread-content-max-width)*2/3)]" data-start="248" data-end="265">
+                  E(base 1023)
+                </td>
+                <td class="max-w-[calc(var(--thread-content-max-width)*2/3)]" data-start="265" data-end="294">M</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="overflow-y-auto p-4" dir="ltr">
+            <code class="whitespace-pre!"
+              ><span
+                ><span><span class="hljs-attr">value</span></span
+                ><span> = (-</span><span><span class="hljs-number">1</span></span
+                ><span>)^sign × </span><span><span class="hljs-number">1</span></span
+                ><span>.mantissa × </span><span><span class="hljs-number">2</span></span
+                ><span>^(exponent - </span><span><span class="hljs-number">1023</span></span
+                ><span>) </span></span
+              ></code
+            >
+          </div> `;
+      }
+
+      function App(props) {
+        const [num, setNum] = useState(1);
+
+        return html`<div>
+          ${demoList.map((item, index) => {
+            return html`<button onClick=${() => setNum(item[item.key])}>${item.name}</button>`;
+          })}
+          <hr />
+          <div>
+            <input onInput=${(e) => setNum(e.target.value)} />
+          </div>
+          <h1>${num}!</h1>
+          <p><${NumberList} num=${num} /></p>
+          <${Intro} />
+        </div>`;
+      }
+
+      render(html`<${App} />`, document.body);
+    </script>
+  </body>
+</html>

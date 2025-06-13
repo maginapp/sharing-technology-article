@@ -7,11 +7,19 @@
       "link": "/blog/react/"
     },
     {
-      "text": "summary",
+      "text": "网络",
       "items": [
         {
           "text": "http",
           "link": "/blog/summary/http"
+        },
+        {
+          "text": "js",
+          "link": "/blog/summary/js"
+        },
+        {
+          "text": "performance",
+          "link": "/blog/summary/performance"
         }
       ],
       "collapsed": true,
