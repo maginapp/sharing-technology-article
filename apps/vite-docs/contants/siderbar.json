@@ -2,7 +2,12 @@
   "/blog/": [
     {
       "text": "My React",
-      "items": [],
+      "items": [
+        {
+          "text": "react事件",
+          "link": "/blog/react/events"
+        }
+      ],
       "collapsed": true,
       "link": "/blog/react/"
     },
