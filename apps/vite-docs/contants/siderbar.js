@@ -1,4 +1,5 @@
-{
+// 侧边栏配置，支持使用 JavaScript 注释。
+export default {
   "/blog/": [
     {
       "text": "ai",
@@ -14,7 +15,12 @@
     },
     {
       "text": "My React",
-      "items": [],
+      "items": [
+        // {
+        //   "text": "react事件",
+        //   "link": "/blog/react/events"
+        // }
+      ],
       "collapsed": true,
       "link": "/blog/react/"
     },
@@ -560,4 +566,4 @@
       "link": ""
     }
   ]
-}
+};

@@ -138,10 +138,11 @@ async function generateConfigObject(baseDir) {
   return config;
 }
 
-// 写入 JSON 文件的函数
-async function writeJsonToFile(filePath: string, jsonData: object): Promise<void>  {
-  await fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), "utf-8");
-  console.log(`JSON data has been written to ${filePath}`);
+// 写入导出侧边栏数据的 JavaScript 文件
+async function writeSidebarToFile(filePath: string, sidebarData: object): Promise<void>  {
+  const source = `// 侧边栏配置，支持使用 JavaScript 注释。\nexport default ${JSON.stringify(sidebarData, null, 2)};\n`;
+  await fs.writeFile(filePath, source, "utf-8");
+  console.log(`Sidebar data has been written to ${filePath}`);
 };
 
 // 示例使用
@@ -150,8 +151,8 @@ async function main() {
   try {
     const config = await generateConfigObject(baseDir);
     console.log('Generated Config:', JSON.stringify(config, null, 2));
-    const outputFilePath = path.join(__dirname, "../contants/siderbar.json");
-    await writeJsonToFile(outputFilePath, config)
+    const outputFilePath = path.join(__dirname, "../contants/siderbar.js");
+    await writeSidebarToFile(outputFilePath, config)
     console.log('Generated Config Write End');
   } catch (error) {
     console.error('Error generating config:', error);
