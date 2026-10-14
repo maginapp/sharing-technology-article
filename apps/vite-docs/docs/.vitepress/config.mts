@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import taskLists from 'markdown-it-task-lists'
 import markdownItTextualUml from 'markdown-it-textual-uml';
-import siderJson from '../../contants/siderbar.json'
+import sidebar from '../../contants/siderbar.js'
 import { withPwa } from '@vite-pwa/vitepress'
 
 // https://vitepress.dev/reference/site-config
@@ -20,7 +20,7 @@ const configs= defineConfig({
       { text: 'Migrate', link: '/migrate/' },
     ],
 
-    sidebar: siderJson,
+    sidebar,
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
