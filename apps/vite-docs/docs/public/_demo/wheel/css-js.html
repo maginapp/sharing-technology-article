@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wheel {
+      width: 200px;
+      height: 200px;
+      background: red;
+      border-radius: 50%;
+      text-align: center;
+      transform: rotate(0);
+    }
+    .start {
+      transition: transform 2.2s ease-in;
+      transform: rotate(720deg);
+    }
+    .wait {
+      transition: transform 2s linear;
+      transform: rotate(720deg);
+    }
+    .end {
+      transform: rotate(0);
+      transition: all 2.2s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div id="wheel" class="wheel">1</div>
+  <button id="btn">start</button>
+  <script>
+    const req = () => {
+      const t = Math.random() * 4 + 4;
+      const e = Math.random() * 4 + 4;
+      return new Promise((res, rej) => {
+        console.log('wait', {t, e});
+        if (t < e) {
+          setTimeout(() => {
+            console.log('return request', t);
+            res(t);
+          }, t * 1000)
+        } else {
+          setTimeout(() => {
+            console.warn('return request err', e);
+            rej(e);
+          }, e * 1000)
+        }
+      })
+    }
+
+    const wheel = document.getElementById('wheel');
+    const btn = document.getElementById('btn');
+    let hasResult = false;
+    let prevDeg = 0;
+    let willEnd = false;
+    let hasErr = false;
+    wheel.addEventListener('transitionend', (e) => {
+      // console.log(e);
+      if (!hasResult && !hasErr) {
+        wheel.classList.remove('wait');
+        wheel.classList.remove('start');
+        wheel.setAttribute('style', `transform: rotate(${prevDeg}deg)`);
+        setTimeout(() => {
+          wheel.classList.add('wait');
+          wheel.setAttribute('style', `transform: rotate(${720 + prevDeg}deg)`);
+        })
+        console.log('????? wait')
+      } else {
+        console.log('????? end')
+        wheel.setAttribute('style', `transform: rotate(${prevDeg}deg)`);
+        if (willEnd) {
+          wheel.classList.remove('end');
+          return;
+        }
+        wheel.classList.remove('wait');
+        willEnd = true;
+        const result =  hasErr ? 0 : hasResult % 1 + 1;
+        let nextDeg = prevDeg + result * 360;
+        prevDeg = (prevDeg + result * 360) % 360;
+        if (hasErr) {
+          console.error('hasErr')
+        }
+        setTimeout(() => {
+          wheel.classList.add('end');
+          wheel.setAttribute('style', `transform: rotate(${nextDeg}deg)`);
+        }, 0);
+      }
+    });
+
+    btn.onclick = () => {
+      wheel.setAttribute('style', `transform: rotate(${prevDeg}deg)`);
+      wheel.classList.remove('end');
+      wheel.classList.remove('wait');
+      hasResult = false;
+      willEnd = false;
+      hasErr = false;
+      setTimeout(()=> {
+        wheel.setAttribute('style', `transform: rotate(${720 + prevDeg}deg)`);
+        wheel.classList.add('start');
+      })
+      req().then(result => {
+        hasResult = result;
+      }).catch(e => {
+        hasErr = e;
+      })
+    }
+
+  </script>
+</body>
+</html>

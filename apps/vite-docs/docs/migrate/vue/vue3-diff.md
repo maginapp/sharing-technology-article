@@ -500,4 +500,4 @@ else {
 
 ### getSequence
 
-获取最大递增序列，详见[Magina | 最大增加序列](/blog/algorithm/demo/longest-increasing-subsequence)  |  [wikipedia | 最大增加序列](https://en.wikipedia.org/wiki/Longest_increasing_subsequence)
+获取最大递增序列，详见[Magina | 最大增加序列](/migrate/algorithm/demo/longest-increasing-subsequence)  |  [wikipedia | 最大增加序列](https://en.wikipedia.org/wiki/Longest_increasing_subsequence)

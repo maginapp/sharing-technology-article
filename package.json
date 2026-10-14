@@ -4,8 +4,9 @@
   "description": "",
   "scripts": {
     "docs:build": "pnpm --filter @magina/vite-docs build",
-    "dev": "vuepress dev docs",
-    "build": "vuepress build docs",
+    "docs:start": "pnpm --filter @magina/vite-docs start",
+    "dev": "pnpm run docs:build",
+    "build": "pnpm run docs:build",
     "node:test": "nodemon node-server-test.js"
   },
   "repository": {

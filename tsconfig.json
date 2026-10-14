@@ -1,4 +1,3 @@
-
 {
     "compilerOptions": {
       /* 基础设置 */
@@ -30,7 +29,7 @@
         "@/*": ["src/*"]                    // 支持路径别名，例如 "@/utils" -> "src/utils"
       }
     },
-    "include": ["./scripts/**/*.ts"],        // 包含的文件范围
+    "include": ["./scripts/**/*.ts", "./apps/**/*.ts", "./packages/**/*.ts"],        // 包含的文件范围
     "exclude": ["node_modules", "./dist"]   // 排除的文件夹
   }
   

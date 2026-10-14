@@ -484,7 +484,7 @@ const setupRenderEffect: SetupRenderEffectFn = (instance, initialVNode,
 
 > 组件更新时，会对新老vnode数据进行[diff](./vue3-diff)
 
-> [组件挂载流程](./vue3-mountelement)
+> [组件挂载流程](./vue3-mountElement)
 
 ```ts
 const mountComponent: MountComponentFn = (initialVNode,container,anchor, parentComponent,parentSuspense, isSVG,optimized) => {

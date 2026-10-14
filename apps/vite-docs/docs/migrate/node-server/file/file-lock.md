@@ -36,7 +36,7 @@ fs.open('./open-file.loc', 'wx', function(err, fd) {
 
 ## fs.mkdir + fs.writeFile
 
-`mkdir`是标准的POSIX系统调用，根据标准，它的实现必须是[原子性](/sharing/backup/concurrent-properties.html#_2-原子性)的。任何支持该调用的平台都必须保证它执行的原子性，利用这个特性来构建文件锁的话，代码就能得到很好的跨平台支持，即使是读取网络文件，也能保证文件的一致性不会被破坏
+`mkdir`是标准的POSIX系统调用，根据标准，它的实现必须是[原子性](/migrate/sharing/backup/concurrent-properties.html#_2-原子性)的。任何支持该调用的平台都必须保证它执行的原子性，利用这个特性来构建文件锁的话，代码就能得到很好的跨平台支持，即使是读取网络文件，也能保证文件的一致性不会被破坏
 
 ### lockFile
 

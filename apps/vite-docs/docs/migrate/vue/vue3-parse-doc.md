@@ -17,7 +17,7 @@ meta:
 * [vue3-render](./vue3-render)
 * [vue3-vnode](./vue3-vnode)
 * [vue3-diff算法解析](./vue3-diff)
-* [vue3-元素渲染流程简介](./vue3-mountelement)
+* [vue3-元素渲染流程简介](./vue3-mountElement)
 
 待完成~
 
@@ -31,5 +31,5 @@ meta:
 >
 >  编译结果分析，template编译优化
 
-* [vue3-renderComponentRoot](./vue3-rendercomponentroot)
+* [vue3-renderComponentRoot](./vue3-renderComponentRoot)
 渲染函数执行
