@@ -101,7 +101,7 @@ left、right、bottom、top
 
 > condition中top未生效??
 
-```mdmd{14-16}
+```md{14-16}
 flowchat
 st=>start: 开始
 e=>end: 结束

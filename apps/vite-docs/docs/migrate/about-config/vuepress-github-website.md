@@ -271,33 +271,7 @@ module.exports = {
   * 资源会直接复制到根目录
 
 
-![Image from alias](~@alias/test-1.png)
-
-<img :src="$withBase('/webstatic/3.png')" alt="$withBase('/webstatic/3.png')"/>
-
-<img :src="$withBase('/webstatic/4.png')" alt="$withBase('/webstatic/4.png')"/>
-
-<ImgWithBase src="/webstatic/5.png" alt="ImgWithBase: /webstatic/5.png"/>
-
-<img-test/>
-
-<img src="./7.png" />
-
-<img src="/webstatic/9.png" />
-
-![/webstatic/0.png']($withBase('/webstatic/0.png'))
-
-<img-with-base :src="$withBase('../../.vuepress/public/webstatic/1.png')" :height="300" alt="vue-$withBase('../../.vuepress/public/webstatic/1.png')"/>
-
-`<img-with-base :src="'../../.vuepress/public/webstatic/6.png'" :height="300" alt="'../../.vuepress/public/webstatic/6.png'"/>`
-
-<img-with-base src="$withBase('/webstatic/2.png')" :height="300" alt="no-png"/> 
-
-<ImgWithBase src="./7.png" alt="ImgWithBase: ./7.png"/>
-
-`<ImgWithBase src="7.png" alt="ImgWithBase: 7.png"/>`
-
-<img :src="'./../public/webstatic/9.png'" />
+以下为旧 VuePress 项目的图片写法示例，依赖 VuePress 的 `$withBase`、组件和别名配置。
 
 ```md
 
@@ -333,7 +307,7 @@ module.exports = {
 
 ```
 
-```{2,5}
+```md{2,5}
 # .vuepress/public
 test.png
 
@@ -353,12 +327,13 @@ head: [
 
 ### 代码高亮显示
 
-```{1}
+````md{1}
 ``` type{行号,行号}
 1
 3
 测试
 ```
+````
 
 ### [emoji](https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/full.json)
 

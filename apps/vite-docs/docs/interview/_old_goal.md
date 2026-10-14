@@ -12,7 +12,7 @@ https://segmentfault.com/a/1190000013156728
 
 [git cherry-pick 教程](https://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html)
 
-[git 200](vue-cli-plugin-style-resources-loader)
+git 200（待补充链接）
 
 
 ## webpack
@@ -45,7 +45,7 @@ https://segmentfault.com/a/1190000018220850
   
 ```
 
-[style-resources-loader / vue-cli-plugin-style-resources-loader]()
+style-resources-loader / vue-cli-plugin-style-resources-loader（待补充链接）
 
 ```js
   // 增加vue.config.js文件配置css

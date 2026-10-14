@@ -16,8 +16,8 @@ meta:
 
 ## Link
 
-* [blog](./../blog/)
-* [sharing](./../interview/)
-* [interview](./../sharing/)
+* [blog](/blog/)
+* [sharing](./README.md)
+* [interview](/interview/__old_interview.md)
 * [issues/bugs提交](https://github.com/maginapp/sharing-technology-article/issues)
 

@@ -52,6 +52,6 @@ await Promise
 
 启动 node-server
 
-* [测试demo:gif-vue](http://localhost:3100/gif-vue.html)
-* [测试demo:gif](http://localhost:3100/gif.html)
+* 测试demo:gif-vue：`http://localhost:3100/gif-vue.html`
+* 测试demo:gif：`http://localhost:3100/gif.html`
 * [createGif.js](/test/node-server/createGif.js)

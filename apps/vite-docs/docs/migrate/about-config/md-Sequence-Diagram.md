@@ -12,7 +12,7 @@ meta:
 
 > vuepress未支持
 
-```sequence
+```text
 title: 这是标题
 participant 对象A
 Note left of 对象A: left消息

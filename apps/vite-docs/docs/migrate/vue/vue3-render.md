@@ -107,7 +107,7 @@ const render: RootRenderFunction = (vnode, container, isSVG) => {
 
 ### 6. mountElement
 
-`patch`过程中会执行DOM的创建与修改：`baseCreateRenderer`的私有方法[`mountElement`](./vue3-mountelement)就是用于DOM创建的
+`patch`过程中会执行DOM的创建与修改：`baseCreateRenderer`的私有方法[`mountElement`](./vue3-mountElement)就是用于DOM创建的
 
 
 <hr />

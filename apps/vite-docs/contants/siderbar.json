@@ -1,13 +1,20 @@
 {
   "/blog/": [
     {
+      "text": "ai",
+      "items": [],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "cross-platform",
+      "items": [],
+      "collapsed": true,
+      "link": ""
+    },
+    {
       "text": "My React",
-      "items": [
-        {
-          "text": "react事件",
-          "link": "/blog/react/events"
-        }
-      ],
+      "items": [],
       "collapsed": true,
       "link": "/blog/react/"
     },
@@ -61,8 +68,15 @@
     {
       "text": "Markdown Examples",
       "link": "/dev-test/markdown-examples"
+    },
+    {
+      "text": "wheel",
+      "items": [],
+      "collapsed": true,
+      "link": ""
     }
   ],
+  "/interview/": [],
   "/migrate/": [
     {
       "text": "about-config",
@@ -349,6 +363,85 @@
           ],
           "collapsed": true,
           "link": ""
+        }
+      ],
+      "collapsed": true,
+      "link": ""
+    },
+    {
+      "text": "sharing",
+      "items": [
+        {
+          "text": "Sharing articles",
+          "link": "/migrate/sharing/README"
+        },
+        {
+          "text": "backup",
+          "items": [
+            {
+              "text": "三大性质总结：原子性、可见性以及有序性",
+              "link": "/migrate/sharing/backup/concurrent-properties"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "config",
+          "items": [
+            {
+              "text": "绝了，没想到一个 source map 居然涉及到那么多知识盲区",
+              "link": "/migrate/sharing/config/source-map-intrudoce"
+            },
+            {
+              "text": "一文吃透Webpack核心原理",
+              "link": "/migrate/sharing/config/webpack-base"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "sharing",
+          "link": "/migrate/sharing/no-allow"
+        },
+        {
+          "text": "博客",
+          "link": "/migrate/sharing/sharing-blog"
+        },
+        {
+          "text": "常用软件",
+          "link": "/migrate/sharing/software"
+        },
+        {
+          "text": "standard",
+          "items": [
+            {
+              "text": "CommonJS 和 ES6 Module 究竟有什么区别？",
+              "link": "/migrate/sharing/standard/common-esmodule"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "test",
+          "items": [
+            {
+              "text": "sinon.js基础使用教程---单元测试",
+              "link": "/migrate/sharing/test/sinon-introduce"
+            }
+          ],
+          "collapsed": true,
+          "link": ""
+        },
+        {
+          "text": "常用工具网站",
+          "link": "/migrate/sharing/utils-web"
+        },
+        {
+          "text": "小工具",
+          "link": "/migrate/sharing/utils"
         }
       ],
       "collapsed": true,
