@@ -5,6 +5,7 @@
   "scripts": {
     "docs:build": "pnpm --filter @magina/vite-docs build",
     "docs:start": "pnpm --filter @magina/vite-docs start",
+    "docs:preview": "pnpm --filter @magina/vite-docs preview",
     "dev": "pnpm run docs:start",
     "build": "pnpm run docs:build",
     "node:test": "nodemon node-server-test.js"

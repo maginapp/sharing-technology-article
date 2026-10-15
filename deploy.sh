@@ -1,27 +1,11 @@
 #!/usr/bin/env sh
+set -eu
 
-# 确保脚本抛出遇到的错误
-set -e
+# 手动触发远端 master 的部署，不会发布本地未推送的修改。
+if ! command -v gh >/dev/null 2>&1; then
+  echo '请安装 GitHub CLI 并执行 gh auth login，或在 GitHub Actions 页面手动运行工作流。' >&2
+  exit 1
+fi
 
-npm install -g pnpm
-
-# 生成静态文件
-pnpm run docs:build
-
-# 进入生成的文件夹
-cd apps/vite-docs/docs/.vitepress/dist
-
-# 如果是发布到自定义域名
-# echo 'www.example.com' > CNAME
-
-git init
-git add -A
-git commit -m 'deploy'
-
-# 如果发布到 https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
-
-# 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:maginapp/sharing-technology-article.git master:gh-pages
-
-cd -
+gh workflow run deploy.yml --repo maginapp/sharing-technology-article --ref master
+echo '已请求部署远端 master。可在 GitHub Actions 页面查看进度。'

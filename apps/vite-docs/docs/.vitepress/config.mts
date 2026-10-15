@@ -7,7 +7,8 @@ import { withPwa } from '@vite-pwa/vitepress'
 // https://vitepress.dev/reference/site-config
 
 const configs= defineConfig({
-  base: '/',
+  // Actions 根据 Pages 配置传入路径；本地默认使用项目站点路径。
+  base: process.env.DOCS_BASE || '/sharing-technology-article/',
   title: "Magina Sharing Portal",
   description: "A personal sharing portal about tech,  daily news etc",
 
