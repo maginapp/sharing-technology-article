@@ -1,16 +1,16 @@
-import { defineConfig } from 'vitepress'
-import taskLists from 'markdown-it-task-lists'
+import { defineConfig } from 'vitepress';
+import taskLists from 'markdown-it-task-lists';
 import markdownItTextualUml from 'markdown-it-textual-uml';
-import sidebar from '../../contants/siderbar.js'
-import { withPwa } from '@vite-pwa/vitepress'
+import sidebar from '../../contants/siderbar.js';
+import { withPwa } from '@vite-pwa/vitepress';
 
 // https://vitepress.dev/reference/site-config
 
-const configs= defineConfig({
+const configs = defineConfig({
   // Actions 根据 Pages 配置传入路径；本地默认使用项目站点路径。
   base: process.env.DOCS_BASE || '/sharing-technology-article/',
-  title: "Magina Sharing Portal",
-  description: "A personal sharing portal about tech,  daily news etc",
+  title: 'Magina Sharing Portal',
+  description: 'A personal sharing portal about tech,  daily news etc',
 
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -24,18 +24,21 @@ const configs= defineConfig({
     sidebar,
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      {
+        icon: 'github',
+        link: 'https://github.com/maginapp/sharing-technology-article',
+      },
     ],
     outline: {
-      level: [1, 7]
-    }
+      level: [1, 7],
+    },
   },
   markdown: {
     config: (md) => {
-      md.use(taskLists)
+      md.use(taskLists);
       // md.use(mermaid)
       // md.use(plantuml)
-      md.use(markdownItTextualUml)
+      md.use(markdownItTextualUml);
     },
     math: true,
   },
@@ -51,53 +54,53 @@ const configs= defineConfig({
     manifest: {
       name: 'Sharing tech | Magina',
       short_name: 'Magina Blog',
-      description: "Progressive Web App of sharing-technology-article",
+      description: 'Progressive Web App of sharing-technology-article',
       icons: [
         {
-          "src": "./icons/icon-32.png",
-          "sizes": "32x32",
-          "type": "image/png"
+          src: './icons/icon-32.png',
+          sizes: '32x32',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-64.png",
-            "sizes": "64x64",
-            "type": "image/png"
+          src: './icons/icon-64.png',
+          sizes: '64x64',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-96.png",
-            "sizes": "96x96",
-            "type": "image/png"
+          src: './icons/icon-96.png',
+          sizes: '96x96',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-128.png",
-            "sizes": "128x128",
-            "type": "image/png"
+          src: './icons/icon-128.png',
+          sizes: '128x128',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-168.png",
-            "sizes": "168x168",
-            "type": "image/png"
+          src: './icons/icon-168.png',
+          sizes: '168x168',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png"
+          src: './icons/icon-192.png',
+          sizes: '192x192',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-256.png",
-            "sizes": "256x256",
-            "type": "image/png"
+          src: './icons/icon-256.png',
+          sizes: '256x256',
+          type: 'image/png',
         },
         {
-            "src": "./icons/icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
+          src: './icons/icon-512.png',
+          sizes: '512x512',
+          type: 'image/png',
+        },
       ],
-      start_url: "./index.html",
-      display: "fullscreen",
-      theme_color: "#B12A34",
-      background_color: "#CCCCCC"
+      start_url: './index.html',
+      display: 'fullscreen',
+      theme_color: '#B12A34',
+      background_color: '#CCCCCC',
     },
     injectManifest: {
       globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,woff2}'],
@@ -109,8 +112,7 @@ const configs= defineConfig({
       navigateFallback: '/',
     },
   },
-})
-
+});
 
 // @ts-ignore
 export default withPwa(configs);
